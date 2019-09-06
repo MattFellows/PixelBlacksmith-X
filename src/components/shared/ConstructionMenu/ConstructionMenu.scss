@@ -1,0 +1,106 @@
+.twoPartContainer {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(200,200,200,0.3);
+    justify-content: center;
+    align-content: center;
+}
+
+.threePartContainer {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(200,200,200,0.3);
+    justify-content: center;
+    align-content: center;
+}
+
+.twoPartMenu {
+    position: relative;
+    height: calc(100vh - 50px);
+    background-image: url(./images/background_2part.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: calc((100vh - 50px) * (384 / 640));
+
+    .topContainer {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .title {
+        display: flex;
+        justify-content: center;
+        font-family: 'BetterPixels';
+        color: black;
+        font-size: 10vh;
+        position: relative;
+        width: 100%;
+        top: 3vh;
+        flex-basis: 80%;
+    }
+
+    .close {
+        flex-basis: 10%;
+        background-image: url(./images/close.png);
+    }
+
+    .help {
+        flex-basis: 10%;
+        background-image: url(./images/close.png);
+    }
+}
+
+.threePartMenu {
+    position: relative;
+    height: calc(100vh - 20px);
+    background-image: url(./images/background_3part.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: calc((100vh - 20px) * (384 / 640));
+    top: 10px;
+
+    .topContainer {
+        display: flex;
+        flex-direction: row;
+        width: calc(100% + 40px);
+        left: -20px;
+        position: relative;
+    }
+
+    .title {
+        display: flex;
+        justify-content: center;
+        font-family: 'BetterPixels';
+        color: black;
+        font-size: 10vh;
+        position: relative;
+        width: 100%;
+        top: 3vh;
+        flex-basis: 80%;
+    }
+
+    .close {
+        flex-basis: 15%;
+        background-image: url(./images/close.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: relative;
+        top: -10px;
+    }
+
+    .help {
+        flex-basis: 15%;
+        background-image: url(./images/help.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: relative;
+        top: -10px;
+    }
+}
+
+.twoPart {
+    position: absolute;
+    height: calc(100vh - 50px);
+}

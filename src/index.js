@@ -1,10 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import rootReducer from './components/shared/reducers';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { createGlobalStyle } from 'styled-components'
+
+const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: 'BetterPixels';
+    src: url('./BetterPixels.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  body {
+    font-family: 'BetterPixels', Helvetica, Arial, sans-serif;
+  }
+`;
+
+const store = createStore(rootReducer)
+
+ReactDOM.render(<Provider store={store}><GlobalStyle/><App /></Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

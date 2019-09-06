@@ -1,5 +1,6 @@
-.App {
-  text-align: center;
+.wallpaper {
+  height: 100vh;
+  position: absolute;
 }
 
 .App-logo {
