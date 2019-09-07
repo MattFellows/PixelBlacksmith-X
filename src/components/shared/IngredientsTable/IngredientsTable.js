@@ -18,13 +18,13 @@ class IngredientsTable extends Component {
                         </thead>
                         <tbody>
                         <tr>
-                            <td className={'icon'}><img src={`/images/levels.png`}/></td>
+                            <td className={'icon'}><img alt='level' src={`/images/levels.png`}/></td>
                             <td className={'name'}>Level</td>
                             <td className='count centered'>{this.props.product.level}</td>
                             <td className='count centered'>{this.props.level}</td>
                         </tr>
                         {this.props.product.ingredients.map(ing => <tr key={ing.name}>
-                            <td className={'icon'}>{ing.image && <img src={`/images/${ing.image}`}/>}</td>
+                            <td className={'icon'}>{ing.image && <img alt={'ing.name'} src={`/images/${ing.image}`}/>}</td>
                             <td className={'name'}>{ing.name}</td>
                             <td className='count centered'>{ing.count}</td>
                             <td className='count centered'>{this.props.inventory.find(item => item.name === ing.name).count}</td>

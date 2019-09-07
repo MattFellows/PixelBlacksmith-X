@@ -1,18 +1,57 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import "react-alice-carousel/lib/alice-carousel.css";
+import moment from 'moment'
 
 import ConstructionMenuThreePart from '../shared/ConstructionMenu/ConstructionMenuThreePart';
 import './Furnace.css';
 import { setPopup } from '../shared/actions';
 import IngredientsTable from '../shared/IngredientsTable/IngredientsTable';
 import SwipeableProductView from '../shared/SwipeableProductView/SwipeableProductView';
+import StackOfStacks from '../shared/StackOfStacks/StackOfStacks';
 
 class Furnace extends Component {
-    render() {
-        return (<div className={'furnaceArea'} onClick={this.props.showFurnacePopup}>
+    constructor(props) {
+        super(props);
 
-        </div>)
+        this.state = {
+            craftingQueue: [
+                {
+                    image: 'ironBar.png',
+                    finishTime: moment().add(5, "seconds"),
+                    count: 1,
+                    product: 'Iron bar',
+                },
+                {
+                    image: 'ironBar.png',
+                    finishTime: moment().add(100, "seconds"),
+                    count: 5,
+                    product: 'Iron bar',
+                }
+            ]
+        }
+    }
+    getAvailableFurnaceStacks() {
+        return 6;
+    }
+
+    getNextStackLevel() {
+        return 5;
+    }
+
+    getCurrentCraftingQueue() {
+        return this.state.craftingQueue;
+    }
+
+    render() {
+        return (
+            <div className={'furnaceArea'} onClick={this.props.showFurnacePopup}>
+                <StackOfStacks
+                    availableStacks={this.getAvailableFurnaceStacks()}
+                    nextStackLevel={this.getNextStackLevel()}
+                    crafting={this.getCurrentCraftingQueue()} />
+            </div>
+        )
     }
 }
 

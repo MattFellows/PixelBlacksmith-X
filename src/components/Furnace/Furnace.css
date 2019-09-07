@@ -1,8 +1,10 @@
 .furnaceArea {
     position: absolute;
-    border: 5px solid black;
     width: 44vh;
-    height: 35vh;
+    height: 37vh;
     top: 10vh;
     left: 89vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
