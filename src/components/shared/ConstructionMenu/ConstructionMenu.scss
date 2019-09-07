@@ -67,6 +67,51 @@
         width: calc(100% + 40px);
         left: -20px;
         position: relative;
+        height: 17vh;
+        margin-bottom: 3vh;
+    }
+
+    .middleContainer {
+        display: flex;
+        flex-direction: row;
+        width: calc(100% - 50px);
+        left: 10px;
+        padding: 0 2vh;
+        position: relative;
+        height: 25vh;
+        margin-bottom: 4vh;
+
+        .swiperContainer {
+            height: calc(100% - 2vh);
+            width: 100%;
+
+            .swiperItem {
+                width: 100%;
+            }
+        }
+
+        .alice-carousel__dots-item.__active {
+            background-color: red;
+        }
+
+        .alice-carousel__prev-btn {
+            display: none;
+        }
+
+        .alice-carousel__next-btn {
+            display: none;
+        }
+    }
+
+    .bottomContainer {
+        display: flex;
+        flex-direction: row;
+        width: calc(100% - 50px);
+        left: 10px;
+        padding: 0 2vh;
+        position: relative;
+        height: 46vh;
+        border: 1px solid black;
     }
 
     .title {

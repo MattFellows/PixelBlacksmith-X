@@ -1,0 +1,64 @@
+.ingredientsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .ingredientsTable {
+        height: calc(100% - 50px);
+        width: 100%;
+        table {
+            width: 100%;
+            font-size: 3vh;
+
+            tr {
+                height: 3vh;
+
+                .icon {
+                    width: 5%;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+                .name {
+                    width: 55%;
+                }
+                .count {
+                    width: 20%;
+                }
+            }
+        }
+    }
+
+    .buttonContainer {
+        height: 50px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: flex-start;
+
+        .button {
+            background-image: url('/images/button_wide.png');
+            height: 48px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            min-width: 144px;
+            margin-right: 10px;
+            color: white;
+            font-size: 36px;
+            line-height: 48px;
+            text-align: center;
+            cursor: pointer;
+
+            &.narrow {
+                background-image: url('/images/button_narrow.png');
+                min-width: 55px;
+            }
+        }
+    }
+
+    .centered {
+        text-align: center;
+    }
+}

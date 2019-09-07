@@ -1,0 +1,44 @@
+.name {
+    font-size: 4vh;
+    width: 100%;
+    padding-left: 2vh;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+
+    .image {
+        flex-basis: 25%; 
+
+        img {
+            width: 100%; 
+        }
+
+        .count {
+            background-color: rgba(20,20,20,0.75);
+            color: white;
+            width: 100%;
+            top: -3vh;
+            height: 3vh;
+            position: relative;
+            font-size: 4vh;
+            text-align: center;
+            line-height: 3vh;
+        }
+    }
+
+    .description {
+        flex-basis: 75%;    
+        padding-left: 1vh;
+        font-size: 4vh;
+    }
+}
+
+.redacted {
+    .image {
+        img {
+            filter: contrast(0%) brightness(0%);
+        }
+    }
+}
