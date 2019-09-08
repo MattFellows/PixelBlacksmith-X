@@ -59,7 +59,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     width: calc((100vh - 20px) * (384 / 640));
-    top: 10px;
+    top: 100px;
+    zoom: 75%;
 
     .topContainer {
         display: flex;
@@ -69,6 +70,7 @@
         position: relative;
         height: 17vh;
         margin-bottom: 3vh;
+        top: -20px;
     }
 
     .middleContainer {

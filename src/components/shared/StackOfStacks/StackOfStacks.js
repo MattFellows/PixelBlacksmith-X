@@ -49,6 +49,12 @@ class StackOfStacks extends Component {
     componentDidMount = () => {
         setInterval(this.updateCountdown, 1000);
         setTimeout(() => setInterval(this.checkAndUpdateStacks, 1000), 500);
+    };
+
+    componentWillReceiveProps = (props) => {
+        this.setState({
+            crafting: props.crafting
+        })
     }
 
     render() {

@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import './App.css';
 import wallpaper from './Wallpaper.png';
 import { setPopup } from './components/shared/actions';
 import Furnace, { FurnacePopup } from './components/Furnace/Furnace';
 
 class App extends Component  {
+
+
 
   componentDidMount = () => {
     //setTimeout(() => this.props.setPopupVisible('furnace'), 1000);
@@ -15,7 +18,7 @@ class App extends Component  {
   renderPopup = (popupType)  => {
     switch(popupType) {
       case 'furnace': {
-        return <FurnacePopup close={this.props.setPopupHidden}/>;
+        return <FurnacePopup ref={this.popupRef} close={this.props.setPopupHidden}/>;
       }
       default: {
         return null;
@@ -24,11 +27,18 @@ class App extends Component  {
   }
 
   render() {
+    let popup = this.renderPopup(this.props.popup);
+    if (this.props.popup) {
+      this.popupRef = React.forwardRef(popup);
+      disableBodyScroll(this.popupRef);
+    } else {
+      enableBodyScroll(this.popupRef);
+    }
     return (
       <div className="App">
         <img className='wallpaper' alt='wallpaper' src={wallpaper}/>
         <Furnace />
-        {this.props.popup && this.renderPopup(this.props.popup)}
+        {popup}
       </div>
     )
   }

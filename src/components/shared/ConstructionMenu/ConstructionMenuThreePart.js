@@ -4,7 +4,7 @@ import './ConstructionMenu.scss';
 
 class ConstructionMenuThreePart extends ConstructionMenu {
     render() {
-        return <div className={'threePartContainer'}>
+        return <div className={'threePartContainer'} onScroll={(e) => {e.preventDefault()}}>
                 <div className={'threePartMenu'}>
                     <div className={'topContainer'}>
                         <div className={'help'}></div>

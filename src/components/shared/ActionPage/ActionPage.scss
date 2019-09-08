@@ -9,10 +9,10 @@
     flex-direction: row;
 
     .image {
-        flex-basis: 25%; 
+        flex-basis: 20%;
 
         img {
-            width: 100%; 
+            width: 100%;
         }
 
         .count {
@@ -29,7 +29,7 @@
     }
 
     .description {
-        flex-basis: 75%;    
+        flex-basis: 75%;
         padding-left: 1vh;
         font-size: 4vh;
     }
