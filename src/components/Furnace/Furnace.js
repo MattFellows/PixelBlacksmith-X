@@ -17,16 +17,60 @@ class Furnace extends Component {
         this.state = {
             craftingQueue: [
                 {
+                    id: 1,
                     image: 'ironBar.png',
-                    finishTime: moment().add(5, "seconds"),
                     count: 1,
-                    product: 'Iron bar',
+                    product: 'Iron bar 1',
+                    time: [5, "seconds"],
                 },
                 {
+                    id: 2,
                     image: 'ironBar.png',
-                    finishTime: moment().add(100, "seconds"),
+                    count: 2,
+                    product: 'Iron bar 2',
+                    time: [10, "seconds"],
+                },
+                {
+                    id: 3,
+                    image: 'ironBar.png',
+                    count: 2,
+                    product: 'Iron bar 3',
+                    time: [10, "seconds"],
+                },
+                {
+                    id: 4,
+                    image: 'ironBar.png',
                     count: 5,
-                    product: 'Iron bar',
+                    product: 'Iron bar 4',
+                    time: [100, "seconds"],
+                },
+                {
+                    id: 5,
+                    image: 'ironBar.png',
+                    count: 5,
+                    product: 'Iron bar 5',
+                    time: [100, "seconds"],
+                },
+                {
+                    id: 6,
+                    image: 'ironBar.png',
+                    count: 5,
+                    product: 'Iron bar 6',
+                    time: [100, "seconds"],
+                },
+                {
+                    id: 7,
+                    image: 'ironBar.png',
+                    count: 5,
+                    product: 'Iron bar 7',
+                    time: [100, "seconds"],
+                },
+                {
+                    id: 8,
+                    image: 'ironBar.png',
+                    count: 5,
+                    product: 'Iron bar 8',
+                    time: [100, "seconds"],
                 }
             ]
         }
@@ -40,7 +84,7 @@ class Furnace extends Component {
     }
 
     getCurrentCraftingQueue() {
-        return this.state.craftingQueue;
+        return [...this.state.craftingQueue];
     }
 
     render() {
@@ -49,7 +93,8 @@ class Furnace extends Component {
                 <StackOfStacks
                     availableStacks={this.getAvailableFurnaceStacks()}
                     nextStackLevel={this.getNextStackLevel()}
-                    crafting={this.getCurrentCraftingQueue()} />
+                    crafting={this.getCurrentCraftingQueue()}
+                    {...this.props}/>
             </div>
         )
     }
@@ -104,4 +149,4 @@ const mapStateToProps = (state) => {
 
 export const FurnacePopup = connect(mapStateToProps)(Popup);
 
-export default connect(null, mapFurnaceDispatchToProps)(Furnace);
+export default connect(mapStateToProps, mapFurnaceDispatchToProps)(Furnace);

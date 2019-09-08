@@ -21,27 +21,65 @@ class StackOfStacks extends Component {
                 i.removeMe = true;
             }
         });
-        newStateCrafting = newStateCrafting.filter(i => !i.removeMe);
         this.setState({
             crafting: newStateCrafting
         });
-    }
+    };
+
+    checkAndUpdateStacks = () => {
+        let newStateCrafting = [...this.state.crafting].filter(i => i && !i.removeMe);
+        let currentlyCraftingCount = newStateCrafting.filter(i => i && i.finishTime && i.remainingTime).length;
+        if (currentlyCraftingCount < this.props.availableStacks) {
+            let allRemainingStacks = this.state.crafting.filter(i => !i.removeMe);
+            for (let i = 0; i < allRemainingStacks.length; i++) {
+                let item = allRemainingStacks[i];
+                if ((currentlyCraftingCount < this.props.availableStacks) && !item.finishTime) {
+                    item.finishTime = moment().add(item.time[0], item.time[1]);
+                    item.remainingTime = item.time[0] * 1000;
+                    currentlyCraftingCount++;
+                }
+            }
+        }
+        this.setState({
+            crafting: newStateCrafting
+        });
+    };
 
     componentDidMount = () => {
         setInterval(this.updateCountdown, 1000);
+        setTimeout(() => setInterval(this.checkAndUpdateStacks, 1000), 500);
     }
 
     render() {
-        const craftingStacks = this.state.crafting.filter(i => i && i.finishTime && i.remainingTime);
-        return <div className={'stacksContainer'}>
-            {craftingStacks.map((i, ind) =>
-                <div key={`${i.image}-${ind}`} className={"stack"}>
-                    <img src={`/images/${i.image}`}/>
-                    <div className={'overlay'}>{Math.ceil(i.remainingTime / 1000)}</div>
-                </div>)}
-            {[...Array(this.props.availableStacks - craftingStacks.length).keys()].map((_i, ind) =>
-                <div className={'stack'}></div>)}
-        </div>
+        const craftingStacks = this.state.crafting.filter(i => i && !i.removeMe && i.finishTime && i.remainingTime > 0);
+        return (
+            <div className={'stacksContainer'}>
+                {craftingStacks.map((i, ind) => {
+                    return (
+                        <div key={`${i.image}-${ind}`} className={"stack"}>
+                            <img alt={i.image} src={`/images/${i.image}`}/>
+                            <div className={'overlay'}>{`${Math.ceil(i.remainingTime / 1000)}s`}</div>
+                        </div>
+                    )
+                })
+                }
+                {[...Array(this.props.availableStacks - craftingStacks.length).keys()].map((_i, ind) =>
+                    <div key={`emptyStack${ind}`} className={'stack'}></div>)
+                }
+                {this.props.nextStackLevel > this.props.level &&
+                <div key={'nextStack'} className={'stack'}>
+                    <img alt={'padlock'} src={`/images/padlock.png`}/>
+                    <div className={'overlay'}>{`Lv ${this.props.nextStackLevel}`}</div>
+                </div>
+                }
+                {this.state.crafting.length > craftingStacks.length &&
+                <div key={'unstartedStacks'} className={'stack'}>
+                    <div className={'overlay2'}>{`+ ${this.state.crafting.filter(i => !i.removeMe).length - craftingStacks.length}`}</div>
+                    <div className={'overlay'}>&nbsp;</div>
+                </div>
+                }
+            </div>
+        )
     }
 }
 
