@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
+import { persistStore, persistReducer } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react'
+import createIdbStorage from '@piotr-cz/redux-persist-idb-storage/src';
+
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -23,9 +27,19 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const store = createStore(rootReducer)
+const persistConfig = {
+    key: 'root',
+    storage: createIdbStorage({name: 'myApp', storeName: 'keyval'}),
+    serialize: true, // Data serialization is not required and disabling it allows you to inspect storage value in DevTools
+}
 
-ReactDOM.render(<Provider store={store}><GlobalStyle/><App /></Provider>, document.getElementById('root'));
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+const store = createStore(persistedReducer);
+const persistor = persistStore(store);
+
+
+ReactDOM.render(<Provider store={store}><PersistGate loading={null} persistor={persistor}><GlobalStyle/><App /></PersistGate></Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
