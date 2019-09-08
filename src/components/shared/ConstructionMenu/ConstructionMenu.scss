@@ -53,7 +53,7 @@
 }
 
 .threePartMenu {
-    position: relative;
+    position: fixed;
     height: calc(100vh - 20px);
     background-image: url(./images/background_3part.png);
     background-repeat: no-repeat;

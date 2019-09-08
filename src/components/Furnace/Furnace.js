@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import "react-alice-carousel/lib/alice-carousel.css";
-import moment from 'moment'
 
 import ConstructionMenuThreePart from '../shared/ConstructionMenu/ConstructionMenuThreePart';
 import './Furnace.css';
@@ -15,64 +14,7 @@ class Furnace extends Component {
         super(props);
 
         this.state = {
-            craftingQueue: [
-                {
-                    id: 1,
-                    image: 'ironBar.png',
-                    count: 1,
-                    product: 'Iron bar 1',
-                    time: [5, "seconds"],
-                },
-                {
-                    id: 2,
-                    image: 'ironBar.png',
-                    count: 2,
-                    product: 'Iron bar 2',
-                    time: [10, "seconds"],
-                },
-                {
-                    id: 3,
-                    image: 'ironBar.png',
-                    count: 2,
-                    product: 'Iron bar 3',
-                    time: [10, "seconds"],
-                },
-                {
-                    id: 4,
-                    image: 'ironBar.png',
-                    count: 5,
-                    product: 'Iron bar 4',
-                    time: [100, "seconds"],
-                },
-                {
-                    id: 5,
-                    image: 'ironBar.png',
-                    count: 5,
-                    product: 'Iron bar 5',
-                    time: [100, "seconds"],
-                },
-                {
-                    id: 6,
-                    image: 'ironBar.png',
-                    count: 5,
-                    product: 'Iron bar 6',
-                    time: [100, "seconds"],
-                },
-                {
-                    id: 7,
-                    image: 'ironBar.png',
-                    count: 5,
-                    product: 'Iron bar 7',
-                    time: [100, "seconds"],
-                },
-                {
-                    id: 8,
-                    image: 'ironBar.png',
-                    count: 5,
-                    product: 'Iron bar 8',
-                    time: [100, "seconds"],
-                }
-            ]
+            craftingQueue: []
         }
     }
     getAvailableFurnaceStacks() {
@@ -83,17 +25,13 @@ class Furnace extends Component {
         return 5;
     }
 
-    getCurrentCraftingQueue() {
-        return [...this.state.craftingQueue];
-    }
-
     render() {
         return (
             <div className={'furnaceArea'} onClick={this.props.showFurnacePopup}>
                 <StackOfStacks
                     availableStacks={this.getAvailableFurnaceStacks()}
                     nextStackLevel={this.getNextStackLevel()}
-                    crafting={this.getCurrentCraftingQueue()}
+                    crafting={this.props.furnaceCraftingStack}
                     {...this.props}/>
             </div>
         )
@@ -126,6 +64,7 @@ class Popup extends Component {
                     bottomChildren={
                         this.state.selectedBar && <IngredientsTable product={this.state.selectedBar} actionName={'Smelt'} action={(size) => {
                             console.log('Smelt: ', size);
+                            this.props.addItems(this.state.selectedBar, size);
                         }
                         } {...this.props}/>
                     }
@@ -135,6 +74,13 @@ class Popup extends Component {
 
 const mapFurnaceDispatchToProps = (dispatch) => ({
     showFurnacePopup: () => dispatch(setPopup('furnace')),
+    addItems: (item, count) => dispatch({
+        type: 'smelt',
+        image: item.image,
+        count: count,
+        product: item.name,
+        time: item.time,
+    })
 });
 
 const mapStateToProps = (state) => {
@@ -142,11 +88,12 @@ const mapStateToProps = (state) => {
     const newLocal = {
         bars: state.root.inventory.filter(i => i.type === 'bar'),
         level: state.root.level,
+        furnaceCraftingStack: state.furnace.craftingQueue,
     };
     console.log('Furnace state: ', newLocal)
     return newLocal;
 };
 
-export const FurnacePopup = connect(mapStateToProps)(Popup);
+export const FurnacePopup = connect(mapStateToProps, mapFurnaceDispatchToProps)(Popup);
 
 export default connect(mapStateToProps, mapFurnaceDispatchToProps)(Furnace);

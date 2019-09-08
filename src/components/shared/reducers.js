@@ -12,31 +12,32 @@ const initialState = {
         {
             type: 'ore',
             name: 'Copper ore',
-            image: 'copperOre',
+            image: 'copperOre.png',
             count: 10,
             level: 1,
         },
         {
             type: 'ore',
             name: 'Tin ore',
-            image: 'tinOre',
+            image: 'tinOre.png',
             count: 10,
             level: 1,
         },
         {
             type: 'ore',
             name: 'Iron ore',
-            image: 'ironOre',
+            image: 'ironOre.png',
             count: 10,
             level: 1,
         },
         {
             type: 'bar',
             name: 'Bronze bar',
-            image: 'bronzeBar',
+            image: 'bronzeBar.png',
             description: 'A fresh bar of bronze.',
             count: 0,
             level: 1,
+            time: [10, 'seconds'],
             ingredients: [
                 {
                     type: 'ore',
@@ -55,10 +56,11 @@ const initialState = {
         {
             type: 'bar',
             name: 'Iron bar',
-            image: 'ironBar',
+            image: 'ironBar.png',
             description: 'A fresh bar of iron.',
             count: 0,
             level: 5,
+            time: [20, 'seconds'],
             ingredients: [
                 {
                     type: 'ore',

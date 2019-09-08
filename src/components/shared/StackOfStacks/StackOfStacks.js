@@ -28,6 +28,7 @@ class StackOfStacks extends Component {
 
     checkAndUpdateStacks = () => {
         let newStateCrafting = [...this.state.crafting].filter(i => i && !i.removeMe);
+        console.log(newStateCrafting);
         let currentlyCraftingCount = newStateCrafting.filter(i => i && i.finishTime && i.remainingTime).length;
         if (currentlyCraftingCount < this.props.availableStacks) {
             let allRemainingStacks = this.state.crafting.filter(i => !i.removeMe);
