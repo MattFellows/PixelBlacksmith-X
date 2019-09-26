@@ -73,10 +73,8 @@ const mapFurnaceDispatchToProps = (dispatch) => ({
     showFurnacePopup: () => dispatch(setPopup('furnace')),
     addItems: (item, count) => dispatch({
         type: 'smelt',
-        image: item.image,
         count: count,
-        product: item.name,
-        time: item.time,
+        item: item,
     }),
     updateFinishTime: (item, finishTime) => dispatch({
         type: 'updateFinishTime',

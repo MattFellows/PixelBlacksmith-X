@@ -1,94 +1,56 @@
 import { ACTIONS } from './actions';
 import uuid from "uuid";
 import moment from "moment";
+import items from "./inventory";
 
 const initialState = {
     popup: false,
     level: 1,
     coins: 150,
     xp: 0,
-    inventory: [
-        {
-            type: 'ore',
-            name: 'Copper ore',
-            image: 'copperOre.png',
-            count: 10,
-            level: 1,
-        },
-        {
-            type: 'ore',
-            name: 'Tin ore',
-            image: 'tinOre.png',
-            count: 10,
-            level: 1,
-        },
-        {
-            type: 'ore',
-            name: 'Iron ore',
-            image: 'ironOre.png',
-            count: 10,
-            level: 1,
-        },
-        {
-            type: 'bar',
-            name: 'Bronze bar',
-            image: 'bronzeBar.png',
-            description: 'A fresh bar of bronze.',
-            count: 0,
-            level: 1,
-            time: [10, 'seconds'],
-            ingredients: [
-                {
-                    type: 'ore',
-                    image: 'copperOre.png',
-                    name: 'Copper ore',
-                    count: 1
-                },
-                {
-                    type: 'ore',
-                    image: 'tinOre.png',
-                    name: 'Tin ore',
-                    count: 1
-                },
-            ]
-        },
-        {
-            type: 'bar',
-            name: 'Iron bar',
-            image: 'ironBar.png',
-            description: 'A fresh bar of iron.',
-            count: 0,
-            level: 5,
-            time: [20, 'seconds'],
-            ingredients: [
-                {
-                    type: 'ore',
-                    name: 'Iron ore',
-                    image: 'ironOre.png',
-                    count: 2
-                },
-            ]
-        }
-    ],
+    inventory: items,
     furnaceQueue: [],
 };
+
+function checkAndRemoveIngredientsInInventory(state, item, count) {
+    if (item.level > state.level) {
+        return null;
+    }
+    for(let i = 0; i < item.ingredients.length; i++){
+        const ingredientItem = item.ingredients[i];
+        const inventoryItem = state.inventory.find(p => p.name === ingredientItem.name);
+        if (inventoryItem && inventoryItem.count >= (ingredientItem.count * count)) {
+            inventoryItem.count -= (ingredientItem.count * count);
+        } else {
+            return null;
+        }
+    }
+    return state.inventory;
+}
 
 function rootReducer(state = initialState, action) {
     switch (action.type) {
         case 'smelt':
         {
-            let newCraftingQueue = [...state.furnaceQueue];
-            newCraftingQueue.push({
-                image: action.image,
-                count: action.count,
-                product: action.product,
-                time: [action.time[0] * action.count, action.time[1]],
-                uuid: uuid.v4(),
-            })
-            return {
-                ...state,
-                furnaceQueue: newCraftingQueue,
+            console.log('Smelting: ', action.item);
+            let newInventory = checkAndRemoveIngredientsInInventory(state, action.item, action.count);
+            console.log('Actually smelting because there was enough in inventory: ', newInventory);
+            if (newInventory) {
+                let newCraftingQueue = [...state.furnaceQueue];
+                newCraftingQueue.push({
+                    image: action.item.image,
+                    count: action.count,
+                    product: action.item.name,
+                    time: [action.item.time[0] * action.count, action.item.time[1]],
+                    uuid: uuid.v4(),
+                })
+                return {
+                    ...state,
+                    inventory: newInventory,
+                    furnaceQueue: newCraftingQueue,
+                }
             }
+            return state;
         }
         case 'updateFinishTime': {
             let newCraftingQueue = [...state.furnaceQueue];
