@@ -43,7 +43,7 @@ class IngredientsTable extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    inventory: state.root.inventory,
+    inventory: state.inventory,
 })
 
 export default connect(mapStateToProps)(IngredientsTable);

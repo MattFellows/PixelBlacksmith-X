@@ -1,7 +1,6 @@
 import { ACTIONS } from './actions';
-import { combineReducers } from 'redux';
-
-import furnaceReducer from '../Furnace/reducers';
+import uuid from "uuid";
+import moment from "moment";
 
 const initialState = {
     popup: false,
@@ -70,20 +69,64 @@ const initialState = {
                 },
             ]
         }
-    ]
+    ],
+    furnaceQueue: [],
 };
 
 function rootReducer(state = initialState, action) {
-    if (action.type === ACTIONS.POPUP) {
-        return {
-            ...state,
-            popup: action.popup
+    switch (action.type) {
+        case 'smelt':
+        {
+            let newCraftingQueue = [...state.furnaceQueue];
+            newCraftingQueue.push({
+                image: action.image,
+                count: action.count,
+                product: action.product,
+                time: [action.time[0] * action.count, action.time[1]],
+                uuid: uuid.v4(),
+            })
+            return {
+                ...state,
+                furnaceQueue: newCraftingQueue,
+            }
+        }
+        case 'updateFinishTime': {
+            let newCraftingQueue = [...state.furnaceQueue];
+            newCraftingQueue.find(a => a.uuid === action.uuid).finishTime = action.finishTime;
+            return {
+                ...state,
+                furnaceQueue: newCraftingQueue,
+            }
+        }
+        case 'removeDeleted': {
+            let newCraftingQueue = [...state.furnaceQueue].filter(i => !i.removeMe).filter(i => moment(i.finishTime).isBefore(moment()) );
+            return {
+                ...state,
+                furnaceQueue: newCraftingQueue,
+            }
+        }
+        case 'addInventoryAndRemoveFromQueue': {
+            let newCraftingQueue = [...state.furnaceQueue].filter(i => i.uuid !== action.item.uuid);
+            let newInventory = [...state.inventory];
+            newInventory.find(inventoryItem => inventoryItem.name === action.item.product).count += action.item.count;
+            console.log('Added: ',newInventory);
+            return {
+                ...state,
+                inventory: newInventory,
+                furnaceQueue: newCraftingQueue,
+            }
+        }
+        case ACTIONS.POPUP: {
+            return {
+                ...state,
+                popup: action.popup
+            }
+        }
+        default: {
+            return state;
         }
     }
     return state;
 }
 
-export default combineReducers({
-    root: rootReducer,
-    furnace: furnaceReducer
-});
+export default rootReducer;

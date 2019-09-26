@@ -10,13 +10,7 @@ import SwipeableProductView from '../shared/SwipeableProductView/SwipeableProduc
 import StackOfStacks from '../shared/StackOfStacks/StackOfStacks';
 
 class Furnace extends Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            craftingQueue: []
-        }
-    }
     getAvailableFurnaceStacks() {
         return 6;
     }
@@ -43,27 +37,30 @@ class Popup extends Component {
         super(props)
 
         this.state = {
-            selectedBar: this.props.bars[0],
+            selectedBar: this.props.inventory.filter(i => i.type === 'bar')[0],
         }
     }
 
     selectBar = bar => {
-        console.log('Select Bar: ', bar);
         if (bar !== this.state.selectedBar) {
             this.setState({selectedBar: bar});
         }
+    };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log(`Props updated on furnace`);
     }
 
     render() {
+        console.log('Rendering furnace');
         return <ConstructionMenuThreePart
                     topChildren={<div className='title'>Furnace</div>}
                     middleChildren={
-                        <SwipeableProductView onSlideChanged={({item}) => this.selectBar(this.props.bars[item])}
-                                              products={this.props.bars} {...this.props}/>
+                        <SwipeableProductView onSlideChanged={({item}) => this.selectBar(this.props.inventory.filter(i => i.type === 'bar')[item])}
+                                              products={this.props.inventory.filter(p => p.type === 'bar')} {...this.props}/>
                     }
                     bottomChildren={
                         this.state.selectedBar && <IngredientsTable product={this.state.selectedBar} actionName={'Smelt'} action={(size) => {
-                            console.log('Smelt: ', size);
                             this.props.addItems(this.state.selectedBar, size);
                         }
                         } {...this.props}/>
@@ -80,17 +77,20 @@ const mapFurnaceDispatchToProps = (dispatch) => ({
         count: count,
         product: item.name,
         time: item.time,
+    }),
+    updateFinishTime: (item, finishTime) => dispatch({
+        type: 'updateFinishTime',
+        uuid: item.uuid,
+        finishTime: finishTime,
     })
 });
 
 const mapStateToProps = (state) => {
-    console.log(state)
     const newLocal = {
-        bars: state.root.inventory.filter(i => i.type === 'bar'),
-        level: state.root.level,
-        furnaceCraftingStack: state.furnace.craftingQueue,
+        inventory: state.inventory,
+        level: state.level,
+        furnaceCraftingStack: state.furnaceQueue,
     };
-    console.log('Furnace state: ', newLocal)
     return newLocal;
 };
 

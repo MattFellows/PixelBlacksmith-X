@@ -17,7 +17,7 @@ class StackOfStacks extends Component {
         newStateCrafting.forEach(i => {
             i.remainingTime = i.finishTime ? moment(i.finishTime).diff(moment()) : null;
             if (i.remainingTime < 0) {
-                this.props.addToInventory(i.product, i.count);
+                this.props.addToInventoryAndRemoveFromQueue(i);
                 i.removeMe = true;
             }
         });
@@ -28,7 +28,6 @@ class StackOfStacks extends Component {
 
     checkAndUpdateStacks = () => {
         let newStateCrafting = [...this.state.crafting].filter(i => i && !i.removeMe);
-        console.log(newStateCrafting);
         let currentlyCraftingCount = newStateCrafting.filter(i => i && i.finishTime && i.remainingTime).length;
         if (currentlyCraftingCount < this.props.availableStacks) {
             let allRemainingStacks = this.state.crafting.filter(i => !i.removeMe);
@@ -37,6 +36,7 @@ class StackOfStacks extends Component {
                 if ((currentlyCraftingCount < this.props.availableStacks) && !item.finishTime) {
                     item.finishTime = moment().add(item.time[0], item.time[1]).toDate().getTime();
                     item.remainingTime = item.time[0] * 1000;
+                    this.props.updateFinishTime(item, item.finishTime);
                     currentlyCraftingCount++;
                 }
             }
@@ -92,7 +92,10 @@ class StackOfStacks extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addToInventory: (item, count) => dispatch({type: 'addInventory', itemName: item, itemCount: count})
+        addToInventoryAndRemoveFromQueue: (item) => {
+            console.log('Add item to inv: ', item);
+            dispatch({type: 'addInventoryAndRemoveFromQueue', item: item})
+        }
     }
 }
 
