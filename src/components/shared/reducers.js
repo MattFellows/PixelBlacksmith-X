@@ -12,6 +12,11 @@ const initialState = {
     furnaceQueue: [],
 };
 
+initialState.inventory.find(i => i.name === 'Copper ore').count = 10;
+initialState.inventory.find(i => i.name === 'Tin ore').count = 10;
+initialState.inventory.find(i => i.name === 'Iron ore').count = 10;
+initialState.inventory.find(i => i.name === 'Coal').count = 20;
+
 function checkAndRemoveIngredientsInInventory(state, item, count) {
     if (item.level > state.level) {
         return null;
@@ -88,7 +93,6 @@ function rootReducer(state = initialState, action) {
             return state;
         }
     }
-    return state;
 }
 
 export default rootReducer;

@@ -36,8 +36,10 @@ class Popup extends Component {
     constructor(props) {
         super(props)
 
+        const selectedBar = Array.isArray(this.props.inventory) ? this.props.inventory.filter(i => i.type === 'bar')[0] : {};
+        console.log('selectedBar: ', selectedBar);
         this.state = {
-            selectedBar: this.props.inventory.filter(i => i.type === 'bar')[0],
+            selectedBar: selectedBar,
         }
     }
 
