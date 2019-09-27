@@ -46,7 +46,7 @@ function rootReducer(state = initialState, action) {
                     image: action.item.image,
                     count: action.count,
                     product: action.item.name,
-                    time: [action.item.time[0] * action.count, action.item.time[1]],
+                    time: [action.item.constructionTime[0] * action.count, action.item.constructionTime[1]],
                     uuid: uuid.v4(),
                 })
                 return {
@@ -73,12 +73,20 @@ function rootReducer(state = initialState, action) {
             }
         }
         case 'addInventoryAndRemoveFromQueue': {
+            console.log('AddToInv: ', action);
             let newCraftingQueue = [...state.furnaceQueue].filter(i => i.uuid !== action.item.uuid);
             let newInventory = [...state.inventory];
+            let newXp = state.xp + (state.inventory.find(i => i.name === action.item.product).baseValue * action.item.count);
+            let newLevel = Math.ceil(Math.sqrt(newXp));
+            if (newLevel > state.level) {
+                //Do Level up stuff here...
+            }
             newInventory.find(inventoryItem => inventoryItem.name === action.item.product).count += action.item.count;
             console.log('Added: ',newInventory);
             return {
                 ...state,
+                level: newLevel,
+                xp: newXp,
                 inventory: newInventory,
                 furnaceQueue: newCraftingQueue,
             }

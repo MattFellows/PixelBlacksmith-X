@@ -5,6 +5,7 @@ import './App.css';
 import wallpaper from './Wallpaper.png';
 import { setPopup } from './components/shared/actions';
 import Furnace, { FurnacePopup } from './components/Furnace/Furnace';
+import PlayerInfo from "./components/PlayerInfo/PlayerInfor";
 
 class App extends Component  {
 
@@ -37,6 +38,7 @@ class App extends Component  {
     return (
       <div className="App">
         <img className='wallpaper' alt='wallpaper' src={wallpaper}/>
+        <PlayerInfo />
         <Furnace />
         {popup}
       </div>
