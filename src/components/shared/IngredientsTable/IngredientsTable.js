@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import './IngredientsTable.scss';
 
 class IngredientsTable extends Component {
@@ -23,7 +24,7 @@ class IngredientsTable extends Component {
                             <td className='count centered'>{this.props.product.level}</td>
                             <td className='count centered'>{this.props.level}</td>
                         </tr>
-                        {this.props.product.ingredients.map(ing => <tr key={ing.name}>
+                        {this.props.product.ingredients.filter(i => i.state === (this.props.ingredientState || 1)).map(ing => <tr key={ing.name}>
                             <td className={'icon'}>{ing.image && <img alt={'ing.name'} src={`/images/${ing.image}`}/>}</td>
                             <td className={'name'}>{ing.name}</td>
                             <td className='count centered'>{ing.count}</td>
@@ -44,6 +45,10 @@ class IngredientsTable extends Component {
 
 const mapStateToProps = (state) => ({
     inventory: state.inventory,
-})
+});
+
+IngredientsTable.propTypes = {
+    ingredientState: PropTypes.number,
+}
 
 export default connect(mapStateToProps)(IngredientsTable);

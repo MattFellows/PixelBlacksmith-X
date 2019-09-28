@@ -1,0 +1,46 @@
+.anvilArea {
+    position: absolute;
+    width: 44vh;
+    height: 37vh;
+    top: 10vh;
+    left: 133vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border: 3px solid black;
+}
+
+.tierSelectorContainer {
+    width: 100%;
+    height: calc(100% - 2vh);
+    display: flex;
+    flex-direction: row;
+
+    .tierSelector {
+        width: 5vh;
+        height: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        .up {
+            width: 100%;
+            padding-top: 100%;
+            background-image: url('/images/uparrow.png');
+            background-size: contain;
+        }
+
+        .down {
+            width: 100%;
+            padding-top: 100%;
+            background-image: url('/images/downarrow.png');
+            background-size: contain;
+        }
+    }
+
+    .swiperContainer {
+        width: calc(100% - 5vh);
+        display: flex;
+        flex-direction: column;
+    }
+}

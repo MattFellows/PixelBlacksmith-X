@@ -4,7 +4,6 @@ import ActionPage from "../ActionPage/ActionPage";
 
 class MakeProductView extends Component {
     render() {
-        console.log('Rendering MakeProductView', this.props.product);
         return <div className='swiperItem'>
             <ActionPage
                 name={this.props.product.name}

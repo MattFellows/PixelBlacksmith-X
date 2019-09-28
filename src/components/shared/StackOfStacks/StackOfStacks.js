@@ -51,7 +51,7 @@ class StackOfStacks extends Component {
         setTimeout(() => setInterval(this.checkAndUpdateStacks, 1000), 500);
     };
 
-    componentWillReceiveProps = (props) => {
+    UNSAFE_componentWillReceiveProps = (props) => {
         this.setState({
             crafting: props.crafting
         })
@@ -93,7 +93,6 @@ class StackOfStacks extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         addToInventoryAndRemoveFromQueue: (item) => {
-            console.log('Add item to inv: ', item);
             dispatch({type: 'addInventoryAndRemoveFromQueue', item: item})
         }
     }

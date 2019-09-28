@@ -5,11 +5,13 @@ import items from "./inventory";
 
 const initialState = {
     popup: false,
-    level: 1,
+    level: 100,
     coins: 150,
-    xp: 0,
+    xp: 2000,
     inventory: items,
     furnaceQueue: [],
+    anvilQueue: [],
+    premium: 0,
 };
 
 initialState.inventory.find(i => i.name === 'Copper ore').count = 10;
@@ -35,11 +37,9 @@ function checkAndRemoveIngredientsInInventory(state, item, count) {
 
 function rootReducer(state = initialState, action) {
     switch (action.type) {
-        case 'smelt':
+        case 'craft':
         {
-            console.log('Smelting: ', action.item);
             let newInventory = checkAndRemoveIngredientsInInventory(state, action.item, action.count);
-            console.log('Actually smelting because there was enough in inventory: ', newInventory);
             if (newInventory) {
                 let newCraftingQueue = [...state.furnaceQueue];
                 newCraftingQueue.push({
@@ -73,22 +73,31 @@ function rootReducer(state = initialState, action) {
             }
         }
         case 'addInventoryAndRemoveFromQueue': {
-            console.log('AddToInv: ', action);
             let newCraftingQueue = [...state.furnaceQueue].filter(i => i.uuid !== action.item.uuid);
             let newInventory = [...state.inventory];
             let newXp = state.xp + (state.inventory.find(i => i.name === action.item.product).baseValue * action.item.count);
-            let newLevel = Math.ceil(Math.sqrt(newXp));
+            let newLevel = Math.ceil(0.1 * Math.sqrt(newXp));
             if (newLevel > state.level) {
                 //Do Level up stuff here...
             }
             newInventory.find(inventoryItem => inventoryItem.name === action.item.product).count += action.item.count;
-            console.log('Added: ',newInventory);
             return {
                 ...state,
                 level: newLevel,
                 xp: newXp,
                 inventory: newInventory,
                 furnaceQueue: newCraftingQueue,
+            }
+        }
+        case 'resetInventory': {
+            const newInventory = [...state.inventory];
+            newInventory.find(i => i.name === 'Copper ore').count = 10;
+            newInventory.find(i => i.name === 'Tin ore').count = 10;
+            newInventory.find(i => i.name === 'Iron ore').count = 10;
+            newInventory.find(i => i.name === 'Coal').count = 20;
+            return {
+                ...state,
+                inventory: newInventory
             }
         }
         case ACTIONS.POPUP: {

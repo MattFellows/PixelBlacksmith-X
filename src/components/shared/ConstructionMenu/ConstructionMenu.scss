@@ -82,27 +82,6 @@
         position: relative;
         height: 25vh;
         margin-bottom: 4vh;
-
-        .swiperContainer {
-            height: calc(100% - 2vh);
-            width: 100%;
-
-            .swiperItem {
-                width: 100%;
-            }
-        }
-
-        .alice-carousel__dots-item.__active {
-            background-color: red;
-        }
-
-        .alice-carousel__prev-btn {
-            display: none;
-        }
-
-        .alice-carousel__next-btn {
-            display: none;
-        }
     }
 
     .bottomContainer {
@@ -144,6 +123,27 @@
         position: relative;
         top: -10px;
     }
+}
+
+.swiperContainer {
+    height: calc(100% - 2vh);
+    width: 100%;
+
+    .swiperItem {
+        width: 100%;
+    }
+}
+
+.alice-carousel__dots-item.__active {
+    background-color: red;
+}
+
+.alice-carousel__prev-btn {
+    display: none;
+}
+
+.alice-carousel__next-btn {
+    display: none;
 }
 
 .twoPart {

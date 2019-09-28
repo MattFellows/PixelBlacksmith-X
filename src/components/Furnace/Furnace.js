@@ -11,12 +11,50 @@ import StackOfStacks from '../shared/StackOfStacks/StackOfStacks';
 
 class Furnace extends Component {
 
-    getAvailableFurnaceStacks() {
-        return 6;
-    }
+    getAvailableFurnaceStacks = () => {
+        const premium = this.props.premium;
+        let l = this.props.level;
+        if (l < 4) {
+            return premium + 1;
+        }
+        if (l < 8) {
+            return premium + 2;
+        }
+        if (l < 17) {
+            return premium + 3;
+        }
+        if (l < 24) {
+            return premium + 4;
+        }
+        if (l < 30) {
+            return premium + 5;
+        }
+        if (l < 44) {
+            return premium + 6;
+        }
+        return premium + 7;
+    };
 
     getNextStackLevel() {
-        return 5;
+        let l = this.props.level;
+        if (l < 4) {
+            return 4;
+        }
+        if (l < 8) {
+            return 8;
+        }
+        if (l < 17) {
+            return 17;
+        }
+        if (l < 24) {
+            return 24;
+        }
+        if (l < 30) {
+            return 30;
+        }
+        if (l < 44) {
+            return 44;
+        }
     }
 
     render() {
@@ -37,7 +75,6 @@ class Popup extends Component {
         super(props)
 
         const selectedBar = Array.isArray(this.props.inventory) ? this.props.inventory.filter(i => i.type === 'bar')[0] : {};
-        console.log('selectedBar: ', selectedBar);
         this.state = {
             selectedBar: selectedBar,
         }
@@ -49,12 +86,7 @@ class Popup extends Component {
         }
     };
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log(`Props updated on furnace`);
-    }
-
     render() {
-        console.log('Rendering furnace');
         return <ConstructionMenuThreePart
                     topChildren={<div className='title'>Furnace</div>}
                     middleChildren={
@@ -74,7 +106,7 @@ class Popup extends Component {
 const mapFurnaceDispatchToProps = (dispatch) => ({
     showFurnacePopup: () => dispatch(setPopup('furnace')),
     addItems: (item, count) => dispatch({
-        type: 'smelt',
+        type: 'craft',
         count: count,
         item: item,
     }),
@@ -90,6 +122,7 @@ const mapStateToProps = (state) => {
         inventory: state.inventory,
         level: state.level,
         furnaceCraftingStack: state.furnaceQueue,
+        premium: state.premium,
     };
     return newLocal;
 };
