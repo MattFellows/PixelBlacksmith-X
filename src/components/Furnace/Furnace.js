@@ -107,11 +107,14 @@ const mapFurnaceDispatchToProps = (dispatch) => ({
     showFurnacePopup: () => dispatch(setPopup('furnace')),
     addItems: (item, count) => dispatch({
         type: 'craft',
+        queue: 'furnace',
+        itemState: 1,
         count: count,
         item: item,
     }),
     updateFinishTime: (item, finishTime) => dispatch({
         type: 'updateFinishTime',
+        queue: 'furnace',
         uuid: item.uuid,
         finishTime: finishTime,
     })

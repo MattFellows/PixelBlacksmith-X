@@ -19,13 +19,17 @@ initialState.inventory.find(i => i.name === 'Tin ore').count = 10;
 initialState.inventory.find(i => i.name === 'Iron ore').count = 10;
 initialState.inventory.find(i => i.name === 'Coal').count = 20;
 
-function checkAndRemoveIngredientsInInventory(state, item, count) {
+function checkAndRemoveIngredientsInInventory(state, item, count, itemState) {
     if (item.level > state.level) {
         return null;
     }
     for(let i = 0; i < item.ingredients.length; i++){
         const ingredientItem = item.ingredients[i];
         const inventoryItem = state.inventory.find(p => p.name === ingredientItem.name);
+        if (ingredientItem.state !== itemState) {
+            continue;
+        }
+        console.log('Check: ', ingredientItem.name, ' x ', ingredientItem.count);
         if (inventoryItem && inventoryItem.count >= (ingredientItem.count * count)) {
             inventoryItem.count -= (ingredientItem.count * count);
         } else {
@@ -39,9 +43,19 @@ function rootReducer(state = initialState, action) {
     switch (action.type) {
         case 'craft':
         {
-            let newInventory = checkAndRemoveIngredientsInInventory(state, action.item, action.count);
+            let queue = [];
+            switch (action.queue) {
+                case 'furnace':
+                    queue = [...state.furnaceQueue];
+                    break;
+                case 'anvil':
+                    queue = [...state.anvilQueue];
+                    break;
+                default:
+            }
+            let newInventory = checkAndRemoveIngredientsInInventory(state, action.item, action.count, action.itemState);
             if (newInventory) {
-                let newCraftingQueue = [...state.furnaceQueue];
+                let newCraftingQueue = queue;
                 newCraftingQueue.push({
                     image: action.item.image,
                     count: action.count,
@@ -49,31 +63,64 @@ function rootReducer(state = initialState, action) {
                     time: [action.item.constructionTime[0] * action.count, action.item.constructionTime[1]],
                     uuid: uuid.v4(),
                 })
-                return {
+                let newState = {
                     ...state,
                     inventory: newInventory,
-                    furnaceQueue: newCraftingQueue,
-                }
+                    [action.queue + 'Queue']: newCraftingQueue,
+                };
+                console.log('New State:', newState);
+                return newState
             }
             return state;
         }
         case 'updateFinishTime': {
-            let newCraftingQueue = [...state.furnaceQueue];
+            let queue = [];
+            switch (action.queue) {
+                case 'furnace':
+                    queue = [...state.furnaceQueue];
+                    break;
+                case 'anvil':
+                    queue = [...state.anvilQueue];
+                    break;
+                default:
+            }
+            let newCraftingQueue = queue;
+            console.log('Finding stack with uuid: ', action.uuid, ' in: ', newCraftingQueue);
             newCraftingQueue.find(a => a.uuid === action.uuid).finishTime = action.finishTime;
             return {
                 ...state,
-                furnaceQueue: newCraftingQueue,
+                [action.queue + 'Queue']: newCraftingQueue,
             }
         }
         case 'removeDeleted': {
-            let newCraftingQueue = [...state.furnaceQueue].filter(i => !i.removeMe).filter(i => moment(i.finishTime).isBefore(moment()) );
+            let queue = [];
+            switch (action.queue) {
+                case 'furnace':
+                    queue = [...state.furnaceQueue];
+                    break;
+                case 'anvil':
+                    queue = [...state.anvilQueue];
+                    break;
+                default:
+            }
+            let newCraftingQueue = queue.filter(i => !i.removeMe).filter(i => moment(i.finishTime).isBefore(moment()) );
             return {
                 ...state,
-                furnaceQueue: newCraftingQueue,
+                [action.queue + 'Queue']: newCraftingQueue,
             }
         }
         case 'addInventoryAndRemoveFromQueue': {
-            let newCraftingQueue = [...state.furnaceQueue].filter(i => i.uuid !== action.item.uuid);
+            let queue = [];
+            switch (action.queue) {
+                case 'furnace':
+                    queue = [...state.furnaceQueue];
+                    break;
+                case 'anvil':
+                    queue = [...state.anvilQueue];
+                    break;
+                default:
+            }
+            let newCraftingQueue = queue.filter(i => i.uuid !== action.item.uuid);
             let newInventory = [...state.inventory];
             let newXp = state.xp + (state.inventory.find(i => i.name === action.item.product).baseValue * action.item.count);
             let newLevel = Math.ceil(0.1 * Math.sqrt(newXp));
@@ -86,7 +133,7 @@ function rootReducer(state = initialState, action) {
                 level: newLevel,
                 xp: newXp,
                 inventory: newInventory,
-                furnaceQueue: newCraftingQueue,
+                [action.queue + 'Queue']: newCraftingQueue,
             }
         }
         case 'resetInventory': {

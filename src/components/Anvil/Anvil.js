@@ -147,13 +147,19 @@ class Popup extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
     showAnvilPopup: () => dispatch(setPopup('anvil')),
-    addItems: (item, count) => dispatch({
-        type: 'craft',
-        count: count,
-        item: item,
-    }),
+    addItems: (item, count) => {
+        console.log('Add Item: ', item, ' x ', count);
+        return dispatch({
+            type: 'craft',
+            queue: 'anvil',
+            itemState: 2,
+            count: count,
+            item: item,
+        })
+    },
     updateFinishTime: (item, finishTime) => dispatch({
         type: 'updateFinishTime',
+        queue: 'anvil',
         uuid: item.uuid,
         finishTime: finishTime,
     })
