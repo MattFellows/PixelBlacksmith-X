@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import {toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import wallpaper from './Wallpaper.png';
 import { setPopup } from './components/shared/actions';
 import Furnace, { FurnacePopup } from './components/Furnace/Furnace';
 import PlayerInfo from "./components/PlayerInfo/PlayerInfor";
 import Anvil, {AnvilPopup} from "./components/Anvil/Anvil";
+
 
 class App extends Component  {
 
@@ -46,6 +49,7 @@ class App extends Component  {
         <Furnace />
         <Anvil />
         {popup}
+        <ToastContainer autoClose={false} position={toast.POSITION.BOTTOM_CENTER}/>
       </div>
     )
   }

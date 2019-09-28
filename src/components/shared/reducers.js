@@ -2,6 +2,7 @@ import { ACTIONS } from './actions';
 import uuid from "uuid";
 import moment from "moment";
 import items from "./inventory";
+import {toast} from "react-toastify";
 
 const initialState = {
     popup: false,
@@ -70,6 +71,9 @@ function rootReducer(state = initialState, action) {
                 };
                 console.log('New State:', newState);
                 return newState
+            } else {
+                console.log('About to toast');
+                toast.error('You do not have the required ingredients');
             }
             return state;
         }

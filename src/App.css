@@ -32,3 +32,8 @@
     transform: rotate(360deg);
   }
 }
+
+.Toastify__toast {
+  font-family: 'BetterPixels', Helvetica, Arial, sans-serif;
+  font-size: 3vh;
+}
