@@ -13,7 +13,6 @@ class SwipeableProductView extends Component {
     }
 
     render() {
-        console.log('Selected Product: ', this.props.selectedProduct.name, this.props.products)
         return <div
             className='swiperContainer'>
             <AliceCarousel

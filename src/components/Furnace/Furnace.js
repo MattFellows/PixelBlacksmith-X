@@ -8,6 +8,7 @@ import { setPopup } from '../shared/actions';
 import IngredientsTable from '../shared/IngredientsTable/IngredientsTable';
 import SwipeableProductView from '../shared/SwipeableProductView/SwipeableProductView';
 import StackOfStacks from '../shared/StackOfStacks/StackOfStacks';
+import {ITEM_STATE} from "../shared/inventory";
 
 class Furnace extends Component {
 
@@ -106,13 +107,13 @@ class Popup extends Component {
                     topChildren={<div className='title'>Furnace</div>}
                     middleChildren={
                         <SwipeableProductView onSlideChanged={({item}) => this.selectBar(this.getProducts(0)[item])}
-                                              products={this.getProducts(0)} selectedProduct={this.state.selectedProduct} {...this.props}/>
+                                              products={this.getProducts(0)} itemState={ITEM_STATE.NORMAL} selectedProduct={this.state.selectedProduct} {...this.props}/>
                     }
                     bottomChildren={
                         this.state.selectedProduct && <IngredientsTable product={this.state.selectedProduct} actionName={'Smelt'} action={(size) => {
                             this.props.addItems(this.state.selectedProduct, size);
                         }
-                        } {...this.props}/>
+                        } ingredientState={ITEM_STATE.NORMAL} {...this.props}/>
                     }
                     close={this.props.close} />
     }
@@ -123,7 +124,7 @@ const mapFurnaceDispatchToProps = (dispatch) => ({
     addItems: (item, count) => dispatch({
         type: 'craft',
         queue: 'furnace',
-        itemState: 1,
+        itemState: ITEM_STATE.NORMAL,
         count: count,
         item: item,
     }),

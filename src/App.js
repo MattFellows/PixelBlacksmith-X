@@ -9,11 +9,15 @@ import { setPopup } from './components/shared/actions';
 import Furnace, { FurnacePopup } from './components/Furnace/Furnace';
 import PlayerInfo from "./components/PlayerInfo/PlayerInfor";
 import Anvil, {AnvilPopup} from "./components/Anvil/Anvil";
+import Table, {TablePopup} from "./components/Table/Table";
 
 
 class App extends Component  {
 
-
+  constructor(props) {
+    super(props);
+    setInterval(this.props.clearup, 1000);
+  }
 
   componentDidMount = () => {
     //setTimeout(() => this.props.setPopupVisible('furnace'), 1000);
@@ -27,6 +31,9 @@ class App extends Component  {
       }
       case 'anvil': {
         return <AnvilPopup close={this.props.setPopupHidden}/>;
+      }
+      case 'table': {
+        return <TablePopup close={this.props.setPopupHidden}/>;
       }
       default: {
         return null;
@@ -48,6 +55,7 @@ class App extends Component  {
         <PlayerInfo />
         <Furnace />
         <Anvil />
+        <Table />
         {popup}
         <ToastContainer autoClose={false} position={toast.POSITION.BOTTOM_CENTER}/>
       </div>
@@ -65,6 +73,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setPopupVisible: (popupType) => dispatch(setPopup(popupType)),
     setPopupHidden: () => dispatch(setPopup(null)),
+    clearup: () => {dispatch({type:'removeDeleted',queue:'anvil'});dispatch({type:'removeDeleted',queue:'furnace'})},
   }
 }
 

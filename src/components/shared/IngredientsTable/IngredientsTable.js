@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './IngredientsTable.scss';
+import {ITEM_STATE} from "../inventory";
 
 class IngredientsTable extends Component {
     render() {
@@ -24,12 +25,14 @@ class IngredientsTable extends Component {
                             <td className='count centered'>{this.props.product.level}</td>
                             <td className='count centered'>{this.props.level}</td>
                         </tr>
-                        {this.props.product.ingredients.filter(i => i.state === (this.props.ingredientState || 1)).map(ing => <tr key={ing.name}>
-                            <td className={'icon'}>{ing.image && <img alt={'ing.name'} src={`/images/${ing.image}`}/>}</td>
-                            <td className={'name'}>{ing.name}</td>
-                            <td className='count centered'>{ing.count}</td>
-                            <td className='count centered'>{this.props.inventory.find(item => item.name === ing.name).count}</td>
-                        </tr>)}
+                        {this.props.product.ingredients.filter(i => i.itemState === (this.props.ingredientState || 1)).map(ing => {
+                            return <tr key={ing.name}>
+                                <td className={'icon'}>{ing.image && <img alt={'ing.name'} src={`/images/${ing.image}`}/>}</td>
+                                <td className={'name'}>{(ing.ingredientState === ITEM_STATE.UNFINISHED ? '(unf) ' : '') + ing.name}</td>
+                                <td className='count centered'>{ing.count}</td>
+                                <td className='count centered'>{this.props.inventory.find(item => item.name === ing.name).count[ing.ingredientState]}</td>
+                            </tr>
+                        })}
                         </tbody>
                     </table>
                 </div>

@@ -2,32 +2,32 @@ import React from 'react';
 import StackOfStacks from "../shared/StackOfStacks/StackOfStacks";
 import {connect} from "react-redux";
 import {setPopup} from "../shared/actions";
-import './Anvil.scss';
+import './Table.scss';
 import ConstructionMenuThreePart from "../shared/ConstructionMenu/ConstructionMenuThreePart";
 import SwipeableProductView from "../shared/SwipeableProductView/SwipeableProductView";
 import IngredientsTable from "../shared/IngredientsTable/IngredientsTable";
 import {ITEM_STATE} from "../shared/inventory";
 
-class Anvil extends React.Component {
-    getAvailableAnvilStacks = () => {
+class Table extends React.Component {
+    getAvailableTableStacks = () => {
         const premium = this.props.premium;
         let l = this.props.level;
-        if (l < 3) {
+        if (l < 5) {
             return premium + 1;
         }
-        if (l < 7) {
+        if (l < 10) {
             return premium + 2;
         }
-        if (l < 16) {
+        if (l < 15) {
             return premium + 3;
         }
-        if (l < 25) {
+        if (l < 27) {
             return premium + 4;
         }
-        if (l < 33) {
+        if (l < 39) {
             return premium + 5;
         }
-        if (l < 42) {
+        if (l < 50) {
             return premium + 6;
         }
         return premium + 7;
@@ -35,33 +35,33 @@ class Anvil extends React.Component {
 
     getNextStackLevel() {
         let l = this.props.level;
-        if (l < 3) {
-            return 3;
+        if (l < 5) {
+            return 5;
         }
-        if (l < 7) {
-            return 7;
+        if (l < 10) {
+            return 10;
         }
-        if (l < 16) {
-            return 16;
+        if (l < 15) {
+            return 15;
         }
-        if (l < 25) {
-            return 25;
+        if (l < 27) {
+            return 27;
         }
-        if (l < 33) {
-            return 33;
+        if (l < 39) {
+            return 39;
         }
-        if (l < 42) {
-            return 42;
+        if (l < 50) {
+            return 50;
         }
     }
 
     render() {
         return (
-            <div className={'anvilArea'} onClick={this.props.showAnvilPopup}>
+            <div className={'tableArea'} onClick={this.props.showTablePopup}>
                 <StackOfStacks
-                    availableStacks={this.getAvailableAnvilStacks()}
+                    availableStacks={this.getAvailableTableStacks()}
                     nextStackLevel={this.getNextStackLevel()}
-                    crafting={this.props.anvilCraftingStack}
+                    crafting={this.props.tableCraftingStack}
                     {...this.props}/>
             </div>
         )
@@ -128,38 +128,38 @@ class Popup extends React.Component {
 
     render() {
         return <ConstructionMenuThreePart
-            topChildren={<div className='title'>Anvil</div>}
+            topChildren={<div className='title'>Table</div>}
             middleChildren={
                 <div className={'tierSelectorContainer'}>
                 <div className={'tierSelector'}><div className={'up'} onClick={this.incrementTier}/><div className={'down'} onClick={this.decrementTier} /></div>
                 <SwipeableProductView onSlideChanged={({item}) => this.selectProduct(this.state.products[item])}
-                                      products={this.state.products} selectedProduct={this.state.selectedProduct} itemState={ITEM_STATE.UNFINISHED} {...this.props}/>
+                                      products={this.state.products} selectedProduct={this.state.selectedProduct} itemState={ITEM_STATE.NORMAL} {...this.props}/>
                 </div>
             }
             bottomChildren={
                 this.state.selectedProduct && <IngredientsTable product={this.state.selectedProduct} actionName={'Craft'} action={(size) => {
                     this.props.addItems(this.state.selectedProduct, size);
                 }
-                } ingredientState={ITEM_STATE.UNFINISHED} {...this.props}/>
+                } ingredientState={ITEM_STATE.NORMAL} {...this.props}/>
             }
             close={this.props.close} />
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    showAnvilPopup: () => dispatch(setPopup('anvil')),
+    showTablePopup: () => dispatch(setPopup('table')),
     addItems: (item, count) => {
         return dispatch({
             type: 'craft',
-            queue: 'anvil',
-            itemState: ITEM_STATE.UNFINISHED,
+            queue: 'table',
+            itemState: ITEM_STATE.NORMAL,
             count: count,
             item: item,
         })
     },
     updateFinishTime: (item, finishTime) => dispatch({
         type: 'updateFinishTime',
-        queue: 'anvil',
+        queue: 'table',
         uuid: item.uuid,
         finishTime: finishTime,
     })
@@ -169,11 +169,11 @@ const mapStateToProps = (state) => {
     const newLocal = {
         inventory: state.inventory,
         level: state.level,
-        anvilCraftingStack: state.anvilQueue,
+        tableCraftingStack: state.tableQueue,
         premium: state.premium,
     };
     return newLocal;
 };
 
-export const AnvilPopup = connect(mapStateToProps, mapDispatchToProps)(Popup);
-export default connect(mapStateToProps, mapDispatchToProps)(Anvil);
+export const TablePopup = connect(mapStateToProps, mapDispatchToProps)(Popup);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);

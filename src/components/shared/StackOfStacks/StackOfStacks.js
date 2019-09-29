@@ -14,7 +14,7 @@ class StackOfStacks extends Component {
 
     updateCountdown = () => {
         let newStateCrafting = [...this.state.crafting];
-        newStateCrafting.forEach(i => {
+        newStateCrafting.filter(i => !i.removeMe).forEach(i => {
             i.remainingTime = i.finishTime ? moment(i.finishTime).diff(moment()) : null;
             if (i.remainingTime < 0) {
                 this.props.addToInventoryAndRemoveFromQueue(i);
