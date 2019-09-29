@@ -74,28 +74,43 @@ class Popup extends Component {
     constructor(props) {
         super(props)
 
-        const selectedBar = Array.isArray(this.props.inventory) ? this.props.inventory.filter(i => i.type === 'bar')[0] : {};
+        this.types = ['bar'];
+        const selectedProduct = Array.isArray(this.props.inventory) ? this.getProducts(0)[0] : {};
         this.state = {
-            selectedBar: selectedBar,
+            selectedProduct: selectedProduct,
         }
     }
 
-    selectBar = bar => {
-        if (bar !== this.state.selectedBar) {
-            this.setState({selectedBar: bar});
+    selectBar = selectedProduct => {
+        if (selectedProduct !== this.state.selectedProduct) {
+            this.setState({selectedProduct: selectedProduct});
         }
     };
+
+    getProducts() {
+        return this.props.inventory
+            .filter(i => this.types.indexOf(i.type) >= 0)
+            .sort((i1, i2) => {
+                if (i1.tier < i2.tier) {
+                    return -1;
+                } else if (i1.tier > i2.tier) {
+                    return 1;
+                } else {
+                    return this.types.indexOf[i1.type] - this.types.indexOf[i2.type];
+                }
+            });
+    }
 
     render() {
         return <ConstructionMenuThreePart
                     topChildren={<div className='title'>Furnace</div>}
                     middleChildren={
-                        <SwipeableProductView onSlideChanged={({item}) => this.selectBar(this.props.inventory.filter(i => i.type === 'bar')[item])}
-                                              products={this.props.inventory.filter(p => p.type === 'bar')} {...this.props}/>
+                        <SwipeableProductView onSlideChanged={({item}) => this.selectBar(this.getProducts(0)[item])}
+                                              products={this.getProducts(0)} selectedProduct={this.state.selectedProduct} {...this.props}/>
                     }
                     bottomChildren={
-                        this.state.selectedBar && <IngredientsTable product={this.state.selectedBar} actionName={'Smelt'} action={(size) => {
-                            this.props.addItems(this.state.selectedBar, size);
+                        this.state.selectedProduct && <IngredientsTable product={this.state.selectedProduct} actionName={'Smelt'} action={(size) => {
+                            this.props.addItems(this.state.selectedProduct, size);
                         }
                         } {...this.props}/>
                     }

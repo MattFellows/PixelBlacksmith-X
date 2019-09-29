@@ -110,7 +110,7 @@ class Popup extends React.Component {
         });
     };
 
-    getProducts(newSelectedTier) {
+    getProducts = (newSelectedTier) => {
         return this.props.inventory
             .filter(i => this.types.indexOf(i.type) >= 0)
             .filter(i => i.tier === newSelectedTier + 1)

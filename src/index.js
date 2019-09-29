@@ -24,6 +24,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'BetterPixels', Helvetica, Arial, sans-serif;
+    user-select:none;
   }
 `;
 

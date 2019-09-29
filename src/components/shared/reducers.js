@@ -6,9 +6,9 @@ import {toast} from "react-toastify";
 
 const initialState = {
     popup: false,
-    level: 100,
+    level: 1,
     coins: 150,
-    xp: 2000,
+    xp: 1,
     inventory: items,
     furnaceQueue: [],
     anvilQueue: [],
