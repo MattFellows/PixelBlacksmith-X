@@ -17,16 +17,24 @@
 }
 
 .twoPartMenu {
-    position: relative;
-    height: calc(100vh - 50px);
+    position: fixed;
+    height: calc(100vh - 20px);
     background-image: url(./images/background_2part.png);
     background-repeat: no-repeat;
     background-size: cover;
-    width: calc((100vh - 50px) * (384 / 640));
+    width: calc((100vh - 20px) * (384 / 640));
+    top: 100px;
+    zoom: 75%;
 
     .topContainer {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        width: calc(100% + 40px);
+        left: -20px;
+        position: relative;
+        height: 17vh;
+        margin-bottom: 3vh;
+        top: -20px;
     }
 
     .title {
@@ -41,14 +49,31 @@
         flex-basis: 80%;
     }
 
+    .bottomContainer {
+        width: calc(100% - 50px);
+        left: 10px;
+        padding: 0 2vh;
+        position: relative;
+        height: 69vh;
+        overflow: hidden;
+    }
+
     .close {
-        flex-basis: 10%;
+        flex-basis: 15%;
         background-image: url(./images/close.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: relative;
+        top: -10px;
     }
 
     .help {
-        flex-basis: 10%;
-        background-image: url(./images/close.png);
+        flex-basis: 15%;
+        background-image: url(./images/help.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: relative;
+        top: -10px;
     }
 }
 

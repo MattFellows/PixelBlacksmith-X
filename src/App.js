@@ -10,6 +10,7 @@ import Furnace, { FurnacePopup } from './components/Furnace/Furnace';
 import PlayerInfo from "./components/PlayerInfo/PlayerInfor";
 import Anvil, {AnvilPopup} from "./components/Anvil/Anvil";
 import Table, {TablePopup} from "./components/Table/Table";
+import Inventory, {InventoryPopup} from "./components/Inventory/Inventory";
 
 
 class App extends Component  {
@@ -35,6 +36,9 @@ class App extends Component  {
       case 'table': {
         return <TablePopup close={this.props.setPopupHidden}/>;
       }
+      case 'inventory': {
+        return <InventoryPopup close={this.props.setPopupHidden}/>;
+      }
       default: {
         return null;
       }
@@ -56,6 +60,7 @@ class App extends Component  {
         <Furnace />
         <Anvil />
         <Table />
+        <Inventory />
         {popup}
         <ToastContainer autoClose={false} position={toast.POSITION.BOTTOM_CENTER}/>
       </div>

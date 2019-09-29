@@ -7,7 +7,9 @@ class ConstructionMenuTwoPart extends ConstructionMenu {
         return <div className={'twoPartContainer'}>
                 <div className={'twoPartMenu'}>
                     <div className={'topContainer'}>
+                        <div className={'help'}></div>
                         {this.props.topChildren}
+                        <div className={'close'} onClick={this.close}></div>
                     </div>
                     <div className={'bottomContainer'}>
                         {this.props.bottomChildren}

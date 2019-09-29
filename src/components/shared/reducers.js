@@ -1,6 +1,5 @@
 import { ACTIONS } from './actions';
 import uuid from "uuid";
-import moment from "moment";
 import items, {ITEM_STATE} from "./inventory";
 import {toast} from "react-toastify";
 
@@ -13,6 +12,7 @@ const initialState = {
     furnaceQueue: [],
     anvilQueue: [],
     tableQueue: [],
+    inventoryQueue: [],
     premium: 0,
 };
 
@@ -56,6 +56,9 @@ function rootReducer(state = initialState, action) {
                 case 'table':
                     queue = [...state.tableQueue];
                     break;
+                case 'inventory':
+                    queue = [...state.inventoryQueue];
+                    break;
                 default:
             }
             let newInventory = checkAndRemoveIngredientsInInventory(state, action.item, action.count, action.itemState);
@@ -94,6 +97,9 @@ function rootReducer(state = initialState, action) {
                 case 'table':
                     queue = [...state.tableQueue];
                     break;
+                case 'inventory':
+                    queue = [...state.inventoryQueue];
+                    break;
                 default:
             }
             let newCraftingQueue = queue;
@@ -116,6 +122,9 @@ function rootReducer(state = initialState, action) {
                 case 'table':
                     queue = [...state.tableQueue];
                     break;
+                case 'inventory':
+                    queue = [...state.inventoryQueue];
+                    break;
                 default:
             }
             let newCraftingQueue = queue.filter(i => !i.removeMe);
@@ -125,7 +134,6 @@ function rootReducer(state = initialState, action) {
             }
         }
         case 'addInventoryAndRemoveFromQueue': {
-            console.log('addInventoryAndRemoveFromQueue: ', action.item);
             let queue = [];
             switch (action.queue) {
                 case 'furnace':
@@ -137,6 +145,9 @@ function rootReducer(state = initialState, action) {
                 case 'table':
                     queue = [...state.tableQueue];
                     break;
+                case 'inventory':
+                    queue = [...state.inventoryQueue];
+                    break;
                 default:
             }
             let newCraftingQueue = [...queue].forEach(i => {if (i.uuid === action.item.uuid) i.removeMe = true});
@@ -147,7 +158,7 @@ function rootReducer(state = initialState, action) {
                 //Do Level up stuff here...
             }
             let updatedInventoryItem = newInventory.find(inventoryItem => inventoryItem.name === action.item.product);
-            if (!action.item.state in updatedInventoryItem.count) {
+            if (!(action.item.state in updatedInventoryItem.count)) {
                 updatedInventoryItem.count[action.item.state] = 0;
             }
             updatedInventoryItem.count[action.item.state] += action.item.count;
@@ -158,7 +169,6 @@ function rootReducer(state = initialState, action) {
                 inventory: newInventory,
                 [action.queue + 'Queue']: newCraftingQueue,
             };
-            console.log('New State: ', newState);
             return newState;
         }
         case 'resetInventory': {
@@ -166,8 +176,12 @@ function rootReducer(state = initialState, action) {
             newInventory.find(i => i.name === 'Copper ore').count[ITEM_STATE.NORMAL] = 10;
             newInventory.find(i => i.name === 'Tin ore').count[ITEM_STATE.NORMAL] = 10;
             newInventory.find(i => i.name === 'Iron ore').count[ITEM_STATE.NORMAL] = 10;
+            newInventory.find(i => i.name === 'Mithril ore').count[ITEM_STATE.NORMAL] = 10;
             newInventory.find(i => i.name === 'Coal').count[ITEM_STATE.NORMAL] = 20;
             newInventory.find(i => i.name === 'Spidersilk').count[ITEM_STATE.NORMAL] = 20;
+            newInventory.find(i => i.name === 'Silk').count[ITEM_STATE.NORMAL] = 20;
+            newInventory.find(i => i.name === 'Ruby').count[ITEM_STATE.NORMAL] = 20;
+            newInventory.find(i => i.name === 'Cheese').count[ITEM_STATE.NORMAL] = 20;
             return {
                 ...state,
                 inventory: newInventory

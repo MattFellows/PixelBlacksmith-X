@@ -1,0 +1,133 @@
+.inventoryArea {
+    position: absolute;
+    width: 44vh;
+    height: 37vh;
+    top: 25vh;
+    left: 177vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.tierSelectorContainer {
+    width: 100%;
+    height: calc(100% - 2vh);
+    display: flex;
+    flex-direction: row;
+
+    .tierSelector {
+        width: 5vh;
+        height: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        .up {
+            width: 100%;
+            padding-top: 100%;
+            background-image: url('/images/uparrow.png');
+            background-size: contain;
+        }
+
+        .down {
+            width: 100%;
+            padding-top: 100%;
+            background-image: url('/images/downarrow.png');
+            background-size: contain;
+        }
+    }
+
+    .swiperContainer {
+        width: calc(100% - 5vh);
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.inventoryContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 69vh;
+
+    .inventoryTable {
+        height: calc(100% - 50px);
+        width: 100%;
+        overflow: auto;
+
+        table {
+            width: 100%;
+            font-size: 3vh;
+
+            tr {
+                height: 3vh;
+
+                .icon {
+                    width: 5%;
+
+                    img {
+                        width: 100%;
+                    }
+                }
+                .name {
+                    width: 55%;
+                }
+                .count {
+                    width: 20%;
+                }
+            }
+        }
+    }
+
+    .button {
+        background-image: url('/images/button_wide.png');
+        height: 48px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        min-width: 144px;
+        margin-right: 10px;
+        color: white;
+        font-size: 36px;
+        line-height: 48px;
+        text-align: center;
+        cursor: pointer;
+
+        &.narrow {
+            background-image: url('/images/button_narrow.png');
+            min-width: 55px;
+        }
+    }
+
+    .buttonContainer {
+        height: 50px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: flex-start;
+
+        .button {
+            background-image: url('/images/button_wide.png');
+            height: 48px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            min-width: 144px;
+            margin-right: 10px;
+            color: white;
+            font-size: 36px;
+            line-height: 48px;
+            text-align: center;
+            cursor: pointer;
+
+            &.narrow {
+                background-image: url('/images/button_narrow.png');
+                min-width: 55px;
+            }
+        }
+    }
+
+    .centered {
+        text-align: center;
+    }
+}
+
