@@ -79,7 +79,7 @@ class StackOfStacks extends Component {
                     <div className={'overlay'}>{`Lv ${this.props.nextStackLevel}`}</div>
                 </div>
                 }
-                {this.state.crafting.length > craftingStacks.length &&
+                {this.state.crafting.filter(i => !i.removeMe).length > craftingStacks.length &&
                 <div key={'unstartedStacks'} className={'stack'}>
                     <div className={'overlay2'}>{`+ ${this.state.crafting.filter(i => !i.removeMe).length - craftingStacks.length}`}</div>
                     <div className={'overlay'}>&nbsp;</div>
