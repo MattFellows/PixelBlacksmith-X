@@ -55,6 +55,14 @@ class Inventory extends React.Component {
 }
 
 class InventoryTable extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            sellCount: 1
+        }
+    }
+
     render() {
         return (
         <div className={'inventoryContainer'}>
@@ -77,6 +85,11 @@ class InventoryTable extends React.Component {
                     </tr>))}
                     </tbody>
                 </table>
+            </div>
+            <div className={'buttonContainer'}>
+                <div className={'sellCountButton'} onClick={() => this.setState({sellCount: 1})}><img alt='sell1' src='/images/button_narrow.png' /><div>Sell 1<div className={'tickOrCross ' + this.state.sellCount === 1 ? 'tick' : 'cross'} /></div></div>
+                <div className={'sellCountButton'} onClick={() => this.setState({sellCount: 10})}><img alt='sell10' src='/images/button_narrow.png' /><div>Sell 10<div className={'tickOrCross ' + this.state.sellCount === 10 ? 'tick' : 'cross'} /></div></div>
+                <div className={'sellCountButton'} onClick={() => this.setState({sellCount: -1})}><img alt='sellmax' src='/images/button_narrow.png' /><div>Sell Max<div className={'tickOrCross ' + this.state.sellCount === -1 ? 'tick' : 'cross'} /></div></div>
             </div>
         </div>
         )
