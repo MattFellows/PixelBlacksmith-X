@@ -71,6 +71,7 @@
             }
             div {
                 width: 100%;
+                height: 100%;
                 padding-top: 5px;
                 text-align: center;
                 font-size: 3vh;
@@ -78,6 +79,19 @@
                 top: 0;
                 left: 0;
                 white-space: nowrap;
+
+                .tickOrCross {
+                    width: 100%;
+                    height: calc(100% - 3vh);
+
+                    .tick {
+                        background-color: green;
+                    }
+
+                    .cross {
+                        background-color: red;
+                    }
+                }
             }
         }
     }
