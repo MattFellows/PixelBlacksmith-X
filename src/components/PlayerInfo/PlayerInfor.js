@@ -8,7 +8,10 @@ class PlayerInfo extends React.Component {
     }
     render() {
         return (
-            <div onDoubleClick={this.props.resetInventory} className={'playerInfoContainer'}>Level {this.props.level} ({this.props.xp})</div>
+            <div onDoubleClick={this.props.resetInventory} className={'playerInfoContainer'}>
+                Level: {this.props.level} ({this.props.xp})
+                Gold: {this.props.gold}
+            </div>
         );
     }
 }
@@ -17,6 +20,7 @@ const mapStateToProps = (state) => {
     return {
         level: state.level,
         xp: state.xp,
+        gold: state.gold,
     }
 };
 

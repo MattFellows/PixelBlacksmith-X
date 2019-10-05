@@ -62,6 +62,7 @@ class Table extends React.Component {
                     availableStacks={this.getAvailableTableStacks()}
                     nextStackLevel={this.getNextStackLevel()}
                     crafting={this.props.tableCraftingStack}
+                    queue={'table'}
                     {...this.props}/>
             </div>
         )

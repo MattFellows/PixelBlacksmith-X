@@ -8,11 +8,19 @@ const initialState = {
     level: 1,
     coins: 150,
     xp: 1,
+    gold: 100,
     inventory: items,
     furnaceQueue: [],
     anvilQueue: [],
     tableQueue: [],
     inventoryQueue: [],
+    marketQueue: [],
+    traders: {
+        fixed: [],
+        regular: [],
+    },
+    trades: {},
+    traderCount: 3,
     premium: 0,
 };
 
@@ -31,7 +39,6 @@ function checkAndRemoveIngredientsInInventory(state, item, count, itemState) {
         if (ingredientItem.itemState !== itemState) {
             continue;
         }
-        console.log('Check: ', (ingredientItem.ingredientState === ITEM_STATE.UNFINISHED ? '(unf) ' : '') + ingredientItem.name, ' x ', ingredientItem.count);
         if ((ingredientItem.ingredientState in inventoryItem.count) && inventoryItem.count[ingredientItem.ingredientState] >= (ingredientItem.count * count)) {
             inventoryItem.count[ingredientItem.ingredientState] -= (ingredientItem.count * count);
         } else {
@@ -41,26 +48,34 @@ function checkAndRemoveIngredientsInInventory(state, item, count, itemState) {
     return state.inventory;
 }
 
+function getQueue(action, state) {
+    let queue = [];
+    switch (action.queue) {
+        case 'furnace':
+            queue = [...state.furnaceQueue];
+            break;
+        case 'anvil':
+            queue = [...state.anvilQueue];
+            break;
+        case 'table':
+            queue = [...state.tableQueue];
+            break;
+        case 'inventory':
+            queue = [...state.inventoryQueue];
+            break;
+        case 'market':
+            queue = [...state.marketQueue];
+            break;
+        default:
+    }
+    return queue;
+}
+
 function rootReducer(state = initialState, action) {
     switch (action.type) {
         case 'craft':
         {
-            let queue = [];
-            switch (action.queue) {
-                case 'furnace':
-                    queue = [...state.furnaceQueue];
-                    break;
-                case 'anvil':
-                    queue = [...state.anvilQueue];
-                    break;
-                case 'table':
-                    queue = [...state.tableQueue];
-                    break;
-                case 'inventory':
-                    queue = [...state.inventoryQueue];
-                    break;
-                default:
-            }
+            let queue = getQueue(action, state);
             let newInventory = checkAndRemoveIngredientsInInventory(state, action.item, action.count, action.itemState);
             if (newInventory) {
                 let newCraftingQueue = queue;
@@ -77,33 +92,15 @@ function rootReducer(state = initialState, action) {
                     inventory: newInventory,
                     [action.queue + 'Queue']: newCraftingQueue,
                 };
-                console.log('New State:', newState);
                 return newState
             } else {
-                console.log('About to toast');
                 toast.error('You do not have the required ingredients');
             }
             return state;
         }
         case 'updateFinishTime': {
-            let queue = [];
-            switch (action.queue) {
-                case 'furnace':
-                    queue = [...state.furnaceQueue];
-                    break;
-                case 'anvil':
-                    queue = [...state.anvilQueue];
-                    break;
-                case 'table':
-                    queue = [...state.tableQueue];
-                    break;
-                case 'inventory':
-                    queue = [...state.inventoryQueue];
-                    break;
-                default:
-            }
+            let queue = getQueue(action, state);
             let newCraftingQueue = queue;
-            console.log('Finding stack with uuid: ', action.uuid, ' in: ', newCraftingQueue);
             newCraftingQueue.find(a => a.uuid === action.uuid).finishTime = action.finishTime;
             return {
                 ...state,
@@ -111,22 +108,7 @@ function rootReducer(state = initialState, action) {
             }
         }
         case 'removeDeleted': {
-            let queue = [];
-            switch (action.queue) {
-                case 'furnace':
-                    queue = [...state.furnaceQueue];
-                    break;
-                case 'anvil':
-                    queue = [...state.anvilQueue];
-                    break;
-                case 'table':
-                    queue = [...state.tableQueue];
-                    break;
-                case 'inventory':
-                    queue = [...state.inventoryQueue];
-                    break;
-                default:
-            }
+            let queue = getQueue(action, state);
             let newCraftingQueue = queue.filter(i => !i.removeMe);
             return {
                 ...state,
@@ -134,39 +116,38 @@ function rootReducer(state = initialState, action) {
             }
         }
         case 'addInventoryAndRemoveFromQueue': {
-            let queue = [];
-            switch (action.queue) {
-                case 'furnace':
-                    queue = [...state.furnaceQueue];
-                    break;
-                case 'anvil':
-                    queue = [...state.anvilQueue];
-                    break;
-                case 'table':
-                    queue = [...state.tableQueue];
-                    break;
-                case 'inventory':
-                    queue = [...state.inventoryQueue];
-                    break;
-                default:
-            }
-            let newCraftingQueue = [...queue].forEach(i => {if (i.uuid === action.item.uuid) i.removeMe = true});
+            let queue = getQueue(action, state);
+            const isInventory = action.queue === 'inventory';
+            let newCraftingQueue = [...queue];
+            newCraftingQueue.forEach(i => {if (i.uuid === action.item.uuid) i.removeMe = true});
             let newInventory = [...state.inventory];
-            let newXp = state.xp + (state.inventory.find(i => i.name === action.item.product).baseValue * action.item.count);
+            let newXp = state.xp;
+            if (!isInventory) {
+                newXp = state.xp + (state.inventory.find(i => i.name === action.item.product).baseValue * action.item.count);
+            }
             let newLevel = Math.ceil(0.1 * Math.sqrt(newXp));
             if (newLevel > state.level) {
                 //Do Level up stuff here...
             }
-            let updatedInventoryItem = newInventory.find(inventoryItem => inventoryItem.name === action.item.product);
-            if (!(action.item.state in updatedInventoryItem.count)) {
-                updatedInventoryItem.count[action.item.state] = 0;
+            if (!isInventory) {
+                let updatedInventoryItem = newInventory.find(inventoryItem => inventoryItem.name === action.item.product);
+                if (!(action.item.state in updatedInventoryItem.count)) {
+                    updatedInventoryItem.count[action.item.state] = 0;
+                }
+                updatedInventoryItem.count[action.item.state] += action.item.count;
             }
-            updatedInventoryItem.count[action.item.state] += action.item.count;
+            let newGold = state.gold;
+            if (isInventory) {
+                const soldInventoryItem = newInventory.find(inventoryItem => inventoryItem.name === action.item.product);
+                const goldMade = (soldInventoryItem.baseValue * action.item.count)
+                newGold += goldMade;
+            }
             let newState = {
                 ...state,
                 level: newLevel,
                 xp: newXp,
                 inventory: newInventory,
+                gold: newGold,
                 [action.queue + 'Queue']: newCraftingQueue,
             };
             return newState;
@@ -191,6 +172,39 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 popup: action.popup
+            }
+        }
+        case 'sell': {
+            const newInventory = [...state.inventory];
+            const newInventoryItem = newInventory.find(i => i.name === action.item.name);
+            if (action.itemState in newInventoryItem.count && newInventoryItem.count[action.itemState] >= action.count) {
+                newInventoryItem.count[action.itemState] -= action.count;
+            }
+            const newInventoryQueue = [...state.inventoryQueue];
+            newInventoryQueue.push({
+                image: 'coins.png',
+                count: action.count,
+                product: action.item.name,
+                state: action.itemState,
+                time: [action.item.constructionTime[0] * action.count, action.item.constructionTime[1]],
+                uuid: uuid.v4(),
+            })
+            return {
+                ...state,
+                inventory: newInventory,
+                inventoryQueue: newInventoryQueue,
+            }
+        }
+        case 'addTrader': {
+            console.log(action);
+            const newRegularTraders = [...state.traders.regular];
+            newRegularTraders.push(action.trader);
+            return {
+                ...state,
+                traders: {
+                    ...state.traders,
+                    regular: newRegularTraders,
+                }
             }
         }
         default: {

@@ -62,6 +62,7 @@ class Anvil extends React.Component {
                     availableStacks={this.getAvailableAnvilStacks()}
                     nextStackLevel={this.getNextStackLevel()}
                     crafting={this.props.anvilCraftingStack}
+                    queue={'anvil'}
                     {...this.props}/>
             </div>
         )

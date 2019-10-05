@@ -17,7 +17,7 @@ class StackOfStacks extends Component {
         newStateCrafting.filter(i => !i.removeMe).forEach(i => {
             i.remainingTime = i.finishTime ? moment(i.finishTime).diff(moment()) : null;
             if (i.remainingTime < 0) {
-                this.props.addToInventoryAndRemoveFromQueue(i);
+                this.props.addToInventoryAndRemoveFromQueue(i, this.props.queue);
                 i.removeMe = true;
             }
         });
@@ -58,7 +58,7 @@ class StackOfStacks extends Component {
     }
 
     render() {
-        const craftingStacks = this.state.crafting.filter(i => i && !i.removeMe && i.finishTime && i.remainingTime > 0);
+        const craftingStacks = [...this.state.crafting].filter(i => i && !i.removeMe && i.finishTime && i.remainingTime > 0);
         return (
             <div className={'stacksContainer'}>
                 {craftingStacks.map((i, ind) => {
@@ -92,8 +92,8 @@ class StackOfStacks extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addToInventoryAndRemoveFromQueue: (item) => {
-            dispatch({type: 'addInventoryAndRemoveFromQueue', item: item})
+        addToInventoryAndRemoveFromQueue: (item, queue) => {
+            dispatch({type: 'addInventoryAndRemoveFromQueue', item: item, queue: queue})
         }
     }
 }

@@ -1,0 +1,31 @@
+.marketArea {
+    position: absolute;
+    width: 44vh;
+    height: 37vh;
+    top: 1vh;
+    left: 220vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border: 1px solid black;
+}
+
+.traderName {
+    font-size: 4vh;
+}
+.traderBlurb {
+    font-size: 3vh;
+}
+.traderStockRow {
+    display: flex;
+    flex-direction: row;
+
+    img {
+        width: 5vh;
+        height: 5vh;
+
+        &.redacted {
+            filter: contrast(0%) brightness(0%);
+        }
+    }
+}

@@ -65,6 +65,7 @@ class Furnace extends Component {
                     availableStacks={this.getAvailableFurnaceStacks()}
                     nextStackLevel={this.getNextStackLevel()}
                     crafting={this.props.furnaceCraftingStack}
+                    queue={'furnace'}
                     {...this.props}/>
             </div>
         )

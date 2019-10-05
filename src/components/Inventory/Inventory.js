@@ -48,6 +48,7 @@ class Inventory extends React.Component {
                     availableStacks={this.getAvailableInventoryStacks()}
                     nextStackLevel={this.getNextStackLevel()}
                     crafting={this.props.inventoryCraftingStack}
+                    queue={'inventory'}
                     {...this.props}/>
             </div>
         )
@@ -62,6 +63,10 @@ class InventoryTable extends React.Component {
             sellCount: 1
         }
     }
+
+    sell = (item, state) => {
+        this.props.sellItems(item, state, this.state.sellCount)
+    };
 
     render() {
         return (
@@ -80,16 +85,16 @@ class InventoryTable extends React.Component {
                     {this.props.inventory.filter(i => Object.values(i.count).reduce((accumulator, currentValue) => accumulator + currentValue) > 0).map(i => Object.keys(i.count).filter(j => i.count[j]).map(j => <tr key={i.image + j}>
                         <td className={'count'}>{i.count[j]}</td>
                         <td className={'icon'}>{i.image && <img alt={i.name} src={`/images/${i.image}`}/>}</td>
-                        <td className={'name'}>{i.name}</td>
-                        <td className={'button narrow'}></td>
+                        <td className={'name'}>{(parseInt(j, 10) === ITEM_STATE.UNFINISHED ? '(unf) ' : '') + i.name}</td>
+                        <td className={'button narrow'} onClick={() => this.sell(i, j)}></td>
                     </tr>))}
                     </tbody>
                 </table>
             </div>
             <div className={'buttonContainer'}>
-                <div className={'sellCountButton'} onClick={() => this.setState({sellCount: 1})}><img alt='sell1' src='/images/button_narrow.png' /><div>Sell 1<div className={'tickOrCross ' + this.state.sellCount === 1 ? 'tick' : 'cross'} /></div></div>
-                <div className={'sellCountButton'} onClick={() => this.setState({sellCount: 10})}><img alt='sell10' src='/images/button_narrow.png' /><div>Sell 10<div className={'tickOrCross ' + this.state.sellCount === 10 ? 'tick' : 'cross'} /></div></div>
-                <div className={'sellCountButton'} onClick={() => this.setState({sellCount: -1})}><img alt='sellmax' src='/images/button_narrow.png' /><div>Sell Max<div className={'tickOrCross ' + this.state.sellCount === -1 ? 'tick' : 'cross'} /></div></div>
+                <div className={'sellCountButton'} onClick={() => this.setState({sellCount: 1})}><img alt='sell1' src='/images/button_narrow.png' /><div>Sell 1<div className={'tickOrCross ' + (this.state.sellCount === 1 ? 'tick' : 'cross')} /></div></div>
+                <div className={'sellCountButton'} onClick={() => this.setState({sellCount: 10})}><img alt='sell10' src='/images/button_narrow.png' /><div>Sell 10<div className={'tickOrCross ' + (this.state.sellCount === 10 ? 'tick' : 'cross')} /></div></div>
+                <div className={'sellCountButton'} onClick={() => this.setState({sellCount: -1})}><img alt='sellmax' src='/images/button_narrow.png' /><div>Sell Max<div className={'tickOrCross ' + (this.state.sellCount === -1 ? 'tick' : 'cross')} /></div></div>
             </div>
         </div>
         )
@@ -110,13 +115,13 @@ class Popup extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
     showInventoryPopup: () => dispatch(setPopup('inventory')),
-    addItems: (item, count) => {
+    sellItems: (item, itemState, count) => {
         return dispatch({
-            type: 'craft',
+            type: 'sell',
             queue: 'inventory',
-            itemState: ITEM_STATE.UNFINISHED,
             count: count,
             item: item,
+            itemState: itemState,
         })
     },
     updateFinishTime: (item, finishTime) => dispatch({
@@ -137,6 +142,6 @@ const mapStateToProps = (state) => {
     return newLocal;
 };
 
-const ConnectedInventoryTable = connect(mapStateToProps)(InventoryTable);
+const ConnectedInventoryTable = connect(mapStateToProps, mapDispatchToProps)(InventoryTable);
 export const InventoryPopup = connect(mapStateToProps, mapDispatchToProps)(Popup);
 export default connect(mapStateToProps, mapDispatchToProps)(Inventory);

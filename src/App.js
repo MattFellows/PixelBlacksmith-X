@@ -11,6 +11,7 @@ import PlayerInfo from "./components/PlayerInfo/PlayerInfor";
 import Anvil, {AnvilPopup} from "./components/Anvil/Anvil";
 import Table, {TablePopup} from "./components/Table/Table";
 import Inventory, {InventoryPopup} from "./components/Inventory/Inventory";
+import Market, {MarketPopup} from "./components/Market/Market";
 
 
 class App extends Component  {
@@ -39,6 +40,9 @@ class App extends Component  {
       case 'inventory': {
         return <InventoryPopup close={this.props.setPopupHidden}/>;
       }
+      case 'market': {
+        return <MarketPopup close={this.props.setPopupHidden}/>;
+      }
       default: {
         return null;
       }
@@ -61,6 +65,7 @@ class App extends Component  {
         <Anvil />
         <Table />
         <Inventory />
+        <Market />
         {popup}
         <ToastContainer autoClose={false} position={toast.POSITION.BOTTOM_CENTER}/>
       </div>

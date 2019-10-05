@@ -1,5 +1,6 @@
 const items = [
 	{
+		id: 177,
 		type: 'page',
 		name: 'Red Page',
 		image: 'redPage.png',
@@ -13,6 +14,7 @@ const items = [
 		]
 	},
 	{
+		id: 178,
 		type: 'page',
 		name: 'Red Page (dirty)',
 		image: 'redPage(dirty).png',
@@ -26,6 +28,7 @@ const items = [
 		]
 	},
 	{
+		id: 179,
 		type: 'page',
 		name: 'Yellow Page',
 		image: 'yellowPage.png',
@@ -39,6 +42,7 @@ const items = [
 		]
 	},
 	{
+		id: 180,
 		type: 'page',
 		name: 'Yellow Page (dirty)',
 		image: 'yellowPage(dirty).png',
@@ -52,6 +56,7 @@ const items = [
 		]
 	},
 	{
+		id: 181,
 		type: 'page',
 		name: 'Green Page',
 		image: 'greenPage.png',
@@ -65,6 +70,7 @@ const items = [
 		]
 	},
 	{
+		id: 182,
 		type: 'page',
 		name: 'Green Page (dirty)',
 		image: 'greenPage(dirty).png',
@@ -78,6 +84,7 @@ const items = [
 		]
 	},
 	{
+		id: 183,
 		type: 'page',
 		name: 'Blue Page',
 		image: 'bluePage.png',
@@ -91,6 +98,7 @@ const items = [
 		]
 	},
 	{
+		id: 184,
 		type: 'page',
 		name: 'Blue Page (dirty)',
 		image: 'bluePage(dirty).png',
@@ -104,6 +112,7 @@ const items = [
 		]
 	},
 	{
+		id: 185,
 		type: 'page',
 		name: 'Pink Page',
 		image: 'pinkPage.png',
@@ -117,6 +126,7 @@ const items = [
 		]
 	},
 	{
+		id: 186,
 		type: 'page',
 		name: 'Pink Page (dirty)',
 		image: 'pinkPage(dirty).png',
@@ -130,6 +140,7 @@ const items = [
 		]
 	},
 	{
+		id: 187,
 		type: 'page',
 		name: 'Brown Page',
 		image: 'brownPage.png',
@@ -143,6 +154,7 @@ const items = [
 		]
 	},
 	{
+		id: 188,
 		type: 'page',
 		name: 'Brown Page (dirty)',
 		image: 'brownPage(dirty).png',
@@ -156,6 +168,7 @@ const items = [
 		]
 	},
 	{
+		id: 189,
 		type: 'page',
 		name: 'Black Page',
 		image: 'blackPage.png',
@@ -169,6 +182,7 @@ const items = [
 		]
 	},
 	{
+		id: 190,
 		type: 'page',
 		name: 'Black Page (dirty)',
 		image: 'blackPage(dirty).png',
@@ -182,6 +196,7 @@ const items = [
 		]
 	},
 	{
+		id: 191,
 		type: 'page',
 		name: 'White Page',
 		image: 'whitePage.png',
@@ -195,6 +210,7 @@ const items = [
 		]
 	},
 	{
+		id: 192,
 		type: 'page',
 		name: 'White Page (dirty)',
 		image: 'whitePage(dirty).png',
@@ -208,6 +224,7 @@ const items = [
 		]
 	},
 	{
+		id: 193,
 		type: 'book',
 		name: 'Book of Strength',
 		image: 'bookOfStrength.png',
@@ -293,6 +310,7 @@ const items = [
 		]
 	},
 	{
+		id: 194,
 		type: 'book',
 		name: 'Book of Agility',
 		image: 'bookOfAgility.png',
@@ -386,6 +404,7 @@ const items = [
 		]
 	},
 	{
+		id: 195,
 		type: 'book',
 		name: 'Book of Nature',
 		image: 'bookOfNature.png',
@@ -439,6 +458,7 @@ const items = [
 		]
 	},
 	{
+		id: 196,
 		type: 'book',
 		name: 'Book of Water',
 		image: 'bookOfWater.png',
@@ -524,6 +544,7 @@ const items = [
 		]
 	},
 	{
+		id: 197,
 		type: 'book',
 		name: 'Book of Peace',
 		image: 'bookOfPeace.png',
@@ -569,6 +590,7 @@ const items = [
 		]
 	},
 	{
+		id: 198,
 		type: 'book',
 		name: 'Book of Earth',
 		image: 'bookOfEarth.png',
@@ -670,6 +692,7 @@ const items = [
 		]
 	},
 	{
+		id: 199,
 		type: 'book',
 		name: 'Book of War',
 		image: 'bookOfWar.png',
@@ -763,6 +786,7 @@ const items = [
 		]
 	},
 	{
+		id: 200,
 		type: 'book',
 		name: 'Book of Life',
 		image: 'bookOfLife.png',
@@ -848,6 +872,7 @@ const items = [
 		]
 	},
 	{
+		id: 201,
 		type: 'book',
 		name: 'The Collection',
 		image: 'theCollection.png',
@@ -933,6 +958,7 @@ const items = [
 		]
 	},
 	{
+		id: 202,
 		type: 'foodIngredient',
 		name: 'Wheat',
 		image: 'wheat.png',
@@ -946,6 +972,7 @@ const items = [
 		]
 	},
 	{
+		id: 203,
 		type: 'foodIngredient',
 		name: 'Egg',
 		image: 'egg.png',
@@ -959,6 +986,7 @@ const items = [
 		]
 	},
 	{
+		id: 204,
 		type: 'foodIngredient',
 		name: 'Milk',
 		image: 'milk.png',
@@ -972,6 +1000,7 @@ const items = [
 		]
 	},
 	{
+		id: 205,
 		type: 'foodIngredient',
 		name: 'Blueberry',
 		image: 'blueberry.png',
@@ -985,6 +1014,7 @@ const items = [
 		]
 	},
 	{
+		id: 206,
 		type: 'foodIngredient',
 		name: 'Banana',
 		image: 'banana.png',
@@ -998,6 +1028,7 @@ const items = [
 		]
 	},
 	{
+		id: 207,
 		type: 'foodIngredient',
 		name: 'Orange',
 		image: 'orange.png',
@@ -1011,6 +1042,7 @@ const items = [
 		]
 	},
 	{
+		id: 208,
 		type: 'foodIngredient',
 		name: 'Cherry',
 		image: 'cherry.png',
@@ -1024,6 +1056,7 @@ const items = [
 		]
 	},
 	{
+		id: 209,
 		type: 'foodIngredient',
 		name: 'Candy',
 		image: 'candy.png',
@@ -1037,6 +1070,7 @@ const items = [
 		]
 	},
 	{
+		id: 210,
 		type: 'foodIngredient',
 		name: 'Chocolate',
 		image: 'chocolate.png',
@@ -1050,6 +1084,7 @@ const items = [
 		]
 	},
 	{
+		id: 211,
 		type: 'foodIngredient',
 		name: 'Raw Fish',
 		image: 'rawFish.png',
@@ -1063,6 +1098,7 @@ const items = [
 		]
 	},
 	{
+		id: 212,
 		type: 'dessert',
 		name: 'Fruit Salad',
 		image: 'fruitSalad.png',
@@ -1116,6 +1152,7 @@ const items = [
 		]
 	},
 	{
+		id: 213,
 		type: 'dessert',
 		name: 'Cooked Fish',
 		image: 'cookedFish.png',
@@ -1137,6 +1174,7 @@ const items = [
 		]
 	},
 	{
+		id: 214,
 		type: 'dessert',
 		name: 'Cooked Meat',
 		image: 'cookedMeat.png',
@@ -1158,6 +1196,7 @@ const items = [
 		]
 	},
 	{
+		id: 215,
 		type: 'dessert',
 		name: 'Ham + Cheese S\'wich',
 		image: 'hamAndCheeseSandwich.png',
@@ -1195,6 +1234,7 @@ const items = [
 		]
 	},
 	{
+		id: 216,
 		type: 'dessert',
 		name: 'Ham Sandwich',
 		image: 'hamSandwich.png',
@@ -1224,6 +1264,7 @@ const items = [
 		]
 	},
 	{
+		id: 217,
 		type: 'dessert',
 		name: 'Cheese Sandwich',
 		image: 'cheeseSandwich.png',
@@ -1253,6 +1294,7 @@ const items = [
 		]
 	},
 	{
+		id: 218,
 		type: 'dessert',
 		name: 'Pie',
 		image: 'pie.png',
@@ -1298,6 +1340,7 @@ const items = [
 		]
 	},
 	{
+		id: 219,
 		type: 'dessert',
 		name: 'Cookie',
 		image: 'cookie.png',
@@ -1343,6 +1386,7 @@ const items = [
 		]
 	},
 	{
+		id: 220,
 		type: 'gem',
 		name: 'Amethyst',
 		image: 'amethyst.png',
@@ -1356,6 +1400,7 @@ const items = [
 		]
 	},
 	{
+		id: 221,
 		type: 'gem',
 		name: 'Citrine',
 		image: 'citrine.png',
@@ -1369,6 +1414,7 @@ const items = [
 		]
 	},
 	{
+		id: 222,
 		type: 'ring',
 		name: 'Silver amethyst ring',
 		image: 'silverAmethystRing.png',
@@ -1398,6 +1444,7 @@ const items = [
 		]
 	},
 	{
+		id: 223,
 		type: 'ring',
 		name: 'Silver citrine ring',
 		image: 'silverCitrineRing.png',
@@ -1427,6 +1474,7 @@ const items = [
 		]
 	},
 	{
+		id: 224,
 		type: 'ring',
 		name: 'Gold amethyst ring',
 		image: 'goldAmethystRing.png',
@@ -1456,6 +1504,7 @@ const items = [
 		]
 	},
 	{
+		id: 225,
 		type: 'ring',
 		name: 'Gold citrine ring',
 		image: 'goldCitrineRing.png',
@@ -1485,6 +1534,7 @@ const items = [
 		]
 	},
 	{
+		id: 226,
 		type: 'foodIngredient',
 		name: 'Rare Candy',
 		image: 'rareCandy.png',
@@ -1498,6 +1548,7 @@ const items = [
 		]
 	},
 	{
+		id: 227,
 		type: 'foodIngredient',
 		name: 'Bowl Of Water',
 		image: 'bowlOfWater.png',
@@ -1511,6 +1562,7 @@ const items = [
 		]
 	},
 	{
+		id: 228,
 		type: 'dessert',
 		name: 'Soup',
 		image: 'soup.png',
@@ -1540,6 +1592,7 @@ const items = [
 		]
 	},
 	{
+		id: 229,
 		type: 'dessert',
 		name: 'Cereal',
 		image: 'cereal.png',
@@ -1569,6 +1622,7 @@ const items = [
 		]
 	},
 	{
+		id: 230,
 		type: 'foodIngredient',
 		name: 'White Chocolate',
 		image: 'whiteChocolate.png',
@@ -1582,6 +1636,7 @@ const items = [
 		]
 	},
 	{
+		id: 231,
 		type: 'dessert',
 		name: 'Golden Egg',
 		image: 'goldenEgg.png',
@@ -1659,6 +1714,7 @@ const items = [
 		]
 	},
 	{
+		id: 1,
 		type: 'ore',
 		name: 'Copper ore',
 		image: 'copperOre.png',
@@ -1672,6 +1728,7 @@ const items = [
 		]
 	},
 	{
+		id: 2,
 		type: 'ore',
 		name: 'Tin ore',
 		image: 'tinOre.png',
@@ -1685,6 +1742,7 @@ const items = [
 		]
 	},
 	{
+		id: 3,
 		type: 'ore',
 		name: 'Coal',
 		image: 'coal.png',
@@ -1698,6 +1756,7 @@ const items = [
 		]
 	},
 	{
+		id: 4,
 		type: 'ore',
 		name: 'Iron ore',
 		image: 'ironOre.png',
@@ -1711,6 +1770,7 @@ const items = [
 		]
 	},
 	{
+		id: 5,
 		type: 'ore',
 		name: 'Mithril ore',
 		image: 'mithrilOre.png',
@@ -1724,6 +1784,7 @@ const items = [
 		]
 	},
 	{
+		id: 6,
 		type: 'ore',
 		name: 'Adamantite ore',
 		image: 'adamantiteOre.png',
@@ -1737,6 +1798,7 @@ const items = [
 		]
 	},
 	{
+		id: 7,
 		type: 'ore',
 		name: 'Runite ore',
 		image: 'runiteOre.png',
@@ -1750,6 +1812,7 @@ const items = [
 		]
 	},
 	{
+		id: 8,
 		type: 'ore',
 		name: 'Gold nugget',
 		image: 'goldNugget.png',
@@ -1763,6 +1826,7 @@ const items = [
 		]
 	},
 	{
+		id: 9,
 		type: 'ore',
 		name: 'Silver nugget',
 		image: 'silverNugget.png',
@@ -1776,6 +1840,7 @@ const items = [
 		]
 	},
 	{
+		id: 10,
 		type: 'ore',
 		name: 'Dragonite ore',
 		image: 'dragoniteOre.png',
@@ -1789,6 +1854,7 @@ const items = [
 		]
 	},
 	{
+		id: 11,
 		type: 'bar',
 		name: 'Bronze bar',
 		image: 'bronzeBar.png',
@@ -1818,6 +1884,7 @@ const items = [
 		]
 	},
 	{
+		id: 12,
 		type: 'bar',
 		name: 'Iron bar',
 		image: 'ironBar.png',
@@ -1839,6 +1906,7 @@ const items = [
 		]
 	},
 	{
+		id: 13,
 		type: 'bar',
 		name: 'Steel bar',
 		image: 'steelBar.png',
@@ -1868,6 +1936,7 @@ const items = [
 		]
 	},
 	{
+		id: 14,
 		type: 'bar',
 		name: 'Mithril bar',
 		image: 'mithrilBar.png',
@@ -1897,6 +1966,7 @@ const items = [
 		]
 	},
 	{
+		id: 15,
 		type: 'bar',
 		name: 'Adamant bar',
 		image: 'adamantBar.png',
@@ -1926,6 +1996,7 @@ const items = [
 		]
 	},
 	{
+		id: 16,
 		type: 'bar',
 		name: 'Rune bar',
 		image: 'runeBar.png',
@@ -1955,6 +2026,7 @@ const items = [
 		]
 	},
 	{
+		id: 17,
 		type: 'bar',
 		name: 'Silver bar',
 		image: 'silverBar.png',
@@ -1976,6 +2048,7 @@ const items = [
 		]
 	},
 	{
+		id: 18,
 		type: 'bar',
 		name: 'Gold bar',
 		image: 'goldBar.png',
@@ -1997,6 +2070,7 @@ const items = [
 		]
 	},
 	{
+		id: 19,
 		type: 'bar',
 		name: 'Dragon bar',
 		image: 'dragonBar.png',
@@ -2026,6 +2100,7 @@ const items = [
 		]
 	},
 	{
+		id: 20,
 		type: 'dagger',
 		name: 'Bronze dagger',
 		image: 'bronzeDagger.png',
@@ -2063,6 +2138,7 @@ const items = [
 		]
 	},
 	{
+		id: 21,
 		type: 'sword',
 		name: 'Bronze sword',
 		image: 'bronzeSword.png',
@@ -2100,6 +2176,7 @@ const items = [
 		]
 	},
 	{
+		id: 22,
 		type: 'longSword',
 		name: 'Bronze longsword',
 		image: 'bronzeLongsword.png',
@@ -2137,6 +2214,7 @@ const items = [
 		]
 	},
 	{
+		id: 23,
 		type: 'bow',
 		name: 'Bronze bow',
 		image: 'bronzeBow.png',
@@ -2174,6 +2252,7 @@ const items = [
 		]
 	},
 	{
+		id: 24,
 		type: 'halfShield',
 		name: 'Bronze half shield',
 		image: 'bronzeHalfShield.png',
@@ -2211,6 +2290,7 @@ const items = [
 		]
 	},
 	{
+		id: 25,
 		type: 'fullShield',
 		name: 'Bronze full shield',
 		image: 'bronzeFullShield.png',
@@ -2248,6 +2328,7 @@ const items = [
 		]
 	},
 	{
+		id: 26,
 		type: 'chainMail',
 		name: 'Bronze chainmail',
 		image: 'bronzeChainmail.png',
@@ -2285,6 +2366,7 @@ const items = [
 		]
 	},
 	{
+		id: 27,
 		type: 'plateBody',
 		name: 'Bronze platebody',
 		image: 'bronzePlatebody.png',
@@ -2322,6 +2404,7 @@ const items = [
 		]
 	},
 	{
+		id: 28,
 		type: 'halfHelmet',
 		name: 'Bronze half helmet',
 		image: 'bronzeHalfHelmet.png',
@@ -2359,6 +2442,7 @@ const items = [
 		]
 	},
 	{
+		id: 29,
 		type: 'fullHelmet',
 		name: 'Bronze full helmet',
 		image: 'bronzeFullHelmet.png',
@@ -2396,6 +2480,7 @@ const items = [
 		]
 	},
 	{
+		id: 30,
 		type: 'boots',
 		name: 'Bronze boots',
 		image: 'bronzeBoots.png',
@@ -2433,6 +2518,7 @@ const items = [
 		]
 	},
 	{
+		id: 31,
 		type: 'gloves',
 		name: 'Bronze gloves',
 		image: 'bronzeGloves.png',
@@ -2470,6 +2556,7 @@ const items = [
 		]
 	},
 	{
+		id: 32,
 		type: 'pickaxe',
 		name: 'Bronze pickaxe',
 		image: 'bronzePickaxe.png',
@@ -2507,6 +2594,7 @@ const items = [
 		]
 	},
 	{
+		id: 33,
 		type: 'hatchet',
 		name: 'Bronze hatchet',
 		image: 'bronzeHatchet.png',
@@ -2544,6 +2632,7 @@ const items = [
 		]
 	},
 	{
+		id: 34,
 		type: 'fishingRod',
 		name: 'Bronze fishing rod',
 		image: 'bronzeFishingRod.png',
@@ -2581,6 +2670,7 @@ const items = [
 		]
 	},
 	{
+		id: 35,
 		type: 'hammer',
 		name: 'Bronze hammer',
 		image: 'bronzeHammer.png',
@@ -2618,6 +2708,7 @@ const items = [
 		]
 	},
 	{
+		id: 36,
 		type: 'dagger',
 		name: 'Iron dagger',
 		image: 'ironDagger.png',
@@ -2655,6 +2746,7 @@ const items = [
 		]
 	},
 	{
+		id: 37,
 		type: 'sword',
 		name: 'Iron sword',
 		image: 'ironSword.png',
@@ -2692,6 +2784,7 @@ const items = [
 		]
 	},
 	{
+		id: 38,
 		type: 'longSword',
 		name: 'Iron longsword',
 		image: 'ironLongsword.png',
@@ -2729,6 +2822,7 @@ const items = [
 		]
 	},
 	{
+		id: 39,
 		type: 'bow',
 		name: 'Iron bow',
 		image: 'ironBow.png',
@@ -2766,6 +2860,7 @@ const items = [
 		]
 	},
 	{
+		id: 40,
 		type: 'halfShield',
 		name: 'Iron half shield',
 		image: 'ironHalfShield.png',
@@ -2803,6 +2898,7 @@ const items = [
 		]
 	},
 	{
+		id: 41,
 		type: 'fullShield',
 		name: 'Iron full shield',
 		image: 'ironFullShield.png',
@@ -2840,6 +2936,7 @@ const items = [
 		]
 	},
 	{
+		id: 42,
 		type: 'chainMail',
 		name: 'Iron chainmail',
 		image: 'ironChainmail.png',
@@ -2877,6 +2974,7 @@ const items = [
 		]
 	},
 	{
+		id: 43,
 		type: 'plateBody',
 		name: 'Iron platebody',
 		image: 'ironPlatebody.png',
@@ -2914,6 +3012,7 @@ const items = [
 		]
 	},
 	{
+		id: 44,
 		type: 'halfHelmet',
 		name: 'Iron half helmet',
 		image: 'ironHalfHelmet.png',
@@ -2951,6 +3050,7 @@ const items = [
 		]
 	},
 	{
+		id: 45,
 		type: 'fullHelmet',
 		name: 'Iron full helmet',
 		image: 'ironFullHelmet.png',
@@ -2988,6 +3088,7 @@ const items = [
 		]
 	},
 	{
+		id: 46,
 		type: 'boots',
 		name: 'Iron boots',
 		image: 'ironBoots.png',
@@ -3025,6 +3126,7 @@ const items = [
 		]
 	},
 	{
+		id: 47,
 		type: 'gloves',
 		name: 'Iron gloves',
 		image: 'ironGloves.png',
@@ -3062,6 +3164,7 @@ const items = [
 		]
 	},
 	{
+		id: 48,
 		type: 'pickaxe',
 		name: 'Iron pickaxe',
 		image: 'ironPickaxe.png',
@@ -3099,6 +3202,7 @@ const items = [
 		]
 	},
 	{
+		id: 49,
 		type: 'hatchet',
 		name: 'Iron hatchet',
 		image: 'ironHatchet.png',
@@ -3136,6 +3240,7 @@ const items = [
 		]
 	},
 	{
+		id: 50,
 		type: 'fishingRod',
 		name: 'Iron fishing rod',
 		image: 'ironFishingRod.png',
@@ -3173,6 +3278,7 @@ const items = [
 		]
 	},
 	{
+		id: 51,
 		type: 'hammer',
 		name: 'Iron hammer',
 		image: 'ironHammer.png',
@@ -3210,6 +3316,7 @@ const items = [
 		]
 	},
 	{
+		id: 52,
 		type: 'internal',
 		name: 'Coins',
 		image: 'coins.png',
@@ -3223,6 +3330,7 @@ const items = [
 		]
 	},
 	{
+		id: 53,
 		type: 'dagger',
 		name: 'Steel dagger',
 		image: 'steelDagger.png',
@@ -3260,6 +3368,7 @@ const items = [
 		]
 	},
 	{
+		id: 54,
 		type: 'sword',
 		name: 'Steel sword',
 		image: 'steelSword.png',
@@ -3297,6 +3406,7 @@ const items = [
 		]
 	},
 	{
+		id: 55,
 		type: 'longSword',
 		name: 'Steel longsword',
 		image: 'steelLongsword.png',
@@ -3334,6 +3444,7 @@ const items = [
 		]
 	},
 	{
+		id: 56,
 		type: 'bow',
 		name: 'Steel bow',
 		image: 'steelBow.png',
@@ -3371,6 +3482,7 @@ const items = [
 		]
 	},
 	{
+		id: 57,
 		type: 'halfShield',
 		name: 'Steel half shield',
 		image: 'steelHalfShield.png',
@@ -3408,6 +3520,7 @@ const items = [
 		]
 	},
 	{
+		id: 58,
 		type: 'fullShield',
 		name: 'Steel full shield',
 		image: 'steelFullShield.png',
@@ -3445,6 +3558,7 @@ const items = [
 		]
 	},
 	{
+		id: 59,
 		type: 'chainMail',
 		name: 'Steel chainmail',
 		image: 'steelChainmail.png',
@@ -3482,6 +3596,7 @@ const items = [
 		]
 	},
 	{
+		id: 60,
 		type: 'plateBody',
 		name: 'Steel platebody',
 		image: 'steelPlatebody.png',
@@ -3519,6 +3634,7 @@ const items = [
 		]
 	},
 	{
+		id: 61,
 		type: 'halfHelmet',
 		name: 'Steel half helmet',
 		image: 'steelHalfHelmet.png',
@@ -3556,6 +3672,7 @@ const items = [
 		]
 	},
 	{
+		id: 62,
 		type: 'fullHelmet',
 		name: 'Steel full helmet',
 		image: 'steelFullHelmet.png',
@@ -3593,6 +3710,7 @@ const items = [
 		]
 	},
 	{
+		id: 63,
 		type: 'boots',
 		name: 'Steel boots',
 		image: 'steelBoots.png',
@@ -3630,6 +3748,7 @@ const items = [
 		]
 	},
 	{
+		id: 64,
 		type: 'gloves',
 		name: 'Steel gloves',
 		image: 'steelGloves.png',
@@ -3667,6 +3786,7 @@ const items = [
 		]
 	},
 	{
+		id: 65,
 		type: 'pickaxe',
 		name: 'Steel pickaxe',
 		image: 'steelPickaxe.png',
@@ -3704,6 +3824,7 @@ const items = [
 		]
 	},
 	{
+		id: 66,
 		type: 'hatchet',
 		name: 'Steel hatchet',
 		image: 'steelHatchet.png',
@@ -3741,6 +3862,7 @@ const items = [
 		]
 	},
 	{
+		id: 67,
 		type: 'fishingRod',
 		name: 'Steel fishing rod',
 		image: 'steelFishingRod.png',
@@ -3778,6 +3900,7 @@ const items = [
 		]
 	},
 	{
+		id: 68,
 		type: 'hammer',
 		name: 'Steel hammer',
 		image: 'steelHammer.png',
@@ -3815,6 +3938,7 @@ const items = [
 		]
 	},
 	{
+		id: 69,
 		type: 'additionalIngredient',
 		name: 'Spidersilk',
 		image: 'spidersilk.png',
@@ -3828,6 +3952,7 @@ const items = [
 		]
 	},
 	{
+		id: 70,
 		type: 'additionalIngredient',
 		name: 'Silk',
 		image: 'silk.png',
@@ -3841,6 +3966,7 @@ const items = [
 		]
 	},
 	{
+		id: 71,
 		type: 'additionalIngredient',
 		name: 'Logs',
 		image: 'logs.png',
@@ -3854,6 +3980,7 @@ const items = [
 		]
 	},
 	{
+		id: 72,
 		type: 'gem',
 		name: 'Ruby',
 		image: 'ruby.png',
@@ -3867,6 +3994,7 @@ const items = [
 		]
 	},
 	{
+		id: 73,
 		type: 'gem',
 		name: 'Sapphire',
 		image: 'sapphire.png',
@@ -3880,6 +4008,7 @@ const items = [
 		]
 	},
 	{
+		id: 74,
 		type: 'gem',
 		name: 'Emerald',
 		image: 'emerald.png',
@@ -3893,6 +4022,7 @@ const items = [
 		]
 	},
 	{
+		id: 75,
 		type: 'gem',
 		name: 'Diamond',
 		image: 'diamond.png',
@@ -3906,6 +4036,7 @@ const items = [
 		]
 	},
 	{
+		id: 76,
 		type: 'gem',
 		name: 'Onyx',
 		image: 'onyx.png',
@@ -3919,6 +4050,7 @@ const items = [
 		]
 	},
 	{
+		id: 77,
 		type: 'foodIngredient',
 		name: 'Apple',
 		image: 'apple.png',
@@ -3932,6 +4064,7 @@ const items = [
 		]
 	},
 	{
+		id: 78,
 		type: 'foodIngredient',
 		name: 'Cheese',
 		image: 'cheese.png',
@@ -3953,6 +4086,7 @@ const items = [
 		]
 	},
 	{
+		id: 79,
 		type: 'foodIngredient',
 		name: 'Bread',
 		image: 'bread.png',
@@ -3990,6 +4124,7 @@ const items = [
 		]
 	},
 	{
+		id: 80,
 		type: 'foodIngredient',
 		name: 'Raw Meat',
 		image: 'rawMeat.png',
@@ -4003,6 +4138,7 @@ const items = [
 		]
 	},
 	{
+		id: 81,
 		type: 'dagger',
 		name: 'Mithril dagger',
 		image: 'mithrilDagger.png',
@@ -4040,6 +4176,7 @@ const items = [
 		]
 	},
 	{
+		id: 82,
 		type: 'sword',
 		name: 'Mithril sword',
 		image: 'mithrilSword.png',
@@ -4077,6 +4214,7 @@ const items = [
 		]
 	},
 	{
+		id: 83,
 		type: 'longSword',
 		name: 'Mithril longsword',
 		image: 'mithrilLongsword.png',
@@ -4114,6 +4252,7 @@ const items = [
 		]
 	},
 	{
+		id: 84,
 		type: 'bow',
 		name: 'Mithril bow',
 		image: 'mithrilBow.png',
@@ -4151,6 +4290,7 @@ const items = [
 		]
 	},
 	{
+		id: 85,
 		type: 'halfShield',
 		name: 'Mithril half shield',
 		image: 'mithrilHalfShield.png',
@@ -4188,6 +4328,7 @@ const items = [
 		]
 	},
 	{
+		id: 86,
 		type: 'fullShield',
 		name: 'Mithril full shield',
 		image: 'mithrilFullShield.png',
@@ -4225,6 +4366,7 @@ const items = [
 		]
 	},
 	{
+		id: 87,
 		type: 'chainMail',
 		name: 'Mithril chainmail',
 		image: 'mithrilChainmail.png',
@@ -4262,6 +4404,7 @@ const items = [
 		]
 	},
 	{
+		id: 88,
 		type: 'plateBody',
 		name: 'Mithril platebody',
 		image: 'mithrilPlatebody.png',
@@ -4299,6 +4442,7 @@ const items = [
 		]
 	},
 	{
+		id: 89,
 		type: 'halfHelmet',
 		name: 'Mithril half helmet',
 		image: 'mithrilHalfHelmet.png',
@@ -4336,6 +4480,7 @@ const items = [
 		]
 	},
 	{
+		id: 90,
 		type: 'fullHelmet',
 		name: 'Mithril full helmet',
 		image: 'mithrilFullHelmet.png',
@@ -4373,6 +4518,7 @@ const items = [
 		]
 	},
 	{
+		id: 91,
 		type: 'boots',
 		name: 'Mithril boots',
 		image: 'mithrilBoots.png',
@@ -4410,6 +4556,7 @@ const items = [
 		]
 	},
 	{
+		id: 92,
 		type: 'gloves',
 		name: 'Mithril gloves',
 		image: 'mithrilGloves.png',
@@ -4447,6 +4594,7 @@ const items = [
 		]
 	},
 	{
+		id: 93,
 		type: 'pickaxe',
 		name: 'Mithril pickaxe',
 		image: 'mithrilPickaxe.png',
@@ -4484,6 +4632,7 @@ const items = [
 		]
 	},
 	{
+		id: 94,
 		type: 'hatchet',
 		name: 'Mithril hatchet',
 		image: 'mithrilHatchet.png',
@@ -4521,6 +4670,7 @@ const items = [
 		]
 	},
 	{
+		id: 95,
 		type: 'fishingRod',
 		name: 'Mithril fishing rod',
 		image: 'mithrilFishingRod.png',
@@ -4558,6 +4708,7 @@ const items = [
 		]
 	},
 	{
+		id: 96,
 		type: 'hammer',
 		name: 'Mithril hammer',
 		image: 'mithrilHammer.png',
@@ -4595,6 +4746,7 @@ const items = [
 		]
 	},
 	{
+		id: 97,
 		type: 'dagger',
 		name: 'Adamant dagger',
 		image: 'adamantDagger.png',
@@ -4632,6 +4784,7 @@ const items = [
 		]
 	},
 	{
+		id: 98,
 		type: 'sword',
 		name: 'Adamant sword',
 		image: 'adamantSword.png',
@@ -4669,6 +4822,7 @@ const items = [
 		]
 	},
 	{
+		id: 99,
 		type: 'longSword',
 		name: 'Adamant longsword',
 		image: 'adamantLongsword.png',
@@ -4706,6 +4860,7 @@ const items = [
 		]
 	},
 	{
+		id: 100,
 		type: 'bow',
 		name: 'Adamant bow',
 		image: 'adamantBow.png',
@@ -4743,6 +4898,7 @@ const items = [
 		]
 	},
 	{
+		id: 101,
 		type: 'halfShield',
 		name: 'Adamant half shield',
 		image: 'adamantHalfShield.png',
@@ -4780,6 +4936,7 @@ const items = [
 		]
 	},
 	{
+		id: 102,
 		type: 'fullShield',
 		name: 'Adamant full shield',
 		image: 'adamantFullShield.png',
@@ -4817,6 +4974,7 @@ const items = [
 		]
 	},
 	{
+		id: 103,
 		type: 'chainMail',
 		name: 'Adamant chainmail',
 		image: 'adamantChainmail.png',
@@ -4854,6 +5012,7 @@ const items = [
 		]
 	},
 	{
+		id: 104,
 		type: 'plateBody',
 		name: 'Adamant platebody',
 		image: 'adamantPlatebody.png',
@@ -4891,6 +5050,7 @@ const items = [
 		]
 	},
 	{
+		id: 105,
 		type: 'halfHelmet',
 		name: 'Adamant half helmet',
 		image: 'adamantHalfHelmet.png',
@@ -4928,6 +5088,7 @@ const items = [
 		]
 	},
 	{
+		id: 106,
 		type: 'fullHelmet',
 		name: 'Adamant full helmet',
 		image: 'adamantFullHelmet.png',
@@ -4965,6 +5126,7 @@ const items = [
 		]
 	},
 	{
+		id: 107,
 		type: 'boots',
 		name: 'Adamant boots',
 		image: 'adamantBoots.png',
@@ -5002,6 +5164,7 @@ const items = [
 		]
 	},
 	{
+		id: 108,
 		type: 'gloves',
 		name: 'Adamant gloves',
 		image: 'adamantGloves.png',
@@ -5039,6 +5202,7 @@ const items = [
 		]
 	},
 	{
+		id: 109,
 		type: 'pickaxe',
 		name: 'Adamant pickaxe',
 		image: 'adamantPickaxe.png',
@@ -5076,6 +5240,7 @@ const items = [
 		]
 	},
 	{
+		id: 110,
 		type: 'hatchet',
 		name: 'Adamant hatchet',
 		image: 'adamantHatchet.png',
@@ -5113,6 +5278,7 @@ const items = [
 		]
 	},
 	{
+		id: 111,
 		type: 'fishingRod',
 		name: 'Adamant fishing rod',
 		image: 'adamantFishingRod.png',
@@ -5150,6 +5316,7 @@ const items = [
 		]
 	},
 	{
+		id: 112,
 		type: 'hammer',
 		name: 'Adamant hammer',
 		image: 'adamantHammer.png',
@@ -5187,6 +5354,7 @@ const items = [
 		]
 	},
 	{
+		id: 113,
 		type: 'dagger',
 		name: 'Rune dagger',
 		image: 'runeDagger.png',
@@ -5232,6 +5400,7 @@ const items = [
 		]
 	},
 	{
+		id: 114,
 		type: 'sword',
 		name: 'Rune sword',
 		image: 'runeSword.png',
@@ -5277,6 +5446,7 @@ const items = [
 		]
 	},
 	{
+		id: 115,
 		type: 'longSword',
 		name: 'Rune longsword',
 		image: 'runeLongsword.png',
@@ -5322,6 +5492,7 @@ const items = [
 		]
 	},
 	{
+		id: 116,
 		type: 'bow',
 		name: 'Rune bow',
 		image: 'runeBow.png',
@@ -5367,6 +5538,7 @@ const items = [
 		]
 	},
 	{
+		id: 117,
 		type: 'halfShield',
 		name: 'Rune half shield',
 		image: 'runeHalfShield.png',
@@ -5412,6 +5584,7 @@ const items = [
 		]
 	},
 	{
+		id: 118,
 		type: 'fullShield',
 		name: 'Rune full shield',
 		image: 'runeFullShield.png',
@@ -5457,6 +5630,7 @@ const items = [
 		]
 	},
 	{
+		id: 119,
 		type: 'chainMail',
 		name: 'Rune chainmail',
 		image: 'runeChainmail.png',
@@ -5502,6 +5676,7 @@ const items = [
 		]
 	},
 	{
+		id: 120,
 		type: 'plateBody',
 		name: 'Rune platebody',
 		image: 'runePlatebody.png',
@@ -5547,6 +5722,7 @@ const items = [
 		]
 	},
 	{
+		id: 121,
 		type: 'halfHelmet',
 		name: 'Rune half helmet',
 		image: 'runeHalfHelmet.png',
@@ -5592,6 +5768,7 @@ const items = [
 		]
 	},
 	{
+		id: 122,
 		type: 'fullHelmet',
 		name: 'Rune full helmet',
 		image: 'runeFullHelmet.png',
@@ -5637,6 +5814,7 @@ const items = [
 		]
 	},
 	{
+		id: 123,
 		type: 'boots',
 		name: 'Rune boots',
 		image: 'runeBoots.png',
@@ -5682,6 +5860,7 @@ const items = [
 		]
 	},
 	{
+		id: 124,
 		type: 'gloves',
 		name: 'Rune gloves',
 		image: 'runeGloves.png',
@@ -5727,6 +5906,7 @@ const items = [
 		]
 	},
 	{
+		id: 125,
 		type: 'pickaxe',
 		name: 'Rune pickaxe',
 		image: 'runePickaxe.png',
@@ -5772,6 +5952,7 @@ const items = [
 		]
 	},
 	{
+		id: 126,
 		type: 'hatchet',
 		name: 'Rune hatchet',
 		image: 'runeHatchet.png',
@@ -5817,6 +5998,7 @@ const items = [
 		]
 	},
 	{
+		id: 127,
 		type: 'fishingRod',
 		name: 'Rune fishing rod',
 		image: 'runeFishingRod.png',
@@ -5862,6 +6044,7 @@ const items = [
 		]
 	},
 	{
+		id: 128,
 		type: 'hammer',
 		name: 'Rune hammer',
 		image: 'runeHammer.png',
@@ -5907,6 +6090,7 @@ const items = [
 		]
 	},
 	{
+		id: 129,
 		type: 'gemPowder',
 		name: 'Powdered Sapphire',
 		image: 'powderedSapphire.png',
@@ -5928,6 +6112,7 @@ const items = [
 		]
 	},
 	{
+		id: 130,
 		type: 'gemPowder',
 		name: 'Powdered Emerald',
 		image: 'powderedEmerald.png',
@@ -5949,6 +6134,7 @@ const items = [
 		]
 	},
 	{
+		id: 131,
 		type: 'gemPowder',
 		name: 'Powdered Diamond',
 		image: 'powderedDiamond.png',
@@ -5970,6 +6156,7 @@ const items = [
 		]
 	},
 	{
+		id: 132,
 		type: 'dagger',
 		name: 'Dragon dagger',
 		image: 'dragonDagger.png',
@@ -6007,6 +6194,7 @@ const items = [
 		]
 	},
 	{
+		id: 133,
 		type: 'sword',
 		name: 'Dragon sword',
 		image: 'dragonSword.png',
@@ -6044,6 +6232,7 @@ const items = [
 		]
 	},
 	{
+		id: 134,
 		type: 'longSword',
 		name: 'Dragon longsword',
 		image: 'dragonLongsword.png',
@@ -6081,6 +6270,7 @@ const items = [
 		]
 	},
 	{
+		id: 135,
 		type: 'bow',
 		name: 'Dragon bow',
 		image: 'dragonBow.png',
@@ -6118,6 +6308,7 @@ const items = [
 		]
 	},
 	{
+		id: 136,
 		type: 'halfShield',
 		name: 'Dragon half shield',
 		image: 'dragonHalfShield.png',
@@ -6155,6 +6346,7 @@ const items = [
 		]
 	},
 	{
+		id: 137,
 		type: 'fullShield',
 		name: 'Dragon full shield',
 		image: 'dragonFullShield.png',
@@ -6192,6 +6384,7 @@ const items = [
 		]
 	},
 	{
+		id: 138,
 		type: 'chainMail',
 		name: 'Dragon chainmail',
 		image: 'dragonChainmail.png',
@@ -6229,6 +6422,7 @@ const items = [
 		]
 	},
 	{
+		id: 139,
 		type: 'plateBody',
 		name: 'Dragon platebody',
 		image: 'dragonPlatebody.png',
@@ -6266,6 +6460,7 @@ const items = [
 		]
 	},
 	{
+		id: 140,
 		type: 'halfHelmet',
 		name: 'Dragon half helmet',
 		image: 'dragonHalfHelmet.png',
@@ -6303,6 +6498,7 @@ const items = [
 		]
 	},
 	{
+		id: 141,
 		type: 'fullHelmet',
 		name: 'Dragon full helmet',
 		image: 'dragonFullHelmet.png',
@@ -6340,6 +6536,7 @@ const items = [
 		]
 	},
 	{
+		id: 142,
 		type: 'boots',
 		name: 'Dragon boots',
 		image: 'dragonBoots.png',
@@ -6377,6 +6574,7 @@ const items = [
 		]
 	},
 	{
+		id: 143,
 		type: 'gloves',
 		name: 'Dragon gloves',
 		image: 'dragonGloves.png',
@@ -6414,6 +6612,7 @@ const items = [
 		]
 	},
 	{
+		id: 144,
 		type: 'pickaxe',
 		name: 'Dragon pickaxe',
 		image: 'dragonPickaxe.png',
@@ -6451,6 +6650,7 @@ const items = [
 		]
 	},
 	{
+		id: 145,
 		type: 'hatchet',
 		name: 'Dragon hatchet',
 		image: 'dragonHatchet.png',
@@ -6488,6 +6688,7 @@ const items = [
 		]
 	},
 	{
+		id: 146,
 		type: 'fishingRod',
 		name: 'Dragon fishing spear',
 		image: 'dragonFishingSpear.png',
@@ -6525,6 +6726,7 @@ const items = [
 		]
 	},
 	{
+		id: 147,
 		type: 'hammer',
 		name: 'Dragon hammer',
 		image: 'dragonHammer.png',
@@ -6562,6 +6764,7 @@ const items = [
 		]
 	},
 	{
+		id: 148,
 		type: 'visage',
 		name: 'Draconic visage',
 		image: 'draconicVisage.png',
@@ -6575,6 +6778,7 @@ const items = [
 		]
 	},
 	{
+		id: 149,
 		type: 'ring',
 		name: 'Silver ring',
 		image: 'silverRing.png',
@@ -6596,6 +6800,7 @@ const items = [
 		]
 	},
 	{
+		id: 150,
 		type: 'ring',
 		name: 'Silver sapphire ring',
 		image: 'silverSapphireRing.png',
@@ -6625,6 +6830,7 @@ const items = [
 		]
 	},
 	{
+		id: 151,
 		type: 'ring',
 		name: 'Silver emerald ring',
 		image: 'silverEmeraldRing.png',
@@ -6654,6 +6860,7 @@ const items = [
 		]
 	},
 	{
+		id: 152,
 		type: 'ring',
 		name: 'Silver ruby ring',
 		image: 'silverRubyRing.png',
@@ -6683,6 +6890,7 @@ const items = [
 		]
 	},
 	{
+		id: 153,
 		type: 'ring',
 		name: 'Silver diamond ring',
 		image: 'silverDiamondRing.png',
@@ -6712,6 +6920,7 @@ const items = [
 		]
 	},
 	{
+		id: 154,
 		type: 'ring',
 		name: 'Silver onyx ring',
 		image: 'silverOnyxRing.png',
@@ -6741,6 +6950,7 @@ const items = [
 		]
 	},
 	{
+		id: 155,
 		type: 'ring',
 		name: 'Gold ring',
 		image: 'goldRing.png',
@@ -6762,6 +6972,7 @@ const items = [
 		]
 	},
 	{
+		id: 156,
 		type: 'ring',
 		name: 'Gold sapphire ring',
 		image: 'goldSapphireRing.png',
@@ -6791,6 +7002,7 @@ const items = [
 		]
 	},
 	{
+		id: 157,
 		type: 'ring',
 		name: 'Gold emerald ring',
 		image: 'goldEmeraldRing.png',
@@ -6820,6 +7032,7 @@ const items = [
 		]
 	},
 	{
+		id: 158,
 		type: 'ring',
 		name: 'Gold ruby ring',
 		image: 'goldRubyRing.png',
@@ -6849,6 +7062,7 @@ const items = [
 		]
 	},
 	{
+		id: 159,
 		type: 'ring',
 		name: 'Gold diamond ring',
 		image: 'goldDiamondRing.png',
@@ -6878,6 +7092,7 @@ const items = [
 		]
 	},
 	{
+		id: 160,
 		type: 'ring',
 		name: 'Gold onyx ring',
 		image: 'goldOnyxRing.png',
@@ -6907,6 +7122,7 @@ const items = [
 		]
 	},
 	{
+		id: 161,
 		type: 'dagger',
 		name: 'Legendary dagger',
 		image: 'legendaryDagger.png',
@@ -6928,6 +7144,7 @@ const items = [
 		]
 	},
 	{
+		id: 162,
 		type: 'sword',
 		name: 'Legendary sword',
 		image: 'legendarySword.png',
@@ -6949,6 +7166,7 @@ const items = [
 		]
 	},
 	{
+		id: 163,
 		type: 'longSword',
 		name: 'Legendary longsword',
 		image: 'legendaryLongsword.png',
@@ -6970,6 +7188,7 @@ const items = [
 		]
 	},
 	{
+		id: 164,
 		type: 'bow',
 		name: 'Legendary bow',
 		image: 'legendaryBow.png',
@@ -6991,6 +7210,7 @@ const items = [
 		]
 	},
 	{
+		id: 165,
 		type: 'halfShield',
 		name: 'Legendary half shield',
 		image: 'legendaryHalfShield.png',
@@ -7012,6 +7232,7 @@ const items = [
 		]
 	},
 	{
+		id: 166,
 		type: 'fullShield',
 		name: 'Legendary full shield',
 		image: 'legendaryFullShield.png',
@@ -7033,6 +7254,7 @@ const items = [
 		]
 	},
 	{
+		id: 167,
 		type: 'chainMail',
 		name: 'Legendary chainmail',
 		image: 'legendaryChainmail.png',
@@ -7054,6 +7276,7 @@ const items = [
 		]
 	},
 	{
+		id: 168,
 		type: 'plateBody',
 		name: 'Legendary platebody',
 		image: 'legendaryPlatebody.png',
@@ -7075,6 +7298,7 @@ const items = [
 		]
 	},
 	{
+		id: 169,
 		type: 'halfHelmet',
 		name: 'Legendary half helmet',
 		image: 'legendaryHalfHelmet.png',
@@ -7096,6 +7320,7 @@ const items = [
 		]
 	},
 	{
+		id: 170,
 		type: 'fullHelmet',
 		name: 'Legendary full helmet',
 		image: 'legendaryFullHelmet.png',
@@ -7117,6 +7342,7 @@ const items = [
 		]
 	},
 	{
+		id: 171,
 		type: 'boots',
 		name: 'Legendary boots',
 		image: 'legendaryBoots.png',
@@ -7138,6 +7364,7 @@ const items = [
 		]
 	},
 	{
+		id: 172,
 		type: 'gloves',
 		name: 'Legendary gloves',
 		image: 'legendaryGloves.png',
@@ -7159,6 +7386,7 @@ const items = [
 		]
 	},
 	{
+		id: 173,
 		type: 'pickaxe',
 		name: 'Legendary pickaxe',
 		image: 'legendaryPickaxe.png',
@@ -7180,6 +7408,7 @@ const items = [
 		]
 	},
 	{
+		id: 174,
 		type: 'hatchet',
 		name: 'Legendary hatchet',
 		image: 'legendaryHatchet.png',
@@ -7201,6 +7430,7 @@ const items = [
 		]
 	},
 	{
+		id: 175,
 		type: 'fishingRod',
 		name: 'Legendary fishing spear',
 		image: 'legendaryFishingSpear.png',
@@ -7222,6 +7452,7 @@ const items = [
 		]
 	},
 	{
+		id: 176,
 		type: 'hammer',
 		name: 'Legendary hammer',
 		image: 'legendaryHammer.png',
