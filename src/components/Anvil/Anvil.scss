@@ -7,6 +7,10 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    background-image: url('/images/anvil.gif');
+    background-repeat: no-repeat;
+    background-position: 1vh center;
+    background-size: 12vh;
 }
 
 .tierSelectorContainer {

@@ -6,6 +6,7 @@ import './Market.scss';
 import ConstructionMenuTwoPart from "../shared/ConstructionMenu/ConstructionMenuTwoPart";
 import traders from '../shared/traders';
 import traderstock from '../shared/traderstock';
+import characters from '../shared/characters';
 import _ from 'lodash';
 
 class Market extends React.Component {
@@ -133,12 +134,41 @@ class MPopup extends React.Component {
 class TPopup extends React.Component {
     render() {
         console.log(this.props);
+        const character = characters.find(c => c.name === this.props.trader.character);
         return <ConstructionMenuTwoPart
             topChildren={<div className='title'>Trader</div>}
             bottomChildren={
-                <>
-                    {(this.props.trader && this.props.trader.name) || undefined}
-                </>
+                (this.props.trader && (
+                    <>
+                        <div className={'traderCharacter'}>
+                            <div className={'traderCharacterImage'}>
+                                <img alt={character.name} src={'/images/characters/character' + character.id + '.png'} />
+                                <div className={'countTrades'}>{this.props.trades[this.props.trader.id] || 0} Trades</div>
+                            </div>
+                            <div className={'traderCharacterText'}>
+                                <div className={'traderCharacterName'}>{character.name}</div>
+                                <div className={'traderCharacterBlurb'}>{character.blurb}</div>
+                            </div>
+                        </div>
+                        <div className={'traderStock'}>
+                            {
+                                this.props.trader.stock.filter(s => s.requiredPurchases <= (this.props.trades[this.props.trader.id] || 0)).map(s => {
+                                    return <div key={s.itemObj.image + ':' + s.requiredPurchases} className={'stockRow'}>
+                                        <img alt={s.itemObj.name} src={'/images/' + s.itemObj.image} />
+                                        <div className={'nameAndCount'}>
+                                            <div>{s.itemObj.name}</div>
+                                            <div>{s.stock - (s.purchases || 0)} / {s.stock}</div>
+                                        </div>
+                                        <div className={'buy'} onClick={() => {
+                                            s.purchases = (s.purchases || 0) + 1;
+                                            this.props.buyItems(s.itemObj, 1, this.props.trader.id);
+                                        }}>Buy</div>
+                                    </div>
+                                })
+                            }
+                        </div>
+                    </>
+                )) || undefined
             }
             close={this.props.showMarketPopup} />
     }
@@ -147,12 +177,13 @@ class TPopup extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
     showMarketPopup: () => dispatch(setPopup('market')),
     showTraderPopup: (trader) => dispatch(setPopup('trader', trader)),
-    buyItems: (item, count) => {
+    buyItems: (item, count, traderId) => {
         return dispatch({
             type: 'buy',
             queue: 'market',
             count: count,
             item: item,
+            traderId: traderId,
         })
     },
     updateFinishTime: (item, finishTime) => dispatch({

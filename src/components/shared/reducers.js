@@ -118,6 +118,8 @@ function rootReducer(state = initialState, action) {
         case 'addInventoryAndRemoveFromQueue': {
             let queue = getQueue(action, state);
             const isInventory = action.queue === 'inventory';
+            const isMarket = action.queue === 'market';
+            const newTrades = state.trades;
             let newCraftingQueue = [...queue];
             newCraftingQueue.forEach(i => {if (i.uuid === action.item.uuid) i.removeMe = true});
             let newInventory = [...state.inventory];
@@ -136,6 +138,9 @@ function rootReducer(state = initialState, action) {
                 }
                 updatedInventoryItem.count[action.item.state] += action.item.count;
             }
+            if (isMarket) {
+                newTrades[action.traderId] = (newTrades[action.traderId] || 0) + 1;
+            }
             let newGold = state.gold;
             if (isInventory) {
                 const soldInventoryItem = newInventory.find(inventoryItem => inventoryItem.name === action.item.product);
@@ -148,6 +153,7 @@ function rootReducer(state = initialState, action) {
                 xp: newXp,
                 inventory: newInventory,
                 gold: newGold,
+                trades: newTrades,
                 [action.queue + 'Queue']: newCraftingQueue,
             };
             return newState;
@@ -206,6 +212,24 @@ function rootReducer(state = initialState, action) {
                     ...state.traders,
                     regular: newRegularTraders,
                 }
+            }
+        }
+        case 'buy': {
+            const newGold = state.gold + action.item.baseValue;
+            const newMarketQueue = [...state.marketQueue];
+            newMarketQueue.push({
+                image: action.item.image,
+                count: action.count,
+                product: action.item.name,
+                traderId: action.traderId,
+                state: ITEM_STATE.NORMAL,
+                time: [action.item.constructionTime[0] * action.count, action.item.constructionTime[1]],
+                uuid: uuid.v4(),
+            });
+            return {
+                ...state,
+                gold: newGold,
+                marketQueue: newMarketQueue,
             }
         }
         default: {

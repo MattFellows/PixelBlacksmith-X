@@ -47,3 +47,66 @@
         }
     }
 }
+
+.traderCharacter {
+    display: flex;
+    margin-top: 10px;
+
+    .traderCharacterImage {
+        width: 20vh;
+
+        img {
+            width: 20vh;
+        }
+        .countTrades {
+            height: 4vh;
+            background-color: rgba(30,30,30,0.8);
+            color: white;
+            text-align: center;
+            width: 20vh;
+            position: relative;
+            top: -4vh;
+            font-size: 4vh;
+            line-height: 4vh;
+        }
+    }
+    .traderCharacterText {
+        width: calc(100% - 20vh);
+
+        .traderCharacterName {
+            font-size: 5vh;
+        }
+        .traderCharacterBlurb {
+            font-size: 3vh;
+        }
+    }
+}
+
+.traderStock {
+    .stockRow {
+        margin-bottom: 5px;
+        display: flex;
+        flex-direction: row;
+        img {
+            width: 8vh;
+            height: 8vh;
+        }
+        .nameAndCount {
+            width: calc(100% - 8vh - 8vh);
+            height: 8vh;
+
+            font-size: 4vh;
+        }
+        .buy {
+            width: 8vh;
+            height: 8vh;
+            line-height: 8vh;
+            background-image: url('/images/button_narrow.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            text-align: center;
+            color: white;
+            font-size: 4vh;
+        }
+    }
+}
