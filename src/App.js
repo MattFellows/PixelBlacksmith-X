@@ -11,7 +11,7 @@ import PlayerInfo from "./components/PlayerInfo/PlayerInfor";
 import Anvil, {AnvilPopup} from "./components/Anvil/Anvil";
 import Table, {TablePopup} from "./components/Table/Table";
 import Inventory, {InventoryPopup} from "./components/Inventory/Inventory";
-import Market, {MarketPopup} from "./components/Market/Market";
+import Market, {MarketPopup, TraderPopup} from "./components/Market/Market";
 
 
 class App extends Component  {
@@ -42,6 +42,9 @@ class App extends Component  {
       }
       case 'market': {
         return <MarketPopup close={this.props.setPopupHidden}/>;
+      }
+      case 'trader': {
+        return <TraderPopup />;
       }
       default: {
         return null;

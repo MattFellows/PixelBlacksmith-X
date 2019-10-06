@@ -10,22 +10,40 @@
     border: 1px solid black;
 }
 
-.traderName {
-    font-size: 4vh;
-}
-.traderBlurb {
-    font-size: 3vh;
-}
-.traderStockRow {
+.traderContainer {
     display: flex;
     flex-direction: row;
 
-    img {
-        width: 5vh;
-        height: 5vh;
+    .traderButton {
+        flex-basis: 10%;
+        background-image: url('/images/open.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center middle;
+    }
+    .traderInfo {
+        flex-basis: 90%;
 
-        &.redacted {
-            filter: contrast(0%) brightness(0%);
+        .traderName {
+            font-size: 4vh;
+        }
+
+        .traderBlurb {
+            font-size: 3vh;
+        }
+
+        .traderStockRow {
+            display: flex;
+            flex-direction: row;
+
+            img {
+                width: 5vh;
+                height: 5vh;
+
+                &.redacted {
+                    filter: contrast(0%) brightness(0%);
+                }
+            }
         }
     }
 }

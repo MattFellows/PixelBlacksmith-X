@@ -90,15 +90,18 @@ class Market extends React.Component {
     }
 }
 
-class Popup extends React.Component {
+class MPopup extends React.Component {
     renderTrader = (tr) => {
         const tradeCount = this.props.trades[tr.id] || 0;
-        return <div key={tr.name}>
-            <div className={'traderName'}>{tr.name}</div>
-            <div className={'traderBlurb'}>{tr.blurb}</div>
-            <div className={'traderStockRow'}>{tr.stock.map(ts => {
-                return <img alt={ts.itemObj.name} key={ts.itemObj.image + ts.requiredPurchases} src={'/images/'+ts.itemObj.image} className={ts.requiredPurchases > tradeCount ? 'redacted' : ''}/>
-            })}</div>
+        return <div key={tr.name} className={'traderContainer'}>
+            <div className={'traderInfo'}>
+                <div className={'traderName'}>{tr.name}</div>
+                <div className={'traderBlurb'}>{tr.blurb}</div>
+                <div className={'traderStockRow'}>{tr.stock.map(ts => {
+                    return <img alt={ts.itemObj.name} key={ts.itemObj.image + ts.requiredPurchases} src={'/images/'+ts.itemObj.image} className={ts.requiredPurchases > tradeCount ? 'redacted' : ''}/>
+                })}</div>
+            </div>
+            <div className={'traderButton'} onClick={() => this.props.showTraderPopup(tr)}></div>
         </div>
     };
 
@@ -127,8 +130,23 @@ class Popup extends React.Component {
     }
 }
 
+class TPopup extends React.Component {
+    render() {
+        console.log(this.props);
+        return <ConstructionMenuTwoPart
+            topChildren={<div className='title'>Trader</div>}
+            bottomChildren={
+                <>
+                    {(this.props.trader && this.props.trader.name) || undefined}
+                </>
+            }
+            close={this.props.showMarketPopup} />
+    }
+}
+
 const mapDispatchToProps = (dispatch) => ({
     showMarketPopup: () => dispatch(setPopup('market')),
+    showTraderPopup: (trader) => dispatch(setPopup('trader', trader)),
     buyItems: (item, count) => {
         return dispatch({
             type: 'buy',
@@ -158,9 +176,11 @@ const mapStateToProps = (state) => {
         traders: state.traders,
         traderCount: state.traderCount,
         trades: state.trades,
+        trader: state.trader,
     };
     return newLocal;
 };
 
-export const MarketPopup = connect(mapStateToProps, mapDispatchToProps)(Popup);
+export const MarketPopup = connect(mapStateToProps, mapDispatchToProps)(MPopup);
+export const TraderPopup = connect(mapStateToProps, mapDispatchToProps)(TPopup);
 export default connect(mapStateToProps, mapDispatchToProps)(Market);

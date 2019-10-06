@@ -171,7 +171,8 @@ function rootReducer(state = initialState, action) {
         case ACTIONS.POPUP: {
             return {
                 ...state,
-                popup: action.popup
+                popup: action.popup,
+                trader: action.trader,
             }
         }
         case 'sell': {
