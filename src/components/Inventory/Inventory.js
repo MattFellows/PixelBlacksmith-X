@@ -132,12 +132,12 @@ const mapDispatchToProps = (dispatch) => ({
     })
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (store) => {
     const newLocal = {
-        inventory: state.inventory,
-        level: state.level,
-        inventoryCraftingStack: state.inventoryQueue,
-        premium: state.premium,
+        inventory: store.inventory,
+        level: store.level,
+        inventoryCraftingStack: store.inventoryQueue,
+        premium: store.premium,
     };
     return newLocal;
 };

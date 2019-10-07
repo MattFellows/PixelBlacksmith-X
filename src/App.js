@@ -76,9 +76,9 @@ class App extends Component  {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (store) => {
   return {
-    popup: state.popup
+    popup: store.popup
   }
 }
 

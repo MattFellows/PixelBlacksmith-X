@@ -16,11 +16,11 @@ class PlayerInfo extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (store) => {
     return {
-        level: state.level,
-        xp: state.xp,
-        gold: state.gold,
+        level: store.level,
+        xp: store.xp,
+        gold: store.gold,
     }
 };
 

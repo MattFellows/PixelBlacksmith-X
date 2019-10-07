@@ -1,6 +1,7 @@
 import { ACTIONS } from './actions';
 import uuid from "uuid";
 import items, {ITEM_STATE} from "./inventory";
+import traderstock from './traderstock';
 import {toast} from "react-toastify";
 
 const initialState = {
@@ -22,6 +23,7 @@ const initialState = {
     trades: {},
     traderCount: 3,
     premium: 0,
+    traderstock: traderstock,
 };
 
 initialState.inventory.find(i => i.name === 'Copper ore').count[1] = 10;
@@ -204,8 +206,20 @@ function rootReducer(state = initialState, action) {
                     inventoryQueue: newInventoryQueue,
                 }
             }
+            case 'removeSoldOutTraders': {
+                let newRegularTraders = [...state.traders.regular].filter(t => {
+                    let tradersStock = state.traderstock.filter(s => s.trader === t.id && s.purchases < s.maxStock && s.requiredPurchases <= (state.trades[t.id] || 0));
+                    return tradersStock.length > 0;
+                });
+                return {
+                    ...state,
+                    traders: {
+                        ...state.traders,
+                        regular: newRegularTraders,
+                    }
+                }
+            }
             case 'addTrader': {
-                console.log(action);
                 const newRegularTraders = [...state.traders.regular];
                 newRegularTraders.push(action.trader);
                 return {
@@ -228,10 +242,17 @@ function rootReducer(state = initialState, action) {
                     time: [action.item.constructionTime[0] * action.count, action.item.constructionTime[1]],
                     uuid: uuid.v4(),
                 });
+                const newStock = [...state.traderstock];
+                const newTraderStock = newStock.find(s => s.trader === action.stock.trader && s.item === action.stock.item && s.requiredPurchases === action.stock.requiredPurchases)
+                console.log('New Trader Stock: ', newTraderStock, newStock, action.stock);
+                if (newTraderStock) {
+                    newTraderStock.purchases = (newTraderStock.purchases || 0) + action.count;
+                }
                 return {
                     ...state,
                     gold: newGold,
                     marketQueue: newMarketQueue,
+                    traderstock: newStock,
                 }
             }
             default: {

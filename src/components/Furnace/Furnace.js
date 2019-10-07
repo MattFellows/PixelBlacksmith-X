@@ -137,12 +137,12 @@ const mapFurnaceDispatchToProps = (dispatch) => ({
     })
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (store) => {
     const newLocal = {
-        inventory: state.inventory,
-        level: state.level,
-        furnaceCraftingStack: state.furnaceQueue,
-        premium: state.premium,
+        inventory: store.inventory,
+        level: store.level,
+        furnaceCraftingStack: store.furnaceQueue,
+        premium: store.premium,
     };
     return newLocal;
 };

@@ -46,8 +46,8 @@ class IngredientsTable extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    inventory: state.inventory,
+const mapStateToProps = (store) => ({
+    inventory: store.inventory,
 });
 
 IngredientsTable.propTypes = {

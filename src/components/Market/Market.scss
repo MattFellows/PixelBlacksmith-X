@@ -19,7 +19,7 @@
         background-image: url('/images/open.png');
         background-size: contain;
         background-repeat: no-repeat;
-        background-position: center middle;
+        background-position: center center;
     }
     .traderInfo {
         flex-basis: 90%;
@@ -35,6 +35,7 @@
         .traderStockRow {
             display: flex;
             flex-direction: row;
+            flex-wrap: wrap;
 
             img {
                 width: 5vh;
