@@ -4,54 +4,9 @@ import {connect} from "react-redux";
 import {setPopup} from "../shared/actions";
 import './Market.scss';
 import ConstructionMenuTwoPart from "../shared/ConstructionMenu/ConstructionMenuTwoPart";
-import traders from '../shared/traders';
 import characters from '../shared/characters';
-import _ from 'lodash';
 
 class Market extends React.Component {
-    constructor(props) {
-        super(props);
-
-        setInterval(() => {
-            if ((this.props.traders.fixed.length + this.props.traders.regular.length) < this.props.traderCount) {
-                let randomTrader = this.getRandomTrader();
-                if (randomTrader) {
-                    this.props.addNewTrader(randomTrader);
-                }
-            }
-            this.props.removeSoldoutTraders();
-
-        }, 1000)
-    }
-
-    getStock = (tr) => {
-        if (tr) {
-            let stock = this.props.traderstock.filter(ts => ts.trader === tr.id);
-            stock.forEach(ts => ts.itemObj = this.props.inventory.find(i => i.id === ts.item));
-            stock.sort((ts1, ts2) => {
-                return ts1.requiredPurchases - ts2.requiredPurchases;
-            });
-            return stock;
-        }
-        return [];
-    };
-
-    getRandomTrader = () => {
-        const random = Math.random() * 100;
-        const potentialTraders = traders
-            .filter(tr => this.props.traders.fixed.map(t => t.id).indexOf(tr.id))
-            .filter(tr => this.props.traders.regular.map(t => t.id).indexOf(tr.id))
-            .filter(tr => tr.level <= this.props.level)
-            .filter(tr => tr.weighting <= random);
-        let randomTrader = _.shuffle(potentialTraders)[0];
-        if (randomTrader) {
-            randomTrader.stock = this.getStock(randomTrader);
-            return randomTrader;
-        } else {
-            console.log('No Traders for: ', random, this.props.traders);
-        }
-        return null;
-    };
 
     getAvailableMarketStacks = () => {
         const premium = this.props.premium;
@@ -102,14 +57,20 @@ class Market extends React.Component {
 }
 
 class MPopup extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     renderTrader = (tr) => {
         const tradeCount = this.props.trades[tr.id] || 0;
+        const traderStock = this.props.traderstock.filter(s => s.trader === tr.id);
         return <div key={tr.name} className={'traderContainer'}>
             <div className={'traderInfo'}>
                 <div className={'traderName'}>{tr.name}</div>
                 <div className={'traderBlurb'}>{tr.blurb}</div>
-                <div className={'traderStockRow'}>{tr.stock.map(ts => {
-                    return <img alt={ts.itemObj.name} key={ts.itemObj.image + ts.requiredPurchases} src={'/images/'+ts.itemObj.image} className={ts.requiredPurchases > tradeCount ? 'redacted' : ''}/>
+                <div className={'traderStockRow'}>{traderStock.map(ts => {
+                    const itemObj = this.props.inventory.find(i => i.id === ts.item);
+                    return <img alt={itemObj.name} key={itemObj.image + ts.requiredPurchases} src={'/images/'+itemObj.image} className={ts.requiredPurchases > tradeCount ? 'redacted' : ''}/>
                 })}</div>
             </div>
             <div className={'traderButton'} onClick={() => this.props.showTraderPopup(tr)}></div>
@@ -117,6 +78,7 @@ class MPopup extends React.Component {
     };
 
     render() {
+
         return <ConstructionMenuTwoPart
             topChildren={<div className='title'>Market</div>}
             bottomChildren={
@@ -142,8 +104,20 @@ class MPopup extends React.Component {
 }
 
 class TPopup extends React.Component {
+    componentDidUpdate(prevProps, prevState) {
+        Object.entries(this.props).forEach(([key, val]) =>
+            prevProps[key] !== val && console.log(`Prop '${key}' changed`)
+        );
+        if (this.state) {
+            Object.entries(this.state).forEach(([key, val]) =>
+                prevState[key] !== val && console.log(`State '${key}' changed`)
+            );
+        }
+    }
+
     render() {
         const character = characters.find(c => c.name === this.props.trader.character);
+        console.log('Trades: ', this.props.trades[this.props.trader.id]);
         return <ConstructionMenuTwoPart
             topChildren={<div className='title'>Trader</div>}
             bottomChildren={
@@ -161,17 +135,17 @@ class TPopup extends React.Component {
                         </div>
                         <div className={'traderStock'}>
                             {
-                                this.props.trader.stock.filter(s => s.requiredPurchases <= (this.props.trades[this.props.trader.id] || 0)).map(s => {
-                                    console.log('Stock: ', s);
-                                    return <div key={s.itemObj.image + ':' + s.requiredPurchases} className={'stockRow'}>
-                                        <img alt={s.itemObj.name} src={'/images/' + s.itemObj.image} />
+                                this.props.traderstock.filter(s => s.trader === this.props.trader.id && s.requiredPurchases <= (this.props.trades[this.props.trader.id] || 0)).map(s => {
+                                    const itemObj = this.props.inventory.find(i => i.id === s.item);
+                                    return <div key={itemObj.image + ':' + s.requiredPurchases} className={'stockRow'}>
+                                        <img alt={itemObj.name} src={'/images/' + itemObj.image} />
                                         <div className={'nameAndCount'}>
-                                            <div>{s.itemObj.name}</div>
-                                            <div>{s.stock - (s.purchases || 0)} / {s.stock}</div>
+                                            <div>{itemObj.name}</div>
+                                            <div>{s.stock} / {s.maxStock}</div>
                                         </div>
                                         <div className={'buy'} onClick={() => {
-                                            if (s.stock - (s.purchases || 0) > 0) {
-                                                this.props.buyItems(s, s.itemObj, 1, this.props.trader.id);
+                                            if (s.stock > 0) {
+                                                this.props.buyItems(s, itemObj, 1, this.props.trader.id);
                                             }
                                         }}>Buy</div>
                                     </div>
@@ -204,13 +178,6 @@ const mapDispatchToProps = (dispatch) => ({
         uuid: item.uuid,
         finishTime: finishTime,
     }),
-    addNewTrader: (trader) => dispatch({
-        type: 'addTrader',
-        trader: trader,
-    }),
-    removeSoldoutTraders: () => dispatch({
-        type: 'removeSoldOutTraders',
-    }),
 });
 
 const mapStateToProps = (store) => {
@@ -228,6 +195,16 @@ const mapStateToProps = (store) => {
     return newLocal;
 };
 
+const mapStateToPropsTPopup = (store) => {
+    const newLocal = {
+        inventory: store.inventory,
+        trades: store.trades,
+        trader: store.trader,
+        traderstock: store.traderstock,
+    };
+    return newLocal;
+};
+
 export const MarketPopup = connect(mapStateToProps, mapDispatchToProps)(MPopup);
-export const TraderPopup = connect(mapStateToProps, mapDispatchToProps)(TPopup);
+export const TraderPopup = connect(mapStateToPropsTPopup, mapDispatchToProps)(TPopup);
 export default connect(mapStateToProps, mapDispatchToProps)(Market);

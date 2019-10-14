@@ -86,7 +86,15 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setPopupVisible: (popupType) => dispatch(setPopup(popupType)),
     setPopupHidden: () => dispatch(setPopup(null)),
-    clearup: () => {dispatch({type:'removeDeleted',queue:'anvil'});dispatch({type:'removeDeleted',queue:'furnace'})},
+    clearup: () => {
+        dispatch({type:'removeDeleted',queue:'anvil'});
+        dispatch({type:'removeDeleted',queue:'furnace'});
+        dispatch({type:'checkAndAddTraders'});
+        dispatch({type:'removeSoldOutTraders'});
+        if (new Date().getSeconds() % 60 === 0) {
+          dispatch({type:'resetStock'});
+        }
+      },
   }
 }
 
