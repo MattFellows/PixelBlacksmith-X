@@ -70,7 +70,7 @@ class App extends Component  {
         <Inventory />
         <Market />
         {popup}
-        <ToastContainer autoClose={false} position={toast.POSITION.BOTTOM_CENTER}/>
+        <ToastContainer autoClose={5000} position={toast.POSITION.BOTTOM_CENTER}/>
       </div>
     )
   }

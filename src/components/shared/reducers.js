@@ -140,7 +140,6 @@ function rootReducer(state = initialState, action) {
                 let queue = getQueue(action, state);
                 const isInventory = action.queue === 'inventory';
                 const isMarket = action.queue === 'market';
-                const newTrades = {...state.trades};
 
                 let newCraftingQueue = [...queue];
                 newCraftingQueue.forEach(i => {
@@ -162,11 +161,6 @@ function rootReducer(state = initialState, action) {
                     }
                     updatedInventoryItem.count[action.item.state] += action.item.count;
                 }
-                console.log('IsMarket: ', isMarket);
-                if (isMarket) {
-                    console.log('Trader: ', action.item.traderId, (newTrades[action.item.traderId] || 0) + 1);
-                    newTrades[action.item.traderId] = (newTrades[action.item.traderId] || 0) + 1;
-                }
                 let newGold = state.gold;
                 if (isInventory) {
                     const soldInventoryItem = newInventory.find(inventoryItem => inventoryItem.name === action.item.product);
@@ -179,7 +173,6 @@ function rootReducer(state = initialState, action) {
                     xp: newXp,
                     inventory: newInventory,
                     gold: newGold,
-                    trades: newTrades,
                     [action.queue + 'Queue']: newCraftingQueue,
                 };
                 return newState;
@@ -197,7 +190,8 @@ function rootReducer(state = initialState, action) {
                 newInventory.find(i => i.name === 'Cheese').count[ITEM_STATE.NORMAL] = 20;
                 return {
                     ...state,
-                    inventory: newInventory
+                    inventory: newInventory,
+                    gold: 1000,
                 }
             }
             case ACTIONS.POPUP: {
@@ -280,6 +274,7 @@ function rootReducer(state = initialState, action) {
             case 'buy': {
                 const newGold = state.gold - action.item.baseValue;
                 const newMarketQueue = [...state.marketQueue];
+                const newTrades = {...state.trades};
                 newMarketQueue.push({
                     image: action.item.image,
                     count: action.count,
@@ -296,11 +291,13 @@ function rootReducer(state = initialState, action) {
                     newTraderStock.stock = newTraderStock.stock - action.count;
                     console.log('New Purchases: ', newTraderStock.purchases);
                 }
+                newTrades[action.traderId] = (newTrades[action.traderId] || 0) + action.count;
                 return {
                     ...state,
                     gold: newGold,
                     marketQueue: newMarketQueue,
                     traderstock: newStock,
+                    trades: newTrades,
                 }
             }
             default: {

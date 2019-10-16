@@ -1,6 +1,7 @@
 import React from 'react';
 import StackOfStacks from "../shared/StackOfStacks/StackOfStacks";
 import {connect} from "react-redux";
+import {toast} from "react-toastify";
 import {setPopup} from "../shared/actions";
 import './Market.scss';
 import ConstructionMenuTwoPart from "../shared/ConstructionMenu/ConstructionMenuTwoPart";
@@ -104,6 +105,13 @@ class MPopup extends React.Component {
 }
 
 class TPopup extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            locked: false,
+        }
+    }
     componentDidUpdate(prevProps, prevState) {
         Object.entries(this.props).forEach(([key, val]) =>
             prevProps[key] !== val && console.log(`Prop '${key}' changed`)
@@ -144,13 +152,22 @@ class TPopup extends React.Component {
                                             <div>{s.stock} / {s.maxStock}</div>
                                         </div>
                                         <div className={'buy'} onClick={() => {
-                                            if (s.stock > 0) {
+                                            if (s.stock > 0 && this.props.gold > itemObj.baseValue) {
                                                 this.props.buyItems(s, itemObj, 1, this.props.trader.id);
+                                            } else if (s.stock > 0) {
+                                                toast.error("You don't have enough gold.");
+                                            } else {
+                                                toast.error("The trader doesn't have enough stock");
                                             }
                                         }}>Buy</div>
                                     </div>
                                 })
                             }
+                        </div>
+                        <div className={'buttonContainer'}>
+                            <div className={'lockTraderButton'} onClick={() => this.props.lockTrader(this.props.trader)}><img alt='sell1' src='/images/button_narrow.png' /><div>lock<div className={'tickOrCross ' + (this.state.locked ? 'tick' : 'cross')} /></div></div>
+                            <div className={'restockButton'} onClick={() => this.props.restockTrader(this.props.trader)}><img alt='buyAll' src='/images/button_extra_wide.png' /><div>Restock</div></div>
+                            <div className={'buyAll'} onClick={() => this.props.buyAll(this.props.trader)}><img alt='buyAll' src='/images/button_extra_wide.png' /><div>Buy All</div></div>
                         </div>
                     </>
                 )) || undefined
@@ -178,6 +195,18 @@ const mapDispatchToProps = (dispatch) => ({
         uuid: item.uuid,
         finishTime: finishTime,
     }),
+    lockTrader: (trader) => dispatch({
+        type: 'lockTrader',
+        trader: trader,
+    }),
+    restockTrader: (trader) => dispatch({
+        type: 'restockTrader',
+        trader: trader,
+    }),
+    buyAll: (trader) => dispatch({
+        type: 'buyAll',
+        trader: trader,
+    }),
 });
 
 const mapStateToProps = (store) => {
@@ -201,6 +230,7 @@ const mapStateToPropsTPopup = (store) => {
         trades: store.trades,
         trader: store.trader,
         traderstock: store.traderstock,
+        gold: store.gold,
     };
     return newLocal;
 };
