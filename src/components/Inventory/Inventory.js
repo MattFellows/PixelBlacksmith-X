@@ -86,7 +86,7 @@ class InventoryTable extends React.Component {
                         <td className={'count'}>{i.count[j]}</td>
                         <td className={'icon'}>{i.image && <img alt={i.name} src={`/images/${i.image}`}/>}</td>
                         <td className={'name'}>{(parseInt(j, 10) === ITEM_STATE.UNFINISHED ? '(unf) ' : '') + i.name}</td>
-                        <td className={'button narrow'} onClick={() => this.sell(i, j)}></td>
+                        <td className={'button narrow'} onClick={() => {console.log('Selling');this.sell(i, j)}}>&nbsp;</td>
                     </tr>))}
                     </tbody>
                 </table>

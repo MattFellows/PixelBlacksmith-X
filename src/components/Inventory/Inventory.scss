@@ -87,11 +87,13 @@
                     height: calc(100% - 7vh);
 
                     &.tick {
-                        background-color: green;
+                        background-image: url('/images/tick.png');
+                        background-size: cover;
                     }
 
                     &.cross {
-                        background-color: red;
+                        background-image: url('/images/cross.png');
+                        background-size: cover;
                     }
                 }
             }

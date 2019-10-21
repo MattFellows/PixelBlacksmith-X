@@ -64,7 +64,7 @@ class MPopup extends React.Component {
 
     renderTrader = (tr) => {
         const tradeCount = this.props.trades[tr.id] || 0;
-        const traderStock = this.props.traderstock.filter(s => s.trader === tr.id);
+        const traderStock = this.props.traderstock.filter(s => s.trader === tr.id).sort((s1, s2) => s1.requiredPurchases - s2.requiredPurchases === 0 ? s1.baseValue - s2.baseValue : s1.requiredPurchases - s2.requiredPurchases);
         return <div key={tr.name} className={'traderContainer'}>
             <div className={'traderInfo'}>
                 <div className={'traderName'}>{tr.name}</div>
@@ -79,17 +79,29 @@ class MPopup extends React.Component {
     };
 
     render() {
-
+        console.log('Traders: ', this.props.traders);
         return <ConstructionMenuTwoPart
             topChildren={<div className='title'>Market</div>}
             bottomChildren={
-                <>
+                <div className={'traders'}>
                 {
                     (Array.isArray(this.props.traders.fixed) &&
                     this.props.traders.fixed.length &&
-                    this.props.traders.fixed.map(tr => {
-                        return this.renderTrader(tr);
-                    })) || undefined
+                        <div class={'header'}>Fixed</div>
+                    ) || undefined
+                }
+                {
+                    (Array.isArray(this.props.traders.fixed) &&
+                        this.props.traders.fixed.length &&
+                        this.props.traders.fixed.map(tr => {
+                            return this.renderTrader(tr);
+                        })) || undefined
+                }
+                {
+                    (Array.isArray(this.props.traders.fixed) &&
+                        this.props.traders.fixed.length &&
+                        <div class={'header ptm'}>Normal</div>
+                    ) || undefined
                 }
                 {
                     (Array.isArray(this.props.traders.regular) &&
@@ -98,7 +110,7 @@ class MPopup extends React.Component {
                         return this.renderTrader(tr)
                     })) || undefined
                 }
-                </>
+                </div>
             }
             close={this.props.close} />
     }
@@ -126,6 +138,7 @@ class TPopup extends React.Component {
     render() {
         const character = characters.find(c => c.name === this.props.trader.character);
         console.log('Trades: ', this.props.trades[this.props.trader.id]);
+        const locked = Array.isArray(this.props.traders.fixed) && this.props.traders.fixed.length && this.props.traders.fixed.find(tr => tr.id === this.props.trader.id);
         return <ConstructionMenuTwoPart
             topChildren={<div className='title'>Trader</div>}
             bottomChildren={
@@ -165,9 +178,9 @@ class TPopup extends React.Component {
                             }
                         </div>
                         <div className={'buttonContainer'}>
-                            <div className={'lockTraderButton'} onClick={() => this.props.lockTrader(this.props.trader)}><img alt='sell1' src='/images/button_narrow.png' /><div>lock<div className={'tickOrCross ' + (this.state.locked ? 'tick' : 'cross')} /></div></div>
-                            <div className={'restockButton'} onClick={() => this.props.restockTrader(this.props.trader)}><img alt='buyAll' src='/images/button_extra_wide.png' /><div>Restock</div></div>
-                            <div className={'buyAll'} onClick={() => this.props.buyAll(this.props.trader)}><img alt='buyAll' src='/images/button_extra_wide.png' /><div>Buy All</div></div>
+                            <div className={'lockTraderButton'} onClick={() => this.props.lockTrader(this.props.trader)}><img alt='sell1' src='/images/button_narrow.png' /><div>lock<div className={'tickOrCross ' + (locked ? 'tick' : 'cross')} /></div></div>
+                            <div className={'restockButton'} onClick={() => this.props.restockTrader(this.props.trader)}><img alt='buyAll' src='/images/button_wide.png' /><div>Restock</div></div>
+                            <div className={'buyAll'} onClick={() => this.props.buyAll(this.props.trader)}><img alt='buyAll' src='/images/button_wide.png' /><div>Buy All</div></div>
                         </div>
                     </>
                 )) || undefined
@@ -196,7 +209,7 @@ const mapDispatchToProps = (dispatch) => ({
         finishTime: finishTime,
     }),
     lockTrader: (trader) => dispatch({
-        type: 'lockTrader',
+        type: 'lock',
         trader: trader,
     }),
     restockTrader: (trader) => dispatch({
@@ -229,6 +242,7 @@ const mapStateToPropsTPopup = (store) => {
         inventory: store.inventory,
         trades: store.trades,
         trader: store.trader,
+        traders: store.traders,
         traderstock: store.traderstock,
         gold: store.gold,
     };

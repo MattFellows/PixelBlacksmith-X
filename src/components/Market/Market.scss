@@ -10,9 +10,15 @@
     border: 1px solid black;
 }
 
+.traders {
+    overflow: auto;
+    height: 100%;
+}
+
 .traderContainer {
     display: flex;
     flex-direction: row;
+    padding-top: 1vh;
 
     .traderButton {
         flex-basis: 10%;
@@ -151,21 +157,25 @@
                 height: calc(100% - 7vh);
 
                 &.tick {
-                    background-color: green;
+                    background-image: url('/images/tick.png');
+                    background-size: cover;
                 }
 
                 &.cross {
-                    background-color: red;
+                    background-image: url('/images/cross.png');
+                    background-size: cover;
                 }
             }
         }
     }
 
     .restockButton {
-        width: 20vh;
+        width: 16vh;
         height: 9vh;
         position: relative;
-        min-width: 20vh;
+        line-height: 9vh;
+        font-size: 5vh;
+        vertical-align: center;
 
         img {
             width: 100%;
@@ -175,9 +185,7 @@
         div {
             width: 100%;
             height: 100%;
-            padding-top: 5px;
             text-align: center;
-            font-size: 3vh;
             position: absolute;
             top: 0;
             left: 0;
@@ -186,10 +194,12 @@
     }
 
     .buyAll {
-        width: 20vh;
+        width: 16vh;
         height: 9vh;
         position: relative;
-        min-width: 20vh;
+        line-height: 9vh;
+        font-size: 5vh;
+        vertical-align: center;
 
         img {
             width: 100%;
@@ -199,13 +209,19 @@
         div {
             width: 100%;
             height: 100%;
-            padding-top: 5px;
             text-align: center;
-            font-size: 3vh;
             position: absolute;
             top: 0;
             left: 0;
             white-space: nowrap;
         }
     }
+}
+
+.header {
+    font-size: 7vh;
+}
+
+.ptm {
+    padding-top: 3vh;
 }

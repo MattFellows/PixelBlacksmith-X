@@ -202,18 +202,20 @@ function rootReducer(state = initialState, action) {
                 }
             }
             case 'sell': {
+                const count = action.count > 0 ? action.count : state.inventory.find(i => i.id === action.item.id).count[action.itemState];
+                console.log(`Selling ${count} ${action.item.name} (${action.item.id}) (${state.traderstock.find(ts => ts.item === action.item.id).item})`);
                 const newInventory = [...state.inventory];
                 const newInventoryItem = newInventory.find(i => i.name === action.item.name);
-                if (action.itemState in newInventoryItem.count && newInventoryItem.count[action.itemState] >= action.count) {
-                    newInventoryItem.count[action.itemState] -= action.count;
+                if (action.itemState in newInventoryItem.count && newInventoryItem.count[action.itemState] >= count) {
+                    newInventoryItem.count[action.itemState] -= count;
                 }
                 const newInventoryQueue = [...state.inventoryQueue];
                 newInventoryQueue.push({
                     image: 'coins.png',
-                    count: action.count,
+                    count: count,
                     product: action.item.name,
                     state: action.itemState,
-                    time: [action.item.constructionTime[0] * action.count, action.item.constructionTime[1]],
+                    time: [action.item.constructionTime[0] * count, action.item.constructionTime[1]],
                     uuid: uuid.v4(),
                 })
                 return {
@@ -260,7 +262,7 @@ function rootReducer(state = initialState, action) {
             case 'checkAndAddTraders': {
                 let newTraders = {...state.traders};
                 let countAdding = 0;
-                while (countAdding++ < 10 && ((newTraders.fixed.length + newTraders.regular.length) < state.traderCount)) {
+                while (countAdding++ < 10 && (newTraders.regular.length < state.traderCount)) {
                     let randomTrader = getRandomTrader(newTraders, state.level, state.traderstock, state.inventory);
                     if (randomTrader) {
                         newTraders.regular.push(randomTrader);
@@ -298,6 +300,80 @@ function rootReducer(state = initialState, action) {
                     marketQueue: newMarketQueue,
                     traderstock: newStock,
                     trades: newTrades,
+                }
+            }
+            case 'restockTrader': {
+                const trader = action.trader;
+                const newTraderStock = [...state.traderstock];
+                let totalCost = 0;
+                newTraderStock.forEach(ts => {
+                   if (ts.trader === trader.id && (state.trades[trader.id] >= ts.requiredPurchases || ts.requiredPurchases === 0)) {
+                       const item = state.inventory.find(i => i.id === ts.item);
+                       totalCost += (ts.maxStock - ts.stock) * item.baseValue;
+                       ts.stock = ts.maxStock;
+                   }
+                });
+                const newGold = state.gold - totalCost;
+                return {
+                    ...state,
+                    traderstock: newTraderStock,
+                    gold: newGold,
+                }
+            }
+            case 'buyAll': {
+                const trader = action.trader;
+                const newTraderStock = [...state.traderstock];
+                let totalCost = 0;
+                let newTrades = {...state.trades};
+                const newMarketQueue = [...state.marketQueue];
+                newTraderStock.forEach(ts => {
+                    if (ts.trader === trader.id && (state.trades[trader.id] >= ts.requiredPurchases || ts.requiredPurchases === 0)) {
+                        const item = state.inventory.find(i => i.id === ts.item);
+
+                        for (let i = 0; i < ts.stock; i++) {
+
+                            newMarketQueue.push({
+                                image: item.image,
+                                count: 1,
+                                product: item.name,
+                                traderId: trader.id,
+                                state: ITEM_STATE.NORMAL,
+                                time: [item.constructionTime[0], item.constructionTime[1]],
+                                uuid: uuid.v4(),
+                            });
+                        }
+
+                        totalCost += (ts.maxStock - ts.stock) * item.baseValue;
+                        ts.stock = 0;
+                        if (!newTrades[trader.id]) {
+                            newTrades[trader.id] = 0;
+                        }
+                        newTrades[trader.id] += (ts.maxStock - ts.stock);
+                    }
+                });
+                const newGold = state.gold - totalCost;
+                return {
+                    ...state,
+                    traderstock: newTraderStock,
+                    gold: newGold,
+                    trades: newTrades,
+                    marketQueue: newMarketQueue,
+                }
+            }
+            case 'lock': {
+                const newTraders = {...state.traders};
+                let locked = newTraders.fixed.find(tr => tr.id === action.trader.id);
+                console.log((locked ? 'Unlocking' : 'Locking: '), action.trader);
+                if (!locked) {
+                    newTraders.fixed.push(action.trader);
+                    newTraders.regular = newTraders.regular.filter(t => t.id !== action.trader.id);
+                } else {
+                    newTraders.regular.push(action.trader);
+                    newTraders.fixed = newTraders.fixed.filter(t => t.id !== action.trader.id);
+                }
+                return {
+                    ...state,
+                    traders: newTraders,
                 }
             }
             default: {
