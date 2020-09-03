@@ -1,0 +1,53 @@
+.visitorCharacter {
+  display: flex;
+  margin-top: 10px;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .visitorCharacterImage {
+    flex-basis: 15vh;
+
+    img {
+      width: 15vh;
+    }
+    .countVisits {
+      height: 4vh;
+      background-color: rgba(30,30,30,0.8);
+      color: white;
+      text-align: center;
+      width: 15vh;
+      position: relative;
+      top: -4vh;
+      font-size: 3.5vh;
+      line-height: 4vh;
+    }
+  }
+  .visitorCharacterText {
+    flex-basis: calc(100% - 16vh);
+
+    .visitorCharacterName {
+      font-size: 5vh;
+    }
+    .visitorCharacterBlurb {
+      font-size: 3vh;
+    }
+  }
+}
+
+.visitorPreferences {
+  display: flex;
+
+  .visitorPreference {
+    width: 8vh;
+    height: 10vh;
+    border-top: 4px solid black;
+    background: #282c34;
+    color: white;
+    text-align: center;
+
+    .visitorPreferenceImage {
+      height: 7vh;
+    }
+  }
+}

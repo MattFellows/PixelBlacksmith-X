@@ -4,6 +4,7 @@ import items, {ITEM_STATE} from "./inventory";
 import traderstock from './traderstock';
 import {toast} from "react-toastify";
 import allTraders from "./traders";
+import visitorTypes from './visitorTypes';
 import _ from "lodash";
 
 const initialState = {
@@ -26,6 +27,42 @@ const initialState = {
     traderCount: 3,
     premium: 0,
     traderstock: traderstock,
+    visitors: [
+        {
+            visitorType: visitorTypes.find(vt => vt.visitorID === 33),
+            visitorDemands: [
+                {
+                    type: 'type',
+                    value: 'ore',
+                    quantityProvided: 0,
+                    quantity: 2,
+                    required: true,
+                },
+                {
+                    type: 'state',
+                    value: 2,
+                    quantityProvided: 0,
+                    quantity: 1,
+                    required: true,
+                },
+                {
+                    type: 'state',
+                    value: 1,
+                    quantityProvided: 0,
+                    quantity: 1,
+                    required: true,
+                },
+                {
+                    type: 'type',
+                    value: 'food',
+                    quantityProvided: 0,
+                    quantity: 1,
+                    required: true,
+                }
+            ]
+        }
+    ],
+    maximumVisitors: 3,
 };
 
 initialState.inventory.find(i => i.name === 'Copper ore').count[1] = 10;
@@ -199,6 +236,7 @@ function rootReducer(state = initialState, action) {
                     ...state,
                     popup: action.popup,
                     trader: action.trader,
+                    visitor: action.visitor,
                 }
             }
             case 'sell': {
@@ -374,6 +412,13 @@ function rootReducer(state = initialState, action) {
                 return {
                     ...state,
                     traders: newTraders,
+                }
+            }
+            case 'addGold': {
+                console.log('Add Money');
+                return {
+                    ...state,
+                    gold: state.gold + 100,
                 }
             }
             default: {

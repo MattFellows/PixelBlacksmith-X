@@ -58,10 +58,6 @@ class Market extends React.Component {
 }
 
 class MPopup extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     renderTrader = (tr) => {
         const tradeCount = this.props.trades[tr.id] || 0;
         const traderStock = this.props.traderstock.filter(s => s.trader === tr.id).sort((s1, s2) => s1.requiredPurchases - s2.requiredPurchases === 0 ? s1.baseValue - s2.baseValue : s1.requiredPurchases - s2.requiredPurchases);
@@ -74,7 +70,7 @@ class MPopup extends React.Component {
                     return <img alt={itemObj.name} key={itemObj.image + ts.requiredPurchases} src={'/images/'+itemObj.image} className={ts.requiredPurchases > tradeCount ? 'redacted' : ''}/>
                 })}</div>
             </div>
-            <div className={'traderButton'} onClick={() => this.props.showTraderPopup(tr)}></div>
+            <div className={'traderButton'} onClick={() => this.props.showTraderPopup(tr)}>&nbsp;</div>
         </div>
     };
 

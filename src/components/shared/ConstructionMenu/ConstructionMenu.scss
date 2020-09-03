@@ -87,6 +87,10 @@
     top: 100px;
     zoom: 75%;
 
+    &.even {
+        background-image: url(./images/background_3part_alt.png);
+    }
+
     .topContainer {
         display: flex;
         flex-direction: row;
@@ -107,6 +111,10 @@
         position: relative;
         height: 25vh;
         margin-bottom: 4vh;
+
+        &.even {
+            height: 35vh;
+        }
     }
 
     .bottomContainer {
@@ -117,6 +125,10 @@
         padding: 0 2vh;
         position: relative;
         height: 46vh;
+
+        &.even {
+            height: 36vh;
+        }
     }
 
     .title {

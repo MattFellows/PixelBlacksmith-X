@@ -1,0 +1,13 @@
+.visitors {
+  position: absolute;
+  width: 55vh;
+  height: 34vh;
+  top: 33vh;
+  left: 11vh;
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap-reverse;
+  align-content: flex-start;
+
+  border: 1px solid black;
+}
