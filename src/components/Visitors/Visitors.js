@@ -9,7 +9,7 @@ import ConstructionMenuThreePart from "../shared/ConstructionMenu/ConstructionMe
 const Visitors = ({visitors}) => {
     return (<div className={'visitors'}>
         {
-            visitors.map(v => <Visitor visitor={v} />)
+            visitors.map(v => <Visitor visitor={v.visitorType} />)
         }
     </div>)
 };

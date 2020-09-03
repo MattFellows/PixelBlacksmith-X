@@ -176,7 +176,6 @@ function rootReducer(state = initialState, action) {
                 console.log('addInventoryAndRemoveFromQueue', action);
                 let queue = getQueue(action, state);
                 const isInventory = action.queue === 'inventory';
-                const isMarket = action.queue === 'market';
 
                 let newCraftingQueue = [...queue];
                 newCraftingQueue.forEach(i => {
