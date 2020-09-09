@@ -4,12 +4,13 @@ import {connect} from "react-redux";
 import './Visitors.scss'
 import Visitor from "./Visitor";
 import VisitorStats from './VisitorStats';
-import ConstructionMenuThreePart from "../shared/ConstructionMenu/ConstructionMenuThreePart";
+import ConstructionMenuThreePart from '../shared/ConstructionMenu/ConstructionMenuThreePart';
+import VisitorDemands from './VisitorDemands';
 
 const Visitors = ({visitors}) => {
     return (<div className={'visitors'}>
         {
-            visitors.map(v => <Visitor visitor={v.visitorType} />)
+            visitors.map(v => <Visitor key={v.name + '-' + v.visitorID} visitor={v} />)
         }
     </div>)
 };
@@ -24,7 +25,8 @@ class Popup extends Component {
     render() {
         return <ConstructionMenuThreePart
             topChildren={<div className='title'>Visitor</div>}
-            middleChildren={<VisitorStats visitor={this.props.visitor} />}
+            middleChildren={<VisitorStats visitor={this.props.visitor.visitorType} />}
+            bottomChildren={<VisitorDemands visitor={this.props.visitor} />}
             close={this.props.close}
             even />
     }

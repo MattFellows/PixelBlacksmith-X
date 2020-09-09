@@ -37,17 +37,41 @@
 
 .visitorPreferences {
   display: flex;
+  width: 100%;
+  flex-direction: row;
 
-  .visitorPreference {
-    width: 8vh;
-    height: 10vh;
-    border-top: 4px solid black;
-    background: #282c34;
-    color: white;
-    text-align: center;
+  .visitorPreferenceContainer {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    text-transform: capitalize;
+    padding-right: 2vh;
 
-    .visitorPreferenceImage {
-      height: 7vh;
+    .visitorPreference {
+      width: 8vh;
+      height: 10vh;
+      border-top: 4px solid black;
+      background: #282c34;
+      color: white;
+      text-align: center;
+      position: relative;
+
+      .visitorPreferenceImage {
+        height: 7vh;
+
+        img {
+          height: 100%;
+        }
+      }
+
+      .visitorPreferenceLabel {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: black;
+      }
     }
   }
 }

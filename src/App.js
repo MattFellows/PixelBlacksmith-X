@@ -14,6 +14,7 @@ import Inventory, {InventoryPopup} from "./components/Inventory/Inventory";
 import Market, {MarketPopup, TraderPopup} from "./components/Market/Market";
 import DebugButton from "./components/DebugButton/DebugButton";
 import Visitors, {VisitorPopup} from "./components/Visitors/Visitors";
+import {TradePopup} from "./components/Visitors/VisitorDemands";
 
 
 class App extends Component  {
@@ -21,11 +22,6 @@ class App extends Component  {
     constructor(props) {
         super(props);
         setInterval(this.props.clearup, 1000);
-    }
-
-    componentDidMount = () => {
-        //setTimeout(() => this.props.setPopupVisible('furnace'), 1000);
-        //setTimeout(this.props.setPopupHidden, 15000);
     }
 
     renderPopup = (popupType)  => {
@@ -50,6 +46,9 @@ class App extends Component  {
             }
             case 'visitor': {
                 return <VisitorPopup close={this.props.setPopupHidden} />;
+            }
+            case 'visitorSale': {
+                return <TradePopup />;
             }
             default: {
                 return null;
@@ -91,8 +90,8 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setPopupVisible: (popupType) => dispatch(setPopup(popupType)),
-        setPopupHidden: () => dispatch(setPopup(null)),
+        setPopupVisible: (popupType) => dispatch(setPopup({popupType})),
+        setPopupHidden: () => dispatch(setPopup({})),
         clearup: () => {
             dispatch({type:'removeDeleted',queue:'anvil'});
             dispatch({type:'removeDeleted',queue:'furnace'});

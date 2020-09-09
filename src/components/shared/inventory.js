@@ -2142,7 +2142,7 @@ const items = [
 		type: 'sword',
 		name: 'Bronze sword',
 		image: 'bronzeSword.png',
-		count: {1: 0, 2: 0},
+		count: {1: 2, 2: 2},
 		level: 1,
 		baseValue: 15,
 		description: 'A fairly blunt bronze sword.',

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 const DebugButton = ({addGold}) => {
     const click = () => {
-        console.log('Click');
         addGold();
     }
 

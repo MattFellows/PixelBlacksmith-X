@@ -65,10 +65,14 @@ class InventoryTable extends React.Component {
     }
 
     sell = (item, state) => {
+        if (this.props.overrideSale) {
+            this.props.overrideSale(item, state);
+            return;
+        }
         this.props.sellItems(item, state, this.state.sellCount)
     };
 
-    render() {
+    render = () => {
         return (
         <div className={'inventoryContainer'}>
             <div className={'inventoryTable'}>
@@ -86,7 +90,7 @@ class InventoryTable extends React.Component {
                         <td className={'count'}>{i.count[j]}</td>
                         <td className={'icon'}>{i.image && <img alt={i.name} src={`/images/${i.image}`}/>}</td>
                         <td className={'name'}>{(parseInt(j, 10) === ITEM_STATE.UNFINISHED ? '(unf) ' : '') + i.name}</td>
-                        <td className={'button narrow'} onClick={() => {console.log('Selling');this.sell(i, j)}}>&nbsp;</td>
+                        <td className={'button narrow'} onClick={() => {this.sell(i, j)}}>&nbsp;</td>
                     </tr>))}
                     </tbody>
                 </table>
@@ -114,7 +118,7 @@ class Popup extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    showInventoryPopup: () => dispatch(setPopup('inventory')),
+    showInventoryPopup: () => dispatch(setPopup({popupType:'inventory'})),
     sellItems: (item, itemState, count) => {
         return dispatch({
             type: 'sell',
@@ -142,6 +146,6 @@ const mapStateToProps = (store) => {
     return newLocal;
 };
 
-const ConnectedInventoryTable = connect(mapStateToProps, mapDispatchToProps)(InventoryTable);
+export const ConnectedInventoryTable = connect(mapStateToProps, mapDispatchToProps)(InventoryTable);
 export const InventoryPopup = connect(mapStateToProps, mapDispatchToProps)(Popup);
 export default connect(mapStateToProps, mapDispatchToProps)(Inventory);

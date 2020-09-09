@@ -7,6 +7,34 @@ import allTraders from "./traders";
 import visitorTypes from './visitorTypes';
 import _ from "lodash";
 
+export const TIERS = [
+    {name: 'BRONZE', value: 1},
+    {name: 'IRON', value: 2},
+    {name: 'STEEL', value: 3},
+    {name: 'MITHRIL', value: 4},
+    {name: 'ADAMANT', value: 5},
+    {name: 'RUNE', value: 6},
+    {name: 'DRAGON', value: 7},
+    {name: 'SILVER', value: 8},
+    {name: 'GOLD', value: 9},
+    {name: 'PREMIUM', value: 10},
+    {name: 'NONE', value: 11},
+];
+
+export const STATES = [
+    {name: 'NORMAL', value: 1},
+    {name: 'UNFINISHED', value: 2},
+    {name: 'RED', value: 3},
+    {name: 'BLUE', value: 4},
+    {name: 'GREEN', value: 5},
+    {name: 'WHITE', value: 6},
+    {name: 'BLACK', value: 7},
+    {name: 'PURPLE', value: 8},
+    {name: 'YELLOW', value: 9},
+    {name: 'ENCHANTED_MIN', value: 3},
+    {name: 'ENCHANTED_MAX', value: 9},
+]
+
 const initialState = {
     popup: false,
     level: 1,
@@ -27,6 +55,7 @@ const initialState = {
     traderCount: 3,
     premium: 0,
     traderstock: traderstock,
+    visitorTypes: visitorTypes,
     visitors: [
         {
             visitorType: visitorTypes.find(vt => vt.visitorID === 33),
@@ -37,31 +66,41 @@ const initialState = {
                     quantityProvided: 0,
                     quantity: 2,
                     required: true,
+                    id: 1,
                 },
                 {
                     type: 'state',
                     value: 2,
                     quantityProvided: 0,
-                    quantity: 1,
+                    quantity: 2,
                     required: true,
+                    id: 2,
                 },
                 {
                     type: 'state',
                     value: 1,
                     quantityProvided: 0,
-                    quantity: 1,
+                    quantity: 2,
                     required: true,
+                    id: 3,
                 },
                 {
                     type: 'type',
                     value: 'food',
                     quantityProvided: 0,
                     quantity: 1,
-                    required: true,
+                    required: false,
+                    id: 4,
                 }
             ]
         }
     ],
+    visitorStats: [{
+        visitorID: 33,
+        typeDiscovered: true,
+        tierDiscovered: true,
+        visits: 0,
+    }],
     maximumVisitors: 3,
 };
 
@@ -80,8 +119,6 @@ const getRandomTrader = (traders, level, traderstock, inventory) => {
     let randomTrader = _.shuffle(potentialTraders)[0];
     if (randomTrader) {
         return randomTrader;
-    } else {
-        console.log('No Traders for: ', random, traders);
     }
     return null;
 };
@@ -173,7 +210,6 @@ function rootReducer(state = initialState, action) {
                 }
             }
             case 'addInventoryAndRemoveFromQueue': {
-                console.log('addInventoryAndRemoveFromQueue', action);
                 let queue = getQueue(action, state);
                 const isInventory = action.queue === 'inventory';
 
@@ -236,6 +272,7 @@ function rootReducer(state = initialState, action) {
                     popup: action.popup,
                     trader: action.trader,
                     visitor: action.visitor,
+                    visitorDemand: action.visitorDemand,
                 }
             }
             case 'sell': {
@@ -286,7 +323,6 @@ function rootReducer(state = initialState, action) {
                 }
             }
             case 'resetStock': {
-                console.log('Reset Stock');
                 const newTraderStock = [...state.traderstock];
                 newTraderStock.forEach(ts => {
                     ts.stock = ts.maxStock;
@@ -328,7 +364,6 @@ function rootReducer(state = initialState, action) {
                 if (newTraderStock) {
                     newTraderStock.purchases = (newTraderStock.purchases || 0) + action.count;
                     newTraderStock.stock = newTraderStock.stock - action.count;
-                    console.log('New Purchases: ', newTraderStock.purchases);
                 }
                 newTrades[action.traderId] = (newTrades[action.traderId] || 0) + action.count;
                 return {
@@ -400,7 +435,6 @@ function rootReducer(state = initialState, action) {
             case 'lock': {
                 const newTraders = {...state.traders};
                 let locked = newTraders.fixed.find(tr => tr.id === action.trader.id);
-                console.log((locked ? 'Unlocking' : 'Locking: '), action.trader);
                 if (!locked) {
                     newTraders.fixed.push(action.trader);
                     newTraders.regular = newTraders.regular.filter(t => t.id !== action.trader.id);
@@ -413,8 +447,41 @@ function rootReducer(state = initialState, action) {
                     traders: newTraders,
                 }
             }
+            case 'sellToVisitor': {
+                const newStats = [...state.visitorStats];
+                const stats = newStats.find(vs => vs.visitorID === action.visitorID);
+                stats.visits = stats.visits + 1;
+                stats.bestDiscovered = true;
+                if (action.saleValue > stats?.best?.value) {
+                    stats.best = {
+                        value: action.saleValue,
+                        item: action.saleItem,
+                        itemType: action.saleItemType,
+                        itemTier: action.saleItemTier,
+                        itemState: action.saleItemState,
+                    }
+                }
+                const newInventory = [...state.inventory];
+                const inventoryItem = newInventory.find(i => i.id === action.saleItem);
+                console.log('InventoryItem: ', inventoryItem);
+                inventoryItem.count[action.saleItemState] = inventoryItem.count[action.saleItemState] - 1;
+                const newGold = state.gold + action.saleValue;
+                const newVisitors = [...state.visitors];
+                const visitor = newVisitors.find(v => v.visitorType.visitorID === action.visitorID);
+                const newDemand = visitor.visitorDemands.find(vd => vd.type === action.saleItemType && vd.value === action.saleItemValue);
+                console.log('Demand: ', newDemand);
+                newDemand.quantityProvided = newDemand.quantityProvided + 1;
+                const newState = {
+                    ...state,
+                    visitors: newVisitors,
+                    visitorStats: newStats,
+                    inventory: newInventory,
+                    gold: newGold,
+                };
+                console.log('New State: ', newState);
+                return newState;
+            }
             case 'addGold': {
-                console.log('Add Money');
                 return {
                     ...state,
                     gold: state.gold + 100,
@@ -425,6 +492,7 @@ function rootReducer(state = initialState, action) {
             }
         }
     } catch(e) {
+        console.error(e);
         return state;
     }
 }

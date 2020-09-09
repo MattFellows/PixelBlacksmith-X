@@ -148,7 +148,7 @@ class Popup extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    showTablePopup: () => dispatch(setPopup('table')),
+    showTablePopup: () => dispatch(setPopup({popupType:'table'})),
     addItems: (item, count) => {
         return dispatch({
             type: 'craft',

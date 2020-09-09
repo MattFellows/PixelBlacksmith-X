@@ -1,0 +1,57 @@
+.visitorDemands {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1vh;
+
+  .visitorDemand {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 7vh;
+    align-items: center;
+
+
+    .demandState {
+      width: 5vh;
+      height: 5vh;
+      margin-right: 1vh;
+
+      &.met {
+        background: url('/images/tick.png') no-repeat top;
+        background-size: contain;
+      }
+      &.notMet {
+        background: url('/images/cross.png') no-repeat top;
+        background-size: contain;
+      }
+    }
+
+    .demand {
+      font-size: 4vh;
+      text-transform: capitalize;
+
+      &.optional {
+        color: #777;
+      }
+
+      &.met {
+        text-decoration: line-through;
+        text-decoration-color: #000;
+        text-decoration-style: dotted;
+      }
+    }
+
+    .sellFromInventory {
+      width: 5vh;
+      height: 5vh;
+      align-self: flex-end;
+      background: url('/images/open.png');
+      background-size: contain;
+      position: absolute;
+      right: 2vh;
+      padding-bottom: 2vh;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+}

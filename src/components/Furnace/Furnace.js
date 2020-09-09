@@ -121,7 +121,7 @@ class Popup extends Component {
 }
 
 const mapFurnaceDispatchToProps = (dispatch) => ({
-    showFurnacePopup: () => dispatch(setPopup('furnace')),
+    showFurnacePopup: () => dispatch(setPopup({popupType:'furnace'})),
     addItems: (item, count) => dispatch({
         type: 'craft',
         queue: 'furnace',

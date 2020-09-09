@@ -75,7 +75,6 @@ class MPopup extends React.Component {
     };
 
     render() {
-        console.log('Traders: ', this.props.traders);
         return <ConstructionMenuTwoPart
             topChildren={<div className='title'>Market</div>}
             bottomChildren={
@@ -120,20 +119,9 @@ class TPopup extends React.Component {
             locked: false,
         }
     }
-    componentDidUpdate(prevProps, prevState) {
-        Object.entries(this.props).forEach(([key, val]) =>
-            prevProps[key] !== val && console.log(`Prop '${key}' changed`)
-        );
-        if (this.state) {
-            Object.entries(this.state).forEach(([key, val]) =>
-                prevState[key] !== val && console.log(`State '${key}' changed`)
-            );
-        }
-    }
 
     render() {
         const character = characters.find(c => c.name === this.props.trader.character);
-        console.log('Trades: ', this.props.trades[this.props.trader.id]);
         const locked = Array.isArray(this.props.traders.fixed) && this.props.traders.fixed.length && this.props.traders.fixed.find(tr => tr.id === this.props.trader.id);
         return <ConstructionMenuTwoPart
             topChildren={<div className='title'>Trader</div>}
@@ -186,8 +174,8 @@ class TPopup extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    showMarketPopup: () => dispatch(setPopup('market')),
-    showTraderPopup: (trader) => dispatch(setPopup('trader', trader)),
+    showMarketPopup: () => dispatch(setPopup({popupType:'market'})),
+    showTraderPopup: (trader) => dispatch(setPopup({popupType:'trader', trader})),
     buyItems: (stock, item, count, traderId) => {
         return dispatch({
             type: 'buy',
