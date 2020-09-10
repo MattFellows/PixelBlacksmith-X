@@ -1,0 +1,145 @@
+import React from "react";
+import {connect} from "react-redux";
+import ConstructionMenuThreePart from "../shared/ConstructionMenu/ConstructionMenuThreePart";
+import SwipeableProductView from "../shared/SwipeableProductView/SwipeableProductView";
+import { ITEM_STATE } from "../shared/inventory";
+import IngredientsTable from "../shared/IngredientsTable/IngredientsTable";
+
+class AnvilPopup extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.types = [
+            "dagger",
+            "sword",
+            "longSword",
+            "bow",
+            "halfShield",
+            "fullShield",
+        ]
+        const { inventory } = this.props;
+        const selectedBar = Array.isArray(inventory)
+            ? this.getProducts(0)[0]
+            : {}
+        this.tiers = 6
+        this.state = {
+            selectedProduct: selectedBar,
+            selectedTier: 0,
+            products: this.getProducts(0),
+        }
+    }
+
+    selectProduct = (product) => {
+        const { selectedProduct } = this.state;
+        if (product !== selectedProduct) {
+            this.setState({ selectedProduct: product })
+        }
+    }
+
+    incrementTier = () => {
+        const { selectedTier, selectedProduct } = this.state;
+        const newSelectedTier = (selectedTier + 1) % this.tiers
+        const newSelectedProduct = this.getProducts(newSelectedTier).find(
+            (p) => p.type === selectedProduct.type
+        )
+        this.setState({
+            selectedTier: newSelectedTier,
+            products: this.getProducts(newSelectedTier),
+            selectedProduct: newSelectedProduct,
+        })
+    }
+
+    decrementTier = () => {
+        const { selectedTier, selectedProduct } = this.state;
+        let newSelectedTier = (selectedTier - 1) % this.tiers
+        if (newSelectedTier === -1) {
+            newSelectedTier = this.tiers
+        }
+        const newSelectedProduct = this.getProducts(newSelectedTier).find(
+            (p) => p.type === selectedProduct.type
+        )
+        this.setState({
+            selectedTier: newSelectedTier,
+            products: this.getProducts(newSelectedTier),
+            selectedProduct: newSelectedProduct,
+        })
+    }
+
+    getProducts = (newSelectedTier) => {
+        const { inventory } = this.props;
+        return inventory
+            .filter((i) => this.types.indexOf(i.type) >= 0)
+            .filter((i) => i.tier === newSelectedTier + 1)
+            .sort((i1, i2) => {
+                if (i1.tier < i2.tier) {
+                    return -1
+                }
+                if (i1.tier > i2.tier) {
+                    return 1
+                }
+                return this.types.indexOf[i1.type] - this.types.indexOf[i2.type]
+            })
+    }
+
+    render() {
+        const { products, selectedProduct } = this.state;
+        const { addItems, close } = this.props;
+        return (
+            <ConstructionMenuThreePart
+                topChildren={<div className="title">Anvil</div>}
+                middleChildren={
+                    <div className="tierSelectorContainer">
+                        <div className="tierSelector">
+                            <div className="up" onClick={this.incrementTier} />
+                            <div className="down" onClick={this.decrementTier} />
+                        </div>
+                        <SwipeableProductView
+                            onSlideChanged={({ item }) =>
+                                this.selectProduct(products[item])
+                            }
+                            products={products}
+                            selectedProduct={selectedProduct}
+                            itemState={ITEM_STATE.UNFINISHED}
+                            {...this.props}
+                        />
+                    </div>
+                }
+                bottomChildren={
+                    selectedProduct && (
+                        <IngredientsTable
+                            product={selectedProduct}
+                            actionName="Craft"
+                            action={(size) => {
+                                addItems(selectedProduct, size)
+                            }}
+                            ingredientState={ITEM_STATE.UNFINISHED}
+                            {...this.props}
+                        />
+                    )
+                }
+                close={close}
+            />
+        )
+    }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    addItems: (item, count) => {
+        return dispatch({
+            type: "craft",
+            queue: "anvil",
+            itemState: ITEM_STATE.UNFINISHED,
+            count,
+            item,
+        })
+    },
+})
+
+const mapStateToProps = (store) => ({
+    inventory: store.inventory,
+    level: store.level,
+    anvilCraftingStack: store.anvilQueue,
+    premium: store.premium,
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AnvilPopup)

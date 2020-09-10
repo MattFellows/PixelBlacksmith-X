@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
+import { Component } from "react"
 
-class ActionButton extends Component {
+class ActionButton extends Component {}
 
-}
-
-export default ActionButton;
+export default ActionButton

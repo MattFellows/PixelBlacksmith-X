@@ -1,180 +1,86 @@
-import React from 'react';
-import StackOfStacks from "../shared/StackOfStacks/StackOfStacks";
-import {connect} from "react-redux";
-import {setPopup} from "../shared/actions";
-import './Anvil.scss';
-import ConstructionMenuThreePart from "../shared/ConstructionMenu/ConstructionMenuThreePart";
-import SwipeableProductView from "../shared/SwipeableProductView/SwipeableProductView";
-import IngredientsTable from "../shared/IngredientsTable/IngredientsTable";
-import {ITEM_STATE} from "../shared/inventory";
+import React from "react"
+import { connect } from "react-redux"
+import StackOfStacks from "../shared/StackOfStacks/StackOfStacks"
+import { setPopup } from "../shared/actions"
+import "./Anvil.scss"
 
 class Anvil extends React.Component {
-    getAvailableAnvilStacks = () => {
-        const premium = this.props.premium;
-        let l = this.props.level;
-        if (l < 3) {
-            return premium + 1;
-        }
-        if (l < 7) {
-            return premium + 2;
-        }
-        if (l < 16) {
-            return premium + 3;
-        }
-        if (l < 25) {
-            return premium + 4;
-        }
-        if (l < 33) {
-            return premium + 5;
-        }
-        if (l < 42) {
-            return premium + 6;
-        }
-        return premium + 7;
-    };
-
-    getNextStackLevel() {
-        let l = this.props.level;
-        if (l < 3) {
-            return 3;
-        }
-        if (l < 7) {
-            return 7;
-        }
-        if (l < 16) {
-            return 16;
-        }
-        if (l < 25) {
-            return 25;
-        }
-        if (l < 33) {
-            return 33;
-        }
-        if (l < 42) {
-            return 42;
-        }
+  getAvailableAnvilStacks = () => {
+    const { premium, level: l } = this.props
+    if (l < 3) {
+      return premium + 1
     }
-
-    render() {
-        return (
-            <div className={'anvilArea'} onClick={this.props.showAnvilPopup}>
-                <StackOfStacks
-                    availableStacks={this.getAvailableAnvilStacks()}
-                    nextStackLevel={this.getNextStackLevel()}
-                    crafting={this.props.anvilCraftingStack}
-                    queue={'anvil'}
-                    {...this.props}/>
-            </div>
-        )
+    if (l < 7) {
+      return premium + 2
     }
-}
-
-class Popup extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.types = ['dagger','sword', 'longSword', 'bow', 'halfShield', 'fullShield'];
-        const selectedBar = Array.isArray(this.props.inventory) ? this.getProducts(0)[0] : {};
-        this.tiers = 6;
-        this.state = {
-            selectedProduct: selectedBar,
-            selectedTier: 0,
-            products:  this.getProducts(0),
-        }
+    if (l < 16) {
+      return premium + 3
     }
-
-    selectProduct = product => {
-        if (product !== this.state.selectedProduct) {
-            this.setState({selectedProduct: product});
-        }
-    };
-
-    incrementTier = () => {
-        let newSelectedTier = ((this.state.selectedTier + 1) % this.tiers);
-        let selectedProduct = this.getProducts(newSelectedTier).find(p => p.type === this.state.selectedProduct.type);
-        this.setState({
-            selectedTier: newSelectedTier,
-            products: this.getProducts(newSelectedTier),
-            selectedProduct: selectedProduct,
-        });
-    };
-
-    decrementTier = () => {
-        let newSelectedTier = ((this.state.selectedTier - 1) % this.tiers);
-        if (newSelectedTier === -1) {
-            newSelectedTier = this.tiers;
-        }
-        let selectedProduct = this.getProducts(newSelectedTier).find(p => p.type === this.state.selectedProduct.type);
-        this.setState({
-            selectedTier: newSelectedTier,
-            products: this.getProducts(newSelectedTier),
-            selectedProduct: selectedProduct,
-        });
-    };
-
-    getProducts = (newSelectedTier) => {
-        return this.props.inventory
-            .filter(i => this.types.indexOf(i.type) >= 0)
-            .filter(i => i.tier === newSelectedTier + 1)
-            .sort((i1, i2) => {
-            if (i1.tier < i2.tier) {
-                return -1;
-            } else if (i1.tier > i2.tier) {
-                return 1;
-            } else {
-                return this.types.indexOf[i1.type] - this.types.indexOf[i2.type];
-            }
-        });
+    if (l < 25) {
+      return premium + 4
     }
-
-    render() {
-        return <ConstructionMenuThreePart
-            topChildren={<div className='title'>Anvil</div>}
-            middleChildren={
-                <div className={'tierSelectorContainer'}>
-                <div className={'tierSelector'}><div className={'up'} onClick={this.incrementTier}/><div className={'down'} onClick={this.decrementTier} /></div>
-                <SwipeableProductView onSlideChanged={({item}) => this.selectProduct(this.state.products[item])}
-                                      products={this.state.products} selectedProduct={this.state.selectedProduct} itemState={ITEM_STATE.UNFINISHED} {...this.props}/>
-                </div>
-            }
-            bottomChildren={
-                this.state.selectedProduct && <IngredientsTable product={this.state.selectedProduct} actionName={'Craft'} action={(size) => {
-                    this.props.addItems(this.state.selectedProduct, size);
-                }
-                } ingredientState={ITEM_STATE.UNFINISHED} {...this.props}/>
-            }
-            close={this.props.close} />
+    if (l < 33) {
+      return premium + 5
     }
+    if (l < 42) {
+      return premium + 6
+    }
+    return premium + 7
+  }
+
+  getNextStackLevel() {
+    const { level: l } = this.props;
+    if (l < 3) {
+      return 3
+    }
+    if (l < 7) {
+      return 7
+    }
+    if (l < 16) {
+      return 16
+    }
+    if (l < 25) {
+      return 25
+    }
+    if (l < 33) {
+      return 33
+    }
+    return 42
+  }
+
+  render() {
+    const { anvilCraftingStack, showAnvilPopup, updateFinishTime, level } = this.props;
+    return (
+      <div className="anvilArea" onClick={showAnvilPopup}>
+        <StackOfStacks
+          availableStacks={this.getAvailableAnvilStacks()}
+          nextStackLevel={this.getNextStackLevel()}
+          crafting={anvilCraftingStack}
+          queue="anvil"
+          updateFinishTime={updateFinishTime}
+          level={level}
+        />
+      </div>
+    )
+  }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    showAnvilPopup: () => dispatch(setPopup({popupType:'anvil'})),
-    addItems: (item, count) => {
-        return dispatch({
-            type: 'craft',
-            queue: 'anvil',
-            itemState: ITEM_STATE.UNFINISHED,
-            count: count,
-            item: item,
-        })
-    },
-    updateFinishTime: (item, finishTime) => dispatch({
-        type: 'updateFinishTime',
-        queue: 'anvil',
+  showAnvilPopup: () => dispatch(setPopup({ popupType: "anvil" })),
+  updateFinishTime: (item, finishTime) =>
+      dispatch({
+        type: "updateFinishTime",
+        queue: "anvil",
         uuid: item.uuid,
-        finishTime: finishTime,
-    })
-});
+        finishTime,
+      }),
+})
 
-const mapStateToProps = (store) => {
-    const newLocal = {
-        inventory: store.inventory,
-        level: store.level,
-        anvilCraftingStack: store.anvilQueue,
-        premium: store.premium,
-    };
-    return newLocal;
-};
+const mapStateToProps = (store) => ({
+  inventory: store.inventory,
+  level: store.level,
+  anvilCraftingStack: store.anvilQueue,
+  premium: store.premium,
+})
 
-export const AnvilPopup = connect(mapStateToProps, mapDispatchToProps)(Popup);
-export default connect(mapStateToProps, mapDispatchToProps)(Anvil);
+export default connect(mapStateToProps, mapDispatchToProps)(Anvil)

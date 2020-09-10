@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react"
 
 class ConstructionMenu extends React.Component {
-    close = () => {
-        this.props && this.props.close && this.props.close();   
-    }
+  close = () => {
+    this.props && this.props.close && this.props.close()
+  }
 }
 
-export default ConstructionMenu;
+export default ConstructionMenu
