@@ -248,7 +248,7 @@ const visitorTypes = [
 		 weighting:6,
 		 statePreferred: {name: 'Normal', value: 1},
 		 tierPreferred: {name: 'none', value: 11},
-		 typePreferred: {name: 'foodIngredient', value: 21},
+		 typePreferred: {name: 'food', value: 21},
 		 visitorID:13,
 	},
 	{
@@ -290,7 +290,7 @@ const visitorTypes = [
 		 weighting:1,
 		 statePreferred: {name: 'Normal', value: 1},
 		 tierPreferred: {name: 'adamant', value: 5},
-		 typePreferred: {name: 'foodIngredient', value: 21},
+		 typePreferred: {name: 'food', value: 21},
 		 visitorID:16,
 	},
 	{
@@ -304,7 +304,7 @@ const visitorTypes = [
 		 weighting:4,
 		 statePreferred: {name: 'Unfinished', value: 2},
 		 tierPreferred: {name: 'mithril', value: 4},
-		 typePreferred: {name: 'foodIngredient', value: 21},
+		 typePreferred: {name: 'food', value: 21},
 		 visitorID:17,
 	},
 	{
@@ -416,7 +416,7 @@ const visitorTypes = [
 		 weighting:5,
 		 statePreferred: {name: 'Normal', value: 1},
 		 tierPreferred: {name: 'none', value: 11},
-		 typePreferred: {name: 'foodIngredient', value: 21},
+		 typePreferred: {name: 'food', value: 21},
 		 visitorID:25,
 	},
 	{
@@ -738,7 +738,7 @@ const visitorTypes = [
 		 weighting:1,
 		 statePreferred: {name: 'Normal', value: 1},
 		 tierPreferred: {name: 'none', value: 11},
-		 typePreferred: {name: 'foodIngredient', value: 21},
+		 typePreferred: {name: 'food', value: 21},
 		 visitorID:48,
 	},
 	{

@@ -62,6 +62,7 @@ class InventoryTable extends React.Component {
         this.state = {
             sellCount: 1
         }
+        console.log('Constructing InventoryTable');
     }
 
     sell = (item, state) => {
@@ -73,6 +74,7 @@ class InventoryTable extends React.Component {
     };
 
     render = () => {
+        const inventory = this.props.overrideInventory || this.props.inventory;
         return (
         <div className={'inventoryContainer'}>
             <div className={'inventoryTable'}>
@@ -86,7 +88,7 @@ class InventoryTable extends React.Component {
                     </tr>
                     </thead>
                     <tbody>
-                    {this.props.inventory.filter(i => Object.values(i.count).reduce((accumulator, currentValue) => accumulator + currentValue) > 0).map(i => Object.keys(i.count).filter(j => i.count[j]).map(j => <tr key={i.image + j}>
+                    {inventory.filter(i => Object.values(i.count).reduce((accumulator, currentValue) => accumulator + currentValue) > 0).map(i => Object.keys(i.count).filter(j => i.count[j]).map(j => <tr key={i.image + j}>
                         <td className={'count'}>{i.count[j]}</td>
                         <td className={'icon'}>{i.image && <img alt={i.name} src={`/images/${i.image}`}/>}</td>
                         <td className={'name'}>{(parseInt(j, 10) === ITEM_STATE.UNFINISHED ? '(unf) ' : '') + i.name}</td>

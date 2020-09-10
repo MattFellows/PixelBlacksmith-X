@@ -378,7 +378,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'banana.png',
 				name: 'Banana',
 				count: 2,
@@ -526,7 +526,7 @@ const items = [
 				ingredientState: 4,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'rawFish.png',
 				name: 'Raw Fish',
 				count: 5,
@@ -580,7 +580,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'rawMeat.png',
 				name: 'Raw Meat',
 				count: 100,
@@ -618,7 +618,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'bread.png',
 				name: 'Bread',
 				count: 100,
@@ -959,7 +959,7 @@ const items = [
 	},
 	{
 		id: 202,
-		type: 'foodIngredient',
+		type: 'food',
 		name: 'Wheat',
 		image: 'wheat.png',
 		count: {1: 0, 2: 0},
@@ -973,7 +973,7 @@ const items = [
 	},
 	{
 		id: 203,
-		type: 'foodIngredient',
+		type: 'food',
 		name: 'Egg',
 		image: 'egg.png',
 		count: {1: 0, 2: 0},
@@ -987,7 +987,7 @@ const items = [
 	},
 	{
 		id: 204,
-		type: 'foodIngredient',
+		type: 'food',
 		name: 'Milk',
 		image: 'milk.png',
 		count: {1: 0, 2: 0},
@@ -1001,7 +1001,7 @@ const items = [
 	},
 	{
 		id: 205,
-		type: 'foodIngredient',
+		type: 'food',
 		name: 'Blueberry',
 		image: 'blueberry.png',
 		count: {1: 0, 2: 0},
@@ -1015,7 +1015,7 @@ const items = [
 	},
 	{
 		id: 206,
-		type: 'foodIngredient',
+		type: 'food',
 		name: 'Banana',
 		image: 'banana.png',
 		count: {1: 0, 2: 0},
@@ -1029,7 +1029,7 @@ const items = [
 	},
 	{
 		id: 207,
-		type: 'foodIngredient',
+		type: 'food',
 		name: 'Orange',
 		image: 'orange.png',
 		count: {1: 0, 2: 0},
@@ -1043,7 +1043,7 @@ const items = [
 	},
 	{
 		id: 208,
-		type: 'foodIngredient',
+		type: 'food',
 		name: 'Cherry',
 		image: 'cherry.png',
 		count: {1: 0, 2: 0},
@@ -1057,7 +1057,7 @@ const items = [
 	},
 	{
 		id: 209,
-		type: 'foodIngredient',
+		type: 'food',
 		name: 'Candy',
 		image: 'candy.png',
 		count: {1: 0, 2: 0},
@@ -1071,7 +1071,7 @@ const items = [
 	},
 	{
 		id: 210,
-		type: 'foodIngredient',
+		type: 'food',
 		name: 'Chocolate',
 		image: 'chocolate.png',
 		count: {1: 0, 2: 0},
@@ -1085,7 +1085,7 @@ const items = [
 	},
 	{
 		id: 211,
-		type: 'foodIngredient',
+		type: 'food',
 		name: 'Raw Fish',
 		image: 'rawFish.png',
 		count: {1: 0, 2: 0},
@@ -1110,7 +1110,7 @@ const items = [
 		constructionTime: [30, 'seconds'],
 		ingredients: [
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'apple.png',
 				name: 'Apple',
 				count: 1,
@@ -1118,7 +1118,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'blueberry.png',
 				name: 'Blueberry',
 				count: 1,
@@ -1126,7 +1126,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'banana.png',
 				name: 'Banana',
 				count: 1,
@@ -1134,7 +1134,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'orange.png',
 				name: 'Orange',
 				count: 1,
@@ -1142,7 +1142,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'cherry.png',
 				name: 'Cherry',
 				count: 1,
@@ -1164,7 +1164,7 @@ const items = [
 		constructionTime: [10, 'seconds'],
 		ingredients: [
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'rawFish.png',
 				name: 'Raw Fish',
 				count: 1,
@@ -1186,7 +1186,7 @@ const items = [
 		constructionTime: [10, 'seconds'],
 		ingredients: [
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'rawMeat.png',
 				name: 'Raw Meat',
 				count: 1,
@@ -1208,7 +1208,7 @@ const items = [
 		constructionTime: [45, 'seconds'],
 		ingredients: [
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'bread.png',
 				name: 'Bread',
 				count: 1,
@@ -1216,7 +1216,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'cheese.png',
 				name: 'Cheese',
 				count: 1,
@@ -1246,7 +1246,7 @@ const items = [
 		constructionTime: [35, 'seconds'],
 		ingredients: [
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'bread.png',
 				name: 'Bread',
 				count: 1,
@@ -1276,7 +1276,7 @@ const items = [
 		constructionTime: [35, 'seconds'],
 		ingredients: [
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'bread.png',
 				name: 'Bread',
 				count: 1,
@@ -1284,7 +1284,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'cheese.png',
 				name: 'Cheese',
 				count: 1,
@@ -1306,7 +1306,7 @@ const items = [
 		constructionTime: [30, 'seconds'],
 		ingredients: [
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'wheat.png',
 				name: 'Wheat',
 				count: 1,
@@ -1314,7 +1314,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'egg.png',
 				name: 'Egg',
 				count: 1,
@@ -1322,7 +1322,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'milk.png',
 				name: 'Milk',
 				count: 1,
@@ -1330,7 +1330,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'blueberry.png',
 				name: 'Blueberry',
 				count: 1,
@@ -1352,7 +1352,7 @@ const items = [
 		constructionTime: [30, 'seconds'],
 		ingredients: [
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'wheat.png',
 				name: 'Wheat',
 				count: 1,
@@ -1360,7 +1360,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'egg.png',
 				name: 'Egg',
 				count: 1,
@@ -1368,7 +1368,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'milk.png',
 				name: 'Milk',
 				count: 1,
@@ -1376,7 +1376,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'chocolate.png',
 				name: 'Chocolate',
 				count: 1,
@@ -1535,7 +1535,7 @@ const items = [
 	},
 	{
 		id: 226,
-		type: 'foodIngredient',
+		type: 'food',
 		name: 'Rare Candy',
 		image: 'rareCandy.png',
 		count: {1: 0, 2: 0},
@@ -1549,7 +1549,7 @@ const items = [
 	},
 	{
 		id: 227,
-		type: 'foodIngredient',
+		type: 'food',
 		name: 'Bowl Of Water',
 		image: 'bowlOfWater.png',
 		count: {1: 0, 2: 0},
@@ -1574,7 +1574,7 @@ const items = [
 		constructionTime: [25, 'seconds'],
 		ingredients: [
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'bowlOfWater.png',
 				name: 'Bowl Of Water',
 				count: 1,
@@ -1604,7 +1604,7 @@ const items = [
 		constructionTime: [20, 'seconds'],
 		ingredients: [
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'bowlOfWater.png',
 				name: 'Bowl Of Water',
 				count: 1,
@@ -1612,7 +1612,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'wheat.png',
 				name: 'Wheat',
 				count: 1,
@@ -1623,7 +1623,7 @@ const items = [
 	},
 	{
 		id: 230,
-		type: 'foodIngredient',
+		type: 'food',
 		name: 'White Chocolate',
 		image: 'whiteChocolate.png',
 		count: {1: 0, 2: 0},
@@ -1648,7 +1648,7 @@ const items = [
 		constructionTime: [20000, 'seconds'],
 		ingredients: [
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'egg.png',
 				name: 'Egg',
 				count: 100,
@@ -1656,7 +1656,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'egg.png',
 				name: 'Egg',
 				count: 10,
@@ -1664,7 +1664,7 @@ const items = [
 				ingredientState: 3,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'egg.png',
 				name: 'Egg',
 				count: 10,
@@ -1672,7 +1672,7 @@ const items = [
 				ingredientState: 4,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'egg.png',
 				name: 'Egg',
 				count: 10,
@@ -1680,7 +1680,7 @@ const items = [
 				ingredientState: 5,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'egg.png',
 				name: 'Egg',
 				count: 10,
@@ -1688,7 +1688,7 @@ const items = [
 				ingredientState: 6,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'egg.png',
 				name: 'Egg',
 				count: 10,
@@ -1696,7 +1696,7 @@ const items = [
 				ingredientState: 7,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'egg.png',
 				name: 'Egg',
 				count: 10,
@@ -1704,7 +1704,7 @@ const items = [
 				ingredientState: 8,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'egg.png',
 				name: 'Egg',
 				count: 10,
@@ -4051,7 +4051,7 @@ const items = [
 	},
 	{
 		id: 77,
-		type: 'foodIngredient',
+		type: 'food',
 		name: 'Apple',
 		image: 'apple.png',
 		count: {1: 0, 2: 0},
@@ -4065,10 +4065,10 @@ const items = [
 	},
 	{
 		id: 78,
-		type: 'foodIngredient',
+		type: 'food',
 		name: 'Cheese',
 		image: 'cheese.png',
-		count: {1: 0, 2: 0},
+		count: {1: 1, 2: 0},
 		level: 1,
 		baseValue: 5,
 		description: 'Smells a bit cheesy.',
@@ -4076,7 +4076,7 @@ const items = [
 		constructionTime: [5, 'seconds'],
 		ingredients: [
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'milk.png',
 				name: 'Milk',
 				count: 1,
@@ -4087,7 +4087,7 @@ const items = [
 	},
 	{
 		id: 79,
-		type: 'foodIngredient',
+		type: 'food',
 		name: 'Bread',
 		image: 'bread.png',
 		count: {1: 0, 2: 0},
@@ -4098,7 +4098,7 @@ const items = [
 		constructionTime: [5, 'seconds'],
 		ingredients: [
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'wheat.png',
 				name: 'Wheat',
 				count: 1,
@@ -4106,7 +4106,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'egg.png',
 				name: 'Egg',
 				count: 1,
@@ -4114,7 +4114,7 @@ const items = [
 				ingredientState: 1,
 			},
 			{
-				type: 'foodIngredient',
+				type: 'food',
 				image: 'milk.png',
 				name: 'Milk',
 				count: 1,
@@ -4125,7 +4125,7 @@ const items = [
 	},
 	{
 		id: 80,
-		type: 'foodIngredient',
+		type: 'food',
 		name: 'Raw Meat',
 		image: 'rawMeat.png',
 		count: {1: 0, 2: 0},

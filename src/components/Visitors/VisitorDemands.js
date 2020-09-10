@@ -35,11 +35,25 @@ const VisitorDemands = ({visitor, sellFromInventory}) => {
     </div>
 }
 
-const Popup = ({visitor, visitorDemand, closeSale, sell}) => {
+const Popup = ({visitor, visitorDemand, closeSale, sell, inventory}) => {
+    const filterByDemand = (inv) => {
+        if (visitorDemand.type === 'state') {
+            for (const [key] of Object.entries(inv.count)) {
+                if (parseInt(key, 10) !== parseInt(visitorDemand.value, 10)) {
+                    inv.count[key] = 0;
+                }
+            }
+        }
+        return (visitorDemand.type === 'type' && inv.type === visitorDemand.value) ||
+            (visitorDemand.type === 'state' && inv.count[visitorDemand.value] > 0) ||
+            (visitorDemand.type === 'tier' && inv.tier === visitorDemand.value)
+    }
+    const overrideInventory = [...inventory].filter(filterByDemand);
     return <ConstructionMenuTwoPart
         topChildren={<div className={'title'}>Trade</div>}
         bottomChildren={
             <ConnectedInventoryTable
+                overrideInventory={overrideInventory}
                 overrideSale={
                     (item, state) => {
                         sell(sellToVisitor({visitor, visitorDemand, item, state}));
@@ -58,6 +72,7 @@ const mapDispatchToProps = dispatch => ({
 const mapTradePopupStateToProps = state => ({
     visitor: state.visitor,
     visitorDemand: state.visitorDemand,
+    inventory: state.inventory,
 })
 
 const mapTradeDispatchToProps = dispatch => ({
