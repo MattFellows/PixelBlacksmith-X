@@ -75,7 +75,7 @@ class InventoryTable extends React.Component {
   }
 
   render = () => {
-    const inventory = this.props.overrideInventory || this.props.inventory
+    const inventory = [...this.props.inventory].filter(this.props.overrideInventoryFilter ? this.props.overrideInventoryFilter : () => true);
     return (
       <div className="inventoryContainer">
         <div className="inventoryTable">
@@ -99,6 +99,7 @@ class InventoryTable extends React.Component {
                 .map((i) =>
                   Object.keys(i.count)
                     .filter((j) => i.count[j])
+                      .filter(this.props.overrideStateFilter ? (j) => parseInt(j, 10) === parseInt(this.props.overrideStateFilter, 10) : () => true)
                     .map((j) => (
                       <tr key={i.image + j}>
                         <td className="count">{i.count[j]}</td>
